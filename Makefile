@@ -7,6 +7,7 @@ clean:
 	@find . -type f -name "*.out" | xargs rm -rf
 	@find . -type f -name "*.blg" | xargs rm -rf
 	@find . -type f -name "*.bbl" | xargs rm -rf
+	@find . -type f -name "*.pdf" | xargs rm -rf
 	@clear
 
 search:

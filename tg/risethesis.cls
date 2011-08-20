@@ -420,12 +420,12 @@ requirements for the degree of \@degree\ in \@majorfielden.
   %\@department\fi
   %} \\
   \if\@language0
-    {\fontfamily{times}\selectfont \tiny \@universitypt\\}
+    {\tiny \@universitypt\\}
   \else
-    {\fontfamily{times}\selectfont \tiny \@universityen\\}
+    {\tiny \@universityen\\}
   \fi
-  {\fontfamily{times}\selectfont \tiny secgrad@cin.ufpe.br\\}
-  {\fontfamily{times}\selectfont \tiny \url{www.cin.ufpe.br/~secgrad}\\}
+  {\tiny secgrad@cin.ufpe.br\\}
+  {\tiny \url{www.cin.ufpe.br/~secgrad}\\}
   \vskip\baselineskip
   \vskip\baselineskip
   \@address , \@date
@@ -458,7 +458,7 @@ requirements for the degree of \@degree\ in \@majorfielden.
     		  \fi
     		  \if\@showdepartment1
     		    \@departmentpt
-    		    \vskip 0.1cm
+    		    \vskip 0.07cm
     		  \fi
     		  \@programpt
     	  \else
