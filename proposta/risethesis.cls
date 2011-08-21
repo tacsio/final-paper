@@ -342,7 +342,7 @@
 
 \gdef\@presentationtext{%
 \if\@language0
-Trabalho apresentado ao Programa de
+Proposta inicial apresentada ao Programa de
 \@programpt\ do \if\@showdepartment1\@departmentpt\ \else\@institutept\ \fi
 da \@universitypt\ como requisito parcial para obtenção do
 grau de \@degree\ em \@majorfieldpt.
@@ -404,15 +404,15 @@ requirements for the degree of \@degree\ in \@majorfielden.
     \begin{center}
       {\Large {``\@title''}}\\
       \vskip\baselineskip
-      {\large \@textby}
+     % {\large \@textby}
       \vskip\baselineskip
       {\LARGE \textbf{\@author}}
       \vskip\baselineskip
-      {{\large \@texttype}}\\
+      {{\large Proposta de\@texttype}}\\
     \end{center}
   %\end{minipage}\\
   \vspace{1.4cm}
-  \includegraphics[width=1cm]{ufpelogo} \\
+  \includegraphics[width=1.5cm]{ufpelogo} \\
   %{\sf\large \@university
   %\if\@showinstitute1\\
   %\@institute\fi
@@ -480,8 +480,7 @@ requirements for the degree of \@degree\ in \@majorfielden.
 	\end{figure}
   \vskip 25mm
   \begin{center}
-  \large \@author
-  \vskip\baselineskip
+  \Large\sf Proposta Trabalho de Graduação
   \vskip\baselineskip
   {\Large\bfseries{``\@title''}}\\
   \vskip 28mm
@@ -493,7 +492,8 @@ requirements for the degree of \@degree\ in \@majorfielden.
     \flushright{
     	%\begin{center}
     	%\begin{tabular}{rl}
-    	{\quotefont \@advisertitle:} \@adviser\\
+    	{\quotefont\bfseries \@advisertitle:} \@adviser { (\href{mailto:nsr@cin.ufpe.br}{nsr@cin.ufpe.br})}\\
+		{\quotefont\bfseries Aluno:} \@author { (\href{mailto:tcs5@cin.ufpe.br}{tcs5@cin.ufpe.br})}\\
     	\if\@showcoadviser1{\quotefont\@coadvisertitle:} \@coadviser\\\fi
     	%\end{tabular}
     	%\end{center}
