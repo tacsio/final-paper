@@ -8,6 +8,7 @@ clean:
 	@find . -type f -name "*.blg" | xargs rm -rf
 	@find . -type f -name "*.bbl" | xargs rm -rf
 	@find . -type f -name "*.pdf" | xargs rm -rf
+	@git checkout manual_latex.pdf
 	@find . -type f -name "*.dvi" | xargs rm -rf
 	@find . -type f -name "*~" | xargs rm -rf
 	@clear
