@@ -7,3 +7,5 @@
 *.lof
 *.out
 *.backup
+*~
+*.directory
