@@ -5,7 +5,10 @@
 \usepackage{supertabular}
 \usepackage{fancybox}
 \usepackage{acronym}
-\usepackage[linkcolor=black,citecolor=black,urlcolor=blue,colorlinks,pdfpagelabels,pdftitle={tcs5-srp},pdfauthor={Tarcisio Coutinho da Silva}]{hyperref}
+\usepackage[linkcolor=black,citecolor=black,urlcolor=blue,colorlinks,pdfpagelabels,pdftitle={srp-tcs5},pdfauthor={Tarcisio Coutinho da Silva}]{hyperref}
+
+\renewcommand{\appendixtocname}{Apêndices} 
+\renewcommand{\appendixpagename}{Apêndices}
 
 \address{Recife}
 
@@ -57,11 +60,9 @@ we'll be all right.
 \abstract
 \input{abstract/abstract}
 
-% Sumario
+
 \tableofcontents
-% Lista figuras
 \listoffigures
-% Lista de tabelas
 \listoftables
 % Lista de Siglas
 \input{acronyms}
@@ -75,8 +76,8 @@ we'll be all right.
 % Referencias
 % Styles: http://amath.colorado.edu/documentation/LaTeX/reference/faq/bibstyles.html#styles
 \bibliographystyle{plain}
-\addcontentsline{toc}{chapter}{Referencias Bibliográficas}
 \bibliography{references}
+\addcontentsline{toc}{chapter}{Referencias Bibliográficas}
 
 
 % Apendice
@@ -84,6 +85,6 @@ we'll be all right.
 \addappheadtotoc
 \appendix
 \appendixpage
-\include{appendix/main}
+\include{appendix/apendice}
 
 \end{document}
