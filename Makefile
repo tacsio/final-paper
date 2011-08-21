@@ -11,6 +11,7 @@ clean:
 	@git checkout manual_latex.pdf
 	@find . -type f -name "*.dvi" | xargs rm -rf
 	@find . -type f -name "*~" | xargs rm -rf
+	@find . -type f -name "*.synctex.gz" | xargs rm -rf
 	@clear
 
 search:
