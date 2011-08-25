@@ -424,8 +424,13 @@ requirements for the degree of \@degree\ in \@majorfielden.
   \else
     {\tiny \@universityen\\}
   \fi
-  {\tiny secgrad@cin.ufpe.br\\}
-  {\tiny \url{www.cin.ufpe.br/~secgrad}\\}
+  \if\@language0
+    {\tiny \@departmentpt\\}
+  \else
+    {\tiny \@departmenten\\}
+  \fi
+  {\tiny \fontfamily{arial}\selectfont \href{mailto:secgrad@cin.ufpe.br}{secgrad@cin.ufpe.br}\\}
+  {\tiny \fontfamily{arial}\selectfont \href{http://www.cin.ufpe.br/~secgrad}{http://www.cin.ufpe.br/~secgrad}\\}
   \vskip\baselineskip
   \vskip\baselineskip
   \@address , \@date
