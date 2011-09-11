@@ -370,7 +370,7 @@ requirements for the degree of \@degree\ in \@majorfielden.
   
 \setlength{\topmargin}{0mm}
 \setlength{\textheight}{\paperheight-\headheight-\headsep-\footskip-2in}
-\setlength{\oddsidemargin}{0mm}
+\setlength{\oddsidemargin}{5mm}
 \setlength{\evensidemargin}{0mm}
 \setlength{\marginparwidth}{0mm}
 \setlength{\marginparsep}{0mm}
