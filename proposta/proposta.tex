@@ -2,25 +2,30 @@
 \section{Contexto}
 \label{pr:contex}
 
-A arquitetura Orientada à Serviços, do inglês \textit{Service-Oriented Architecture}, ou simplesmente SOA, tem surgido ao longo dos últimos anos como uma das abordagens preferidas de design de arquitetura para construção de sistemas. 
+A arquitetura Orientada à Serviços, do inglês \textit{Service-Oriented Architecture}, ou simplesmente SOA, tem surgido ao longo dos últimos anos como uma das abordagens preferidas de design de arquitetura para construção de sistemas~\cite{erl2008soa}.
 
-Com objetivos alinhados aos objetivos do paradigma SOC \textit{(Service-Oriented Computing)}, SOA possibilita a criação de novas aplicações com maior coerência, rapidez e diminuição nos custos, tudo isso com excelente aproveitamento do legado.
+Com objetivos alinhados aos objetivos do paradigma SOC \textit{(Service-Oriented Computing)}, SOA possibilita a criação de novas aplicações com maior coerência, rapidez e diminuição nos custos, tudo isso com excelente aproveitamento do legado~\cite{erl2008soa}.
 
-Baseada em padrões abertos e na visão onipresente da internet, SOA tem como princípio fundamental a idéia de serviços como unidades que representam módulos do negócio ou funcionalidades de aplicação.
-Na visão de SOA, um serviço é um componente que atende a uma função de négocio. Ele pode responder a requisições ocultando os detalhes de sua implementação, e é descrito através de contratos que expressam seu objetivo e suas capacidades.
+Baseada em padrões abertos e na visão onipresente da internet, SOA tem como princípio fundamental a idéia de serviços como unidades que representam módulos do negócio ou funcionalidades de aplicação~\cite{erl2008soa}~\cite{imb2007soa}.
+
+Na visão de SOA, um serviço é um componente que atende a uma função de negócio. Ele pode responder a requisições ocultando os detalhes de sua implementação, e é descrito através de contratos que expressam seu objetivo e suas capacidades.
 \\
 
-Buscando maior agilidade no desenvolvimento de aplicações, flexibilidade na implantação de soluções e reuso de componentes pré-existentes, que consequentemente gera redução de custos, diversas empresas de tecnologia da informação vêm adotando SOA na construção de seus sistemas, quebrando paradigmas das antigas metodologias de desenvolvimento para arquiteturas monolíticas.
+Buscando maior agilidade, flexibilidade e reuso de componentes pré-existentes no desenvolvimento de aplicações, diversas empresas de tecnologia da informação vêm adotando SOA na construção de seus sistemas, quebrando assim, paradigmas das antigas metodologias de desenvolvimento para arquiteturas monolíticas.
 
-Nesse contexto, temos a plataforma de serviços OSGi, que é um conjunto de especificações definidas pela OSGi Alliance, que provê suporte à modelagem e desenvolvimento de sistemas modulares na linguagem Java. A idéia básica é resolver o problema de criar softwares monolíticos, ou seja, softwares projetados sem modularidade, facilitando assim a reutilização e manutenção de  componentes, o que torna a solução robusta, barata e confiável. 
+Nesse contexto, temos a plataforma de serviços OSGi, que é um conjunto de especificações definidas pela OSGi Alliance. OSGi provê suporte à modelagem e desenvolvimento de sistemas modulares na linguagem Java~\cite{hall2010osgi}. A idéia básica é resolver o problema de criar softwares monolíticos, ou seja, softwares projetados sem modularidade, facilitando assim a reutilização e manutenção de  componentes, o que torna a solução robusta, barata e confiável~\cite{davis2009open}. \\
 
-OSGi introduz um modelo de programação orientada a serviço, o que alguns autores apresentam como \textit{SOA in a Virtual Machine}, separando de fato a interface da implementação.
+OSGi introduz um modelo de programação orientada a serviço, o que alguns autores apresentam como \textit{SOA in a Virtual Machine}~\cite{hall2010osgi}, separando de fato a interface da implementação.
+
+Em um ambiente OSGi, as aplicações, denominadas bundles, definem os módulos ou componentes do sistema. Cada componente pode, em tempo de execução, ser instalado, desinstalado, ativado ou desativado local ou remotamente~\cite{alliance2007osgi}. Isso mostra um grande potencial para a construção de aplicações orientadas à serviço.\\
+
+Porém, como garantir que os contratos a nível de serviço entre o consumidor e provedor são realmente respeitados? Ou quando for caracterizada uma quebra de contrato, quando um provedor não cumpre com suas responsabilidades, como resolver o problema sem que haja um impacto elevado na aplicação que necessita do determinado serviço provido?
 
 \newpage
 \section{Objetivos}
 \label{pr:objectives}
 
-Este trabalho de graduação tem como principal objeto o desenvolvimento de uma arquitetura de monitoramento e seleção de serviços para a plataforma OSGi, capaz de capturar e armazenar dados relativos as métricas de qualidade de serviço monitoradas e em posse desses dados, realizar a seleção do serviço.
+Este trabalho de graduação tem como principal objeto o desenvolvimento de uma arquitetura de monitoramento e seleção de serviços para a plataforma OSGi, capaz de capturar e armazenar dados relativos as métricas de qualidade de serviço monitoradas. E em posse desses dados, realizar a seleção do serviço requerido.
 \\
 
 As métricas de QoS monitoradas são requeridas pelo consumidor do serviço, através da definição de contratos de serviço junto ao provedor. A partir da análise desses contratos em relação aos dados obtidos do monitoramento, o provedor mais adequado será escolhido dentre os possíveis candidatos.
