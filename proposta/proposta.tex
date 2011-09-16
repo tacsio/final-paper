@@ -13,19 +13,24 @@ Na visão de SOA, um serviço é um componente que atende a uma função de neg�
 
 Buscando maior agilidade, flexibilidade e reuso de componentes pré-existentes no desenvolvimento de aplicações, diversas empresas de tecnologia da informação vêm adotando SOA na construção de seus sistemas, quebrando assim, paradigmas das antigas metodologias de desenvolvimento para arquiteturas monolíticas.
 
-Nesse contexto, temos a plataforma de serviços OSGi, que é um conjunto de especificações definidas pela OSGi Alliance. OSGi provê suporte à modelagem e desenvolvimento de sistemas modulares na linguagem Java~\cite{hall2010osgi}. A idéia básica é resolver o problema de criar softwares monolíticos, ou seja, softwares projetados sem modularidade, facilitando assim a reutilização e manutenção de  componentes, o que torna a solução robusta, barata e confiável~\cite{davis2009open}. \\
+Nesse contexto, temos a plataforma de serviços OSGi, que é um conjunto de especificações definidas pela OSGi Alliance. OSGi provê suporte à modelagem e desenvolvimento de sistemas modulares na linguagem Java~\cite{hall2010osgi}. A idéia básica é resolver o problema de criar softwares monolíticos, ou seja, softwares projetados sem modularidade, facilitando assim a reutilização e manutenção de  componentes, o que torna a solução robusta, barata e confiável~\cite{davis2009open}.
+\\
 
-OSGi introduz um modelo de programação orientada a serviço, o que alguns autores apresentam como \textit{SOA in a Virtual Machine}~\cite{hall2010osgi}, separando de fato a interface da implementação.
+OSGi introduz um modelo de programação orientada a serviço, o que alguns autores apresentam como \textit{SOA in a Virtual Machine}~\cite{hall2010osgi}, separando de fato a interface da implementação. Isso mostra um grande potencial para a construção de aplicações orientadas à serviço.
 
-Em um ambiente OSGi, as aplicações, denominadas bundles, definem os módulos ou componentes do sistema. Cada componente pode, em tempo de execução, ser instalado, desinstalado, ativado ou desativado local ou remotamente~\cite{alliance2007osgi}. Isso mostra um grande potencial para a construção de aplicações orientadas à serviço.\\
 
-Porém, como garantir que os contratos a nível de serviço entre o consumidor e provedor são realmente respeitados? Ou quando for caracterizada uma quebra de contrato, quando um provedor não cumpre com suas responsabilidades, como resolver o problema sem que haja um impacto elevado na aplicação que necessita do determinado serviço provido?
+Outra tecnologia que compartilha vários princípios de SOC é a tecnologia de Web Services. Web Services fornecem uma forma padrão de interoperabilidade entre diferentes aplicações, rodando em uma variedade de plataformas e frameworks~\cite{http://www.w3.org/2002/ws/}.\\
+
+
+Assim, em uma arquitetura orientada a serviços, módulos podem consumir serviços providos por tecnologias diferentes, apenas identificando o serviço requerido e realizando o \textit{binding}, estabelecendo assim um contrato entre o consumidor e o provedor do serviço~\cite{http://www.oracle.com/technetwork/articles/javase/soa-142870.html}.  
+
+Porém, como garantir que os contratos a nível de serviço entre o consumidor e provedor são realmente respeitados? Ou quando for caracterizada uma quebra de contrato, onde o provedor não cumpre com suas responsabilidades, como resolver o problema sem que haja um impacto elevado na aplicação que necessita do determinado serviço provido?
 
 \newpage
 \section{Objetivos}
 \label{pr:objectives}
 
-Este trabalho de graduação tem como principal objeto o desenvolvimento de uma arquitetura de monitoramento e seleção de serviços para a plataforma OSGi, capaz de capturar e armazenar dados relativos as métricas de qualidade de serviço monitoradas. E em posse desses dados, realizar a seleção do serviço requerido.
+Este trabalho de graduação tem como principal objeto o desenvolvimento de um mecanismo de monitoramento e seleção de serviços, capaz de capturar e armazenar dados relativos as métricas de qualidade de serviço monitoradas. E em posse desses dados, realizar a seleção do serviço requerido.
 \\
 
 As métricas de QoS monitoradas são requeridas pelo consumidor do serviço, através da definição de contratos de serviço junto ao provedor. A partir da análise desses contratos em relação aos dados obtidos do monitoramento, o provedor mais adequado será escolhido dentre os possíveis candidatos.
