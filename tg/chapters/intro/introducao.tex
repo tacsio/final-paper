@@ -1,7 +1,29 @@
 \chapter{Introdução}
+
+Atualmente, o mercado cada vez mais acirrado e competitivo, faz com que as empresas constantemente modifiquem e redesenhem suas estratégias de negócio de maneira ágil, buscando incessantemente por inovação e agregação de valor a seus produtos e serviços. 
+
+Esse tipo de cenário, do ponto de vista computacional, requer adaptação constante dos sistemas e processos relacionados, tornando os custos necessários a essa adaptação um grande obstáculo~\cite{rabelo2006}, já que a maioria desses custos são provenientes de implementações de novas soluções para cada caso específico. Além disso, o constante incremento de novas aplicações torna o sistema ainda mais complexo, dificultando o processo de desenvolvimento e aumentando também os custos relacionados ao gerenciamento~\cite{rabelo2006}~\cite{ada2006}.
+
+Assim, é clara a necessidade de uma solução que suportasse esse novo contexto, no qual os sistemas constantemente evoluem, interagem e trocam informações entre si, onde a idéia de se desenvolver uma aplicação nova e complexa deve ser evitada e substituída por um conjunto de aplicações pequenas, já existentes (quando possível) e mais simples~\cite{rabelo2006}. A aplicação agora deve ser composta por um conjunto de módulos independentes, especializados, interoperáveis e sobretudo simples, o que aumenta a reutilização e manutenção do módulo~\cite{oracle2005ws}.
+
+Em função disto, temos na visão de SOA, um modelo arquitetural modular e interoperável que se mostra como uma alternativa viável à resolução dessa necessidade.
+
 Arquitetura Orientada a Serviços, ou do inglês \textit{Service-Oriented Architecture} (SOA), tem surgido ao longo dos últimos anos como uma das abordagens preferidas para construção de sistemas~\cite{erl2008soa}. Com objetivos alinhados aos objetivos do paradigma SOC \textit{(Service-Oriented Computing)}, SOA possibilita a criação de novas aplicações com maior coerência, rapidez e diminuição nos custos, tudo isso com excelente aproveitamento do legado~\cite{erl2008soa}.
 
-Baseada em padrões abertos e na visão onipresente da Internet, SOA tem como princípio fundamental a idéia de serviços como unidades que representam módulos do negócio ou funcionalidades da aplicação~\cite{erl2008soa}~\cite{imb2007soa}. Na visão de SOA, um serviço é um componente que implementa uma função de negócio. Ele pode responder a requisições ocultando os detalhes de sua implementação e é descrito através de contratos que expressam seu objetivo e suas capacidades. Buscando maior agilidade, flexibilidade e reuso de componentes pré-existentes no desenvolvimento de aplicações, diversas empresas de tecnologia da informação vêm adotando SOA na construção de seus sistemas.
+Baseada em padrões abertos e na visão onipresente da Internet, SOA tem como princípio fundamental a idéia de serviços como unidades que representam módulos do negócio ou funcionalidades da aplicação~\cite{erl2008soa}~\cite{imb2007soa}~\cite{cervantes2005technical}. Na visão de SOA, um serviço é um componente que implementa uma função de negócio. Ele pode responder a requisições ocultando os detalhes de sua implementação e é descrito através de contratos que expressam seu objetivo e suas capacidades. 
+
+Buscando maior agilidade, flexibilidade e reuso de componentes pré-existentes no desenvolvimento de aplicações, diversas empresas de tecnologia da informação vêm adotando SOA na construção de seus sistemas. O modelo básico de SOA, consiste em 3 elementos principais apresentados na figura \ref{fig:soatriangle}.
+
+O \textbf{provedor do serviço} (\textit{Service Provider}), que implementa a função de negocio e publica uma descrição do serviço no \textbf{registro} (\textit{Service Registy}). O \textbf{consumidor do serviço} (\textit{Service Requestor}) que busca no registro por um determinado serviço, caso este seja encontrado, a localização do serviço é recuperada e o consumidor se conecta ao endpoint do serviço, podendo assim invocar as operações do serviço~\cite{michlmayr2007towards}~\cite{huhns2005service}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=7cm]{chapters/intro/soa_triangle.png}
+\caption[Triângulo SOA]{Triângulo SOA.}
+\label{fig:soatriangle}
+\end{figure}
+
+A figura \ref{fig:soatriangle} mostra de maneira implícita um dos princípios e essenciais objetivos de SOC, o baixo acoplamento entre serviços, uma vez que, um provedor de serviços pode muito bem fazer o papel consumidor de serviços. Essa dinâmica tem impactos ainda maiores quando tratamos de arquitetura de software. Pois, ao trocarmos aplicações monolíticas por serviços ou composições de serviços, estes pequenos módulos podem ser facilmente sustituídos ou atualizados, sem que haja um impacto maior no sistema.
 
 Nesse contexto, temos a plataforma de serviços OSGi (\textit{Open Services Gateway initiative}~\cite{alliance2007osgi}. OSGi provê suporte à modelagem e desenvolvimento de sistemas modulares na linguagem Java~\cite{hall2010osgi}. A idéia básica é resolver o problema de criar softwares monolíticos, ou seja, softwares projetados sem modularidade, facilitando a reutilização e manutenção de  componentes, o que torna a solução mais robusta, barata e confiável~\cite{davis2009open}.
 
