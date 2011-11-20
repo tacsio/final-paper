@@ -1,20 +1,71 @@
-\chapter{Experiment Instruments}
-\label{ap:measurement-instruments}
+\chapter{JMX}
 
-\section{Time sheet}
-\label{ap:sec:time-sheet}
+Este apêndice mostra exemplos de códigos JMX.\\
 
-\section{Questionnaire for Subjects Profile}
-\label{ap:sec:profile}
+\section{Standard Mbean}
 
-\newpage
-\section{Form for Qualitative Analysis}
-\label{ap:sec:feedback}
+\subsection*{\!\textsl{\textbf{HelloMbean.java}}}
+\begin{verbatimtab}[4]
+package br.ufpe.cin.jmx.mbean;
 
-\chapter{Apêndice B}
-\label{ap:instruments}
-\newpage
-\section{Sessao}
-\label{ap:sec:asd}
-asd
+public interface HelloMBean {
+	public void setMessage(String msg);
+	public String getMessage();
+	public String sayBye();
+}
+\end{verbatimtab}
 
+\subsection*{\!\textsl{\textbf{HelloMbean.java}}}
+\begin{verbatimtab}[4]
+package br.ufpe.cin.jmx.mbean;
+
+public class Hello implements HelloMBean {
+
+	private String msg;
+
+	public Hello() {
+		msg = "Hello World";
+	}
+
+	@Override
+	public void setMessage(String msg) {
+		this.msg = msg;
+
+	}
+
+	@Override
+	public String getMessage() {
+		return this.msg;
+	}
+
+	@Override
+	public String sayBye() {
+		return "bye";
+	}
+}
+\end{verbatimtab}
+
+\subsection*{\!\textsl{\textbf{Main.java}}}
+\begin{verbatimtab}[4]
+package br.ufpe.cin.jmx.mbean;
+
+import java.lang.management.ManagementFactory;
+
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+
+		MBeanServer server = ManagementFactory.
+				getPlatformMBeanServer();
+		ObjectName name = new ObjectName(
+				"br.ufpe.cin.jmx.mbean:type=Hello");
+		HelloMBean mbean = new Hello();
+
+		server.registerMBean(mbean, name);
+		Thread.sleep(Long.MAX_VALUE);
+	}
+}
+\end{verbatimtab}
