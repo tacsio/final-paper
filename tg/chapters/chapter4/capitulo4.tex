@@ -32,12 +32,41 @@ Como foi dito anteriormente, JMX foi definida segundo duas JSRs , JSR 3 e JSR 16
 \subsection{Nível de Intrumentação}
 O nível de instrumentação é resposável por expor as funcionalidades e configurações das aplicações através da criação e registro de Mbeans~\cite{jmx}. Estes Mbeans coletam e manipulam as informações dos recursos gerenciáveis, repassando-as aos agentes JMX do nível superior.
 
+Exitem vários tipos difenrente de Mbeans em JMX, nas próximas seções descreveremos alguns deles:
+
+\subsubsection{Standard Mbean}
+\label{subsub:stardardmbean}
+São os tipos mais simples de Managed Bean. Interagem com os recursos através da definição de uma interface de gerenciamento, que descreve os atributos e operações do Mbean. Estas interfaces são definidas explícitamente e os atributos e métodos são descobertos por meio de reflexão. Seguem a convenção do nome da classe acrescido do prefixo \verb Mbean  e todos os seus atributos são acessados por métodos \textit{getters} e \textit{setters}. Possui uma limitação quanto aos tipos de dados que podem ser utilizados, não permitindo o uso de tipos complexos definidos pelo usuário de maneira padrão~\cite{mxbeans}.
+
+Uma limitação da arquitetura JMX é que, não é permitido a implementação de duas interfaces de gerenciamento para a mesma Mbean. Mesmo através de herança visando evitar a implementação explícita de duas interfaces, o agente JMX sempre irá utilizar a infreface de gerenciamento mais próxima da classe. Uma alternativa a esse problema é extender a interface de gerenciamento.
+
+\subsubsection{MxBean}
+\label{subsub:mxbean}
+Mxbean é uma versão melhorada do Standard Mbean, ele traz uma solução ao problema relacionado ao conjunto limitados de tipos de dados utilizáveis pela Mbean comum visto na Seção \ref{subsub:stardardmbean}
+
+Ele provê suporte à utilização de tipos de dados complexos para representação de atributos do Mbean, através de mapeamentos de tipos complexos para um tipo padrão \verb CompositeDataSupport ~\cite{mxbeans}.
+
+A especificação de Mxbeans está presente na JSR 174 e este foi incluído na versão 6 de Java. Sendo assim, só pode ser executado nas versões superiores a J2SE 5.0~\cite{mxbeans}.
+
+\subsubsection{Dynamic Mbean}
+Dynamic Mbeans se difenciam de Standard Mbeans pelo fato de que estes descrevem seus atributos e operações através de uma interface padrão. Assim, as propriedades do Mbean são descobertas em tempo de execução, já que, através dessa interface, os agentes JMX obtem a descrição da Mbean por meio da classe \verb MBeanInfo ~\cite{jmx} 
+
+O diferencial é que no caso das Standard Mbeans, os metadados que descrevem a interface são obtidos por meio de reflexão, e na Dynamic Mbean, as classes de metadados são construídos por elas mesmas em tempo de execução.
+
+Desde modo, o acesso ao atributos e operações em Mbeans dinâmicas não é realizado diretamente, mas sim por meio de métodos genéricos, semelhante ao mecamismo utilizado pelo padrão de projeto, \textit{Requestor}~\cite{volter2005remoting}. Uma maneira simples de ilustrar isso, é através da figura \ref{fig:requestjmx}.
+
+TODO: FIGURA
+
+Exitem outros tipos de Mbeans dinâmicas, como Model Mbean, Open Mbean e AbtractDynamicMbean que basicamente adicionam novas features à Dynamic Mbean tradicional. Não entraremos em detalhes pois está fora do escopo deste trabalho.
+
 \subsection{Nível Agente}
 O nível agente é responsável por gerenciar todas as e controlar diretamente todos os recursos, tornando-os acessíveis a aplicativos de gerenciamento remoto.
 
 A gerência das Mbeans é provida através do principal componente do agente JMX, o Mbean Server. Além disso, agentes JMX incluem um conjunto de serviços para gerenciar as MBeans e pelo menos um adaptador de comunicações ou conector para permitir o acesso ao agente por um aplicativo de gerenciamento~\cite{jmx}.
 
 Basicamente, um agente JMX consiste em um Mbean Server, um conjunto de serviços básicos de gerência e pelo menos um adaptador de comunicação ou conector JMX.
+
+\subsubsection{Mbean Server}
 
 \subsection{Nível de Gerenciamento}
 O nível de gerenciamento é o nível mais alto da arquitetura JMX, este define um mecanismo baseado em adaptadores e conectores que tornam os agente JMX acessíveis a aplicativos de gerenciamento remoto fora da JVM em que o agente se encontra~\cite{jmx}.
@@ -86,5 +115,3 @@ TODO: FIGURA
 
 \item As notificações não descartadas são tradatas
 \end{enumerate}
-
-\section{Componetes JMX}
