@@ -54,12 +54,18 @@ Dynamic MBeans se diferenciam de Standard MBeans pelo fato de que estes descreve
 
 O diferencial é que no caso das Standard MBeans, os metadados que descrevem a interface são obtidos por meio de reflexão, e na Dynamic MBean, as classes de metadados são construídos por elas mesmas em tempo de execução.
 
-Desde modo, o acesso ao atributos e operações em MBeans dinâmicas não é realizado diretamente, mas sim por meio de métodos genéricos, semelhante ao mecanismo utilizado pelo padrão de projeto, \textit{Requestor}~\cite{volter2005remoting}. Uma maneira simples de ilustrar isso, é através da figura \ref{fig:requestjmx}.
+Desde modo, o acesso ao atributos e operações em MBeans dinâmicas não é realizado diretamente, mas sim por meio de métodos genéricos, semelhante ao mecanismo utilizado pelo padrão de projeto \textit{Requestor}~\cite{volter2005remoting} ilustrado na figura \ref{fig:requestjmx}.
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=14cm]{chapters/chapter4/invoke.png}
-\caption[Invocação de Operação na MBean]{Invocação de Operação na MBean.}
+\subfloat[Invocação de Operação na MBean]{
+\includegraphics[width=13cm]{chapters/chapter4/invoke.png}
+}
+\\
+\subfloat[Acesso a atributo na MBean]{
+\includegraphics[width=13cm]{chapters/chapter4/getValue.png}
+}
+\caption{Acesso a atributos e operações da MBean.}
 \label{fig:requestjmx}
 \end{figure}
 
