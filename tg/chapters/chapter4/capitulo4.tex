@@ -29,6 +29,7 @@ Como foi dito anteriormente, JMX foi definida segundo duas JSRs , JSR 3 e JSR 16
 \label{fig:arch_jmx}
 \end{figure}
 
+\newpage
 \subsection{Nível de Intrumentação}
 O nível de instrumentação é responsável por expor as funcionalidades e configurações das aplicações através da criação e registro de MBeans~\cite{jmx}. Estes MBeans coletam e manipulam as informações dos recursos gerenciáveis, repassando-as aos agentes JMX do nível superior.
 
@@ -125,13 +126,6 @@ NotificationListener & Interface que permite o recebimento de notificações\\\h
 
 \subsection{Modelo de Notificação JMX}
 O modelo de notificações JMX segue os seguintes passos, demonstrados na Figura \ref{fig:notifyjmx}
-\begin{figure}[h]
-\centering
-\includegraphics[width=13cm]{chapters/chapter4/notification_model.png}
-\caption[Modelo de notificação JMX]{Modelo de notificação JMX.}
-\label{fig:notifyjmx}
-\end{figure}
-
 
 \subsubsection{Funcionamento} 
 \begin{enumerate}
@@ -146,5 +140,11 @@ O modelo de notificações JMX segue os seguintes passos, demonstrados na Figura
 \item As notificações não descartadas são tratadas
 \end{enumerate}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=13cm]{chapters/chapter4/notification_model.png}
+\caption[Modelo de notificação JMX]{Modelo de notificação JMX.}
+\label{fig:notifyjmx}
+\end{figure}
 
 TODO: fechar JMX
