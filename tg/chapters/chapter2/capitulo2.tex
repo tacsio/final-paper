@@ -1,8 +1,8 @@
 \chapter{Conceitos Básicos}
 \label{ch:2}
-Neste capítulo discutiremos alguns conceitos básicos necessários ao entendimento da solução proposta. Abordaremos inicialmente sobre orientação a serviços e a componentes, apresentando os pontos positivos e negativos de cada abordagem. 
+Neste capítulo discutiremos alguns conceitos básicos necessários ao entendimento da solução proposta. Abordaremos inicialmente sobre orientação a serviços e a componentes, apresentando as principais características de cada abordagem. 
 
-Em seguida, discutiremos sobre gerencimento de recursos e serviços, sua importância no contexto de arquiteturas orientadas a serviços, e uma visão geral do ciclo de desenvolvimento PDCA. 
+Em seguida, discutiremos sobre gerenciamento de recursos e serviços, sua importância no contexto de arquiteturas orientadas a serviços, e uma visão geral do ciclo de desenvolvimento PDCA. 
 
 Por fim, apresentaremos uma visão geral de JMX, a tecnologia utilizada no trabalho para realizar o monitoramento dos recursos.
 
@@ -11,8 +11,8 @@ Orientação a Serviços, surge como um novo paradigma de desenvolvimento de apl
 
 Assim, na orientação a serviços, as capacidades dos serviços são definidas através de uma \textit{Service Description} e a partir dessa descrição, provedores de serviço são descobertos por consumidores de serviço estabelecendo um contrato de serviço entre as partes. Deste modo, no mundo de serviços, temos diversas implementações distintas para um mesmo serviço onde o consumidor não está vinculado a nenhuma delas, podendo substituir o serviço consumido de acordo com suas necessidades, através da definição de novos contratos de serviço com base nessas descrições~\cite{cervantes2005technical}.
 
-\subsection{SOA}
-Alinhado a essas idéias, temos em SOA, um modelo de arquitetura baseada em serviços com suporte a descoberta dinâmica de serviços, uma vez que, o modelo baseia-se nos 3 elementos fundamentais da orientação a serviços.
+\subsection{\textit{Service Oriented Architecture}}
+Alinhado a essas ideias, temos em SOA, um modelo de arquitetura baseada em serviços com suporte a descoberta dinâmica de serviços, uma vez que, o modelo baseia-se nos 3 elementos fundamentais da orientação a serviços.
 
 \begin{itemize}
  \item \textbf{Provedor de Serviços} (\textit{Service Provider})
@@ -23,7 +23,9 @@ Alinhado a essas idéias, temos em SOA, um modelo de arquitetura baseada em serv
 A interação destes elementos compões o triângulo tradicional do modelo arquitetural, ver Figura \ref{fig:soatriangle}. 
 
 O modelo de interação é relativamente simples. Provedores de serviço publicam suas capacidades através de \textit{Service Descriptions} no registro de serviços.
-O consumidor do serviço executa consultas a um determinado serviço através do registro, essa consulta é feita com base da descrição do serviço. Caso exista um provedor que atenda as necessidades do consumidor, então o registro devolverá uma referência do provedor daquele serviço ao consumidor, possibilitando a realização do \textit{binding} entre eles. Então, o provedor disponibiliza um objeto que implementa a interface do serviço (\textit{Servant}~\cite{volter2005remoting}) finalizando a interação com o provedor. Quando a interação entre o consumidor e o \textit{servant} é finalizada, o mesmo é liberado para utilização em alguma outra requisição ou simplesmente destuído.
+O consumidor do serviço executa consultas a um determinado serviço através do registro, essa consulta é feita com base da descrição do serviço. Caso exista um provedor que atenda as necessidades do consumidor, então o registro devolverá uma referência do provedor daquele serviço ao consumidor, possibilitando a realização do \textit{binding} entre eles. Então, o provedor disponibiliza um objeto que implementa a interface do serviço, representando o objeto remoto em tempo de execução, (\textit{Servant}~\cite{volter2005remoting}) finalizando a interação com o provedor. Quando a interação entre o consumidor e o \textit{servant} é finalizada, o mesmo é liberado para utilização em alguma outra requisição ou simplesmente destruído.
+
+Nesse contexto, o consumidor não tem conhecimento de como o serviço é implementado, onde o mesmo se localiza, nem mesmo se o \textit{servant}, pelo qual ele tem acesso ao serviço, é o mesmo a cada invocação. Esse grau de transparência provê um grande potencial de dinamismo e reuso, que são duas das principais características de arquiteturas orientadas a serviços~\cite{davis2009open}.
 
 
 
@@ -31,6 +33,7 @@ O consumidor do serviço executa consultas a um determinado serviço através do
 TODO
 
 \section{Clico PDCA de Desenvolvimento}
+\label{sec:pdca}
 TODO
 
 \begin{figure}[htp]
@@ -93,7 +96,7 @@ A especificação de Mxbeans está presente na JSR 174 e este foi incluído na v
 
 O diferencial é que no caso das \textit{Standard MBeans}, os metadados que descrevem a interface são obtidos por meio de reflexão, e na \textit{Dynamic MBean}, as classes de metadados são construídos por elas mesmas em tempo de execução.
 
-Desde modo, o acesso ao atributos e operações em MBeans dinâmicas não é realizado diretamente, mas sim por meio de métodos genéricos, semelhante ao mecanismo utilizado pelo padrão de projeto \textit{Requestor}~\cite{volter2005remoting}. Esse método de acesso é ilustardo na figura \ref{fig:requestjmx}.
+Desde modo, o acesso ao atributos e operações em MBeans dinâmicas não é realizado diretamente, mas sim por meio de métodos genéricos, semelhante ao mecanismo utilizado pelo padrão de projeto \textit{Requestor}~\cite{volter2005remoting}. Esse método de acesso é ilustrado na figura \ref{fig:requestjmx}.
 
 \begin{figure}[htp]
 \centering
