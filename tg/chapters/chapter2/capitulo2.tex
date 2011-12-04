@@ -6,8 +6,26 @@ Em seguida, discutiremos sobre gerencimento de recursos e serviços, sua import�
 
 Por fim, apresentaremos uma visão geral de JMX, a tecnologia utilizada no trabalho para realizar o monitoramento dos recursos.
 
-\section{Orientação a Servicos}
-TODO
+\section{Orientação a Serviços}
+Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas, promovendo reuso, baixo acoplamento e interoperabilidade do conceito de serviços como unidades que representam funcionalidades da aplicação~\cite{cervantes2005technical}~\cite{erl2008soa}. Estas funcionalidades são definidas através de contratos de serviço, nos quais o desenvolvimento da aplicação é baseado.
+
+Assim, na orientação a serviços, as capacidades dos serviços são definidas através de uma \textit{Service Description} e a partir dessa descrição, provedores de serviço são descobertos por consumidores de serviço estabelecendo um contrato de serviço entre as partes. Deste modo, no mundo de serviços, temos diversas implementações distintas para um mesmo serviço onde o consumidor não está vinculado a nenhuma delas, podendo substituir o serviço consumido de acordo com suas necessidades, através da definição de novos contratos de serviço com base nessas descrições~\cite{cervantes2005technical}.
+
+\subsection{SOA}
+Alinhado a essas idéias, temos em SOA, um modelo de arquitetura baseada em serviços com suporte a descoberta dinâmica de serviços, uma vez que, o modelo baseia-se nos 3 elementos fundamentais da orientação a serviços.
+
+\begin{itemize}
+ \item \textbf{Provedor de Serviços} (\textit{Service Provider})
+ \item \textbf{Consumidor de Serviços} (\textit{Service Requestor})
+ \item \textbf{Registro de Serviços} (\textit{Service Registry})
+\end{itemize}
+
+A interação destes elementos compões o triângulo tradicional do modelo arquitetural, ver Figura \ref{fig:soatriangle}. 
+
+O modelo de interação é relativamente simples. Provedores de serviço publicam suas capacidades através de \textit{Service Descriptions} no registro de serviços.
+O consumidor do serviço executa consultas a um determinado serviço através do registro, essa consulta é feita com base da descrição do serviço. Caso exista um provedor que atenda as necessidades do consumidor, então o registro devolverá uma referência do provedor daquele serviço ao consumidor, possibilitando a realização do \textit{binding} entre eles. Então, o provedor disponibiliza um objeto que implementa a interface do serviço (\textit{Servant}~\cite{volter2005remoting}) finalizando a interação com o provedor. Quando a interação entre o consumidor e o \textit{servant} é finalizada, o mesmo é liberado para utilização em alguma outra requisição ou simplesmente destuído.
+
+
 
 \section{Orientação a Componentes}
 TODO
