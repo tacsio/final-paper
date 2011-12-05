@@ -30,7 +30,7 @@ Nesse contexto, o consumidor não tem conhecimento de como o serviço é impleme
 
 
 \section{Orientação a Componentes}
-Segundo Szyperski ~\cite{ref}, "Componentes de software são unidades binárias de produção, aquisição e implantação independente, que interagem formando sistemas".
+Segundo Szyperski ~\cite{szyperski2002component}, "Componentes de software são unidades binárias de produção, aquisição e implantação independente, que interagem formando sistemas".
 
 Além disso, componentes definem interfaces e dependências através de um modelo de componente, que assim como classe da orientação a objetos, descrevem as características do modelo, ver \ref{sub:elements}.
 
@@ -60,18 +60,18 @@ Essas propriedades são realizadas por 3 elementos distintos que são base da or
 O conceito de modelo de componte é, de certa forma, similar ao conceito de classe na orientação a objetos~\cite{cervantes2005technical}. Ele abstrai e descreve as características dos componentes (interfaces, propriedades, dependências) e pode definir mecanismos pelos quais estes são implantados.
 
 \subsubsection{Intância de Componente}
-Uma instância de componente, retomando nossa analogia a orientação a objetos, é um elemento que representa uma entidade "física" do modelo. Diferente do modelo, uma instância de componente possui estado e pode fazer parte de componsições~\cite{cervantes2005technical}~\cite{ref}.
+Uma instância de componente, retomando nossa analogia a orientação a objetos, é um elemento que representa uma entidade "física" do modelo. Diferente do modelo, uma instância de componente possui estado e pode fazer parte de componsições~\cite{cervantes2005technical}~\cite{szyperski2002component}.
 
 \subsubsection{Pacote de Componente}
 Um pacote de componente pode ser definido como um componente pronto para ser implantado, ou seja, um componente autocontido que possui todas as suas dependências resolvidas de maneira a prover suas funcionalidades de forma independente~\cite{cervantes2005techical}.
 
 \section{Ciclo PDCA}
 \label{sec:pdca}
-O ciclo PDCA (\textit{\textbf{P}lain \textbf{C}heck \textbf{D}o \textbf{A}ct}), ou ciclo de  Demming, é um ciclo de desenvolvimento e gestão de processos com foco na melhoria contínua proposto por Walter A. Shewhart~\cite{ref} e amplamente difundido por W. Edward Deming~\cite{ref} inicialmente utilizado-o na implementação de um sistema de qualidade na indústruia japonesa ~\cite{fabioof}.
+O ciclo PDCA (\textit{\textbf{P}lain \textbf{C}heck \textbf{D}o \textbf{A}ct}), ou ciclo de  Demming, é um ciclo de desenvolvimento e gestão de processos com foco na melhoria contínua proposto por Walter A. Shewhart~\cite{shewhart} e amplamente difundido por W. Edward Deming~\cite{deming} inicialmente utilizado-o na implementação de um sistema de qualidade na indústruia japonesa ~\cite{fabio2003}.
 
 O ciclo é dividido em 4 etapas, ver Figura \ref{fig:pdca}, visando garantir o alcance de metas pré-estabelecidas, através da utilização de informações como fator chave na tomada de decisões.
 
-É um método eficaz de controle de atividades relacionadas a melhorias, além de compartilhar dos conceitos de gerencia de redes e recursos em geral, a medida que, a tomada de decisão é formente influenciada pelas informações coletadas.
+É um método eficaz de controle de atividades relacionadas a melhorias, que compartilha dos conceitos de gerencia de redes e recursos em geral, a medida que, a tomada de decisão é formente influenciada pelas informações coletadas.
 
 \begin{figure}[htp]
 \centering
@@ -84,15 +84,22 @@ O ciclo é dividido em 4 etapas, ver Figura \ref{fig:pdca}, visando garantir o a
 \subsection{Etapas}
 \label{pdca:phases}
 \subsubsection{\textit{Plan} - Planejar}
+A fase de planejamento consiste no estabelecimento de metas e objetivos com base nas políticas adotadas pela organização. Nesta etapa é de extrema importância a análise de informações para a identificação e o entendimento do problema a ser resolvido.
 
+É a fase mais importante do processo, uma vez que, um planejamento bem elaborado reflete no resultado como um todo. Evitando falhas e perda de tempo em fases futuras~\cite{fabio2003}~\cite{erc}.
+
+Tem como resultado a elaboração de um plano de ação, que define os métodos necessários para atingir as metas estabelecidas.
 
 \subsubsection{\textit{Do} - Executar}
+É a fase de execução do plano de ação e coleta dos dados relacionados, para posterior análise.
 
+Nesta etapa é importante que a execução seja coerente com o plano de ação definido na fase anterior, uma vez que, enquanto a fase anterior busca maior eficácia e coesão, a fase de execução é voltada à eficiência do processo.
 
 \subsubsection{\textit{Check} - Verificar}
-
+TODO
 
 \subsubsection{\textit{Act} - Agir}
+TODO
 
 \section{JMX}
 \textit{Java Management Extensions} (JMX) é uma API que fornece uma maneira simples e padrão de gestão e monitoramento de recursos para a plataforma Java. Estes recursos podem ser aplicações, dispositivos, serviços ou a própria JVM (\textit{Java Virtual Machine}). São instrumentados por um ou mais \textit{Managed Beans}, ou simplesmente MBeans, responsáveis por adquirir, manipular ou enviar informações acerca destes recursos~\cite{lindfors2002jmx}.
@@ -240,3 +247,4 @@ O modelo de notificações JMX segue os seguintes passos, demonstrados na Figura
 \end{figure}
 
 \section{Considerações Finais}
+TODO
