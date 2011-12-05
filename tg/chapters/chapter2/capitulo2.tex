@@ -7,7 +7,7 @@ Em seguida, discutiremos sobre gerenciamento de recursos e serviços, sua import
 Por fim, apresentaremos uma visão geral de JMX, a tecnologia utilizada no trabalho para realizar o monitoramento dos recursos.
 
 \section{Orientação a Serviços}
-Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas, promovendo reuso, baixo acoplamento e interoperabilidade do conceito de serviços como unidades que representam funcionalidades da aplicação~\cite{cervantes2005technical}~\cite{erl2008soa}. Estas funcionalidades são definidas através de contratos de serviço, nos quais o desenvolvimento da aplicação é baseado.
+Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas, promovendo reuso, baixo acoplamento e interoperabilidade do conceito de serviços como unidades que representam funcionalidades da aplicação~\cite{erl2008soa}~\cite{cervantes2005technical}. Estas funcionalidades são definidas através de contratos de serviço, nos quais o desenvolvimento da aplicação é baseado.
 
 Assim, na orientação a serviços, as capacidades dos serviços são definidas através de uma \textit{Service Description} e a partir dessa descrição, provedores de serviço são descobertos por consumidores de serviço estabelecendo um contrato de serviço entre as partes. Deste modo, no mundo de serviços, temos diversas implementações distintas para um mesmo serviço onde o consumidor não está vinculado a nenhuma delas, podendo substituir o serviço consumido de acordo com suas necessidades, através da definição de novos contratos de serviço com base nessas descrições~\cite{cervantes2005technical}.
 
@@ -30,11 +30,48 @@ Nesse contexto, o consumidor não tem conhecimento de como o serviço é impleme
 
 
 \section{Orientação a Componentes}
-TODO
+Segundo Szyperski ~\cite{ref}, "Componentes de software são unidades binárias de produção, aquisição e implantação independente, que interagem formando sistemas".
 
-\section{Clico PDCA de Desenvolvimento}
+Além disso, componentes definem interfaces e dependências através de um modelo de componente, que assim como classe da orientação a objetos, descrevem as características do modelo, ver \ref{sub:elements}.
+
+Um componente possui 3 propriedades características:
+
+\begin{enumerate}
+\item \textbf{Pode ser implantado de forma independente}
+
+Diz respeito a implantação independente de ambiente ou de outros componentes.
+
+\item \textbf{Não deve possui estado observável}
+
+Diz respeito as intâncias de componentes, que não devem ser distinguíveis entre sí, ou seja, não há o conceito de estado observável presente na orientação a objetos. Terceitos não conseguem diferenciar cópias de um componente.
+
+\item \textbf{Unidade de composição com terceiros}
+
+Essa propriedade traz consigo algumas características semelhantes as da orientação a serviços, uma vez que, para a realização de uma composição, o componente deve ser coeso, autocontido e possuir interfaces bem definidas. 
+Um componente pode ser visto como uma caixa preta, que encapsula detalhes de sua implementação e interage com o mundo externo através de sua(s) interface(s).
+\end{enumerate}
+
+Essas propriedades são realizadas por 3 elementos distintos que são base da orientação a componentes.
+
+\subsection{\textit{Component Elements}}
+\label{sub:elements}
+
+\subsubsection{Modelo de Componente}
+O conceito de modelo de componte é, de certa forma, similar ao conceito de classe na orientação a objetos~\cite{cervantes2005technical}. Ele abstrai e descreve as características dos componentes (interfaces, propriedades, dependências) e pode definir mecanismos pelos quais estes são implantados.
+
+\subsubsection{Intância de Componente}
+Uma instância de componente, retomando nossa analogia a orientação a objetos, é um elemento que representa uma entidade "física" do modelo. Diferente do modelo, uma instância de componente possui estado e pode fazer parte de componsições~\cite{cervantes2005technical}~\cite{ref}.
+
+\subsubsection{Pacote de Componente}
+Um pacote de componente pode ser definido como um componente pronto para ser implantado, ou seja, um componente autocontido que possui todas as suas dependências resolvidas de maneira a prover suas funcionalidades de forma independente~\cite{cervantes2005techical}.
+
+\section{Ciclo PDCA}
 \label{sec:pdca}
-TODO
+O ciclo PDCA (\textit{\textbf{P}lain \textbf{C}heck \textbf{D}o \textbf{A}ct}), ou ciclo de  Demming, é um ciclo de desenvolvimento e gestão de processos com foco na melhoria contínua proposto por Walter A. Shewhart~\cite{ref} e amplamente difundido por W. Edward Deming~\cite{ref} inicialmente utilizado-o na implementação de um sistema de qualidade na indústruia japonesa ~\cite{fabioof}.
+
+O ciclo é dividido em 4 etapas, ver Figura \ref{fig:pdca}, visando garantir o alcance de metas pré-estabelecidas, através da utilização de informações como fator chave na tomada de decisões.
+
+É um método eficaz de controle de atividades relacionadas a melhorias, além de compartilhar dos conceitos de gerencia de redes e recursos em geral, a medida que, a tomada de decisão é formente influenciada pelas informações coletadas.
 
 \begin{figure}[htp]
 \centering
@@ -42,6 +79,20 @@ TODO
 \caption[Ciclo PDCA]{Ciclo PDCA de Desenvolvimento com Foco na Melhoria Contínua.}
 \label{fig:pdca}
 \end{figure}
+
+
+\subsection{Etapas}
+\label{pdca:phases}
+\subsubsection{\textit{Plan} - Planejar}
+
+
+\subsubsection{\textit{Do} - Executar}
+
+
+\subsubsection{\textit{Check} - Verificar}
+
+
+\subsubsection{\textit{Act} - Agir}
 
 \section{JMX}
 \textit{Java Management Extensions} (JMX) é uma API que fornece uma maneira simples e padrão de gestão e monitoramento de recursos para a plataforma Java. Estes recursos podem ser aplicações, dispositivos, serviços ou a própria JVM (\textit{Java Virtual Machine}). São instrumentados por um ou mais \textit{Managed Beans}, ou simplesmente MBeans, responsáveis por adquirir, manipular ou enviar informações acerca destes recursos~\cite{lindfors2002jmx}.
