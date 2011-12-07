@@ -1,71 +1,308 @@
-\chapter{JMX}
+\chapter{\textit{QoS Resource Monitoring}}
 
-Este apêndice mostra exemplos de códigos JMX.\\
+Este apêndice apresenta trechos de código do monitor da plaforma, que captura dados referêntes aos recursos gerenciados via JMX.\\
 
-\section{Standard Mbean}
+\section{MBean de Monitoração de Recursos}
 
-\subsection*{\!\textsl{\textbf{HelloMbean.java}}}
+\subsection*{\!\textsl{\textbf{PlatformMonitorMBean.java}}}
 \begin{verbatimtab}[4]
-package br.ufpe.cin.jmx.mbean;
+package br.ufpe.cin.dsoa.jmx.monitor;
 
-public interface HelloMBean {
-	public void setMessage(String msg);
-	public String getMessage();
-	public String sayBye();
+public interface PlatformMonitorMBean {
+
+	public void startMonitoring();
+	public void stopMonitoring();
+	public void setInterval(long interval);
+	public long getInterval();
+
 }
+
 \end{verbatimtab}
 
-\subsection*{\!\textsl{\textbf{HelloMbean.java}}}
+\subsection*{\!\textsl{\textbf{PlatformMonitor.java}}}
+\small
 \begin{verbatimtab}[4]
-package br.ufpe.cin.jmx.mbean;
-
-public class Hello implements HelloMBean {
-
-	private String msg;
-
-	public Hello() {
-		msg = "Hello World";
-	}
-
-	@Override
-	public void setMessage(String msg) {
-		this.msg = msg;
-
-	}
-
-	@Override
-	public String getMessage() {
-		return this.msg;
-	}
-
-	@Override
-	public String sayBye() {
-		return "bye";
-	}
-}
-\end{verbatimtab}
-
-\subsection*{\!\textsl{\textbf{Main.java}}}
-\begin{verbatimtab}[4]
-package br.ufpe.cin.jmx.mbean;
+package br.ufpe.cin.dsoa.jmx.monitor;
 
 import java.lang.management.ManagementFactory;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.management.AttributeNotFoundException;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.InstanceNotFoundException;
+import javax.management.MBeanException;
+import javax.management.MBeanRegistrationException;
 import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
+import javax.management.Notification;
+import javax.management.NotificationBroadcasterSupport;
 import javax.management.ObjectName;
+import javax.management.ReflectionException;
 
-public class Main {
+public class PlatformMonitor extends NotificationBroadcasterSupport 
+	implements PlatformMonitorMBean, Runnable {
 
-	public static void main(String[] args) throws Exception {
+	public static final String RESOURCE_STATUS_TYPE = "resource.status";
 
-		MBeanServer server = ManagementFactory.
-				getPlatformMBeanServer();
-		ObjectName name = new ObjectName(
-				"br.ufpe.cin.jmx.mbean:type=Hello");
-		HelloMBean mbean = new Hello();
+	private static String OBJECT_NAME="jmx.monitor:Type=PlatformMonitor";
+	private static final String SYSTEM_LOAD="SystemLoadAverage";
+	private static final String FREE_PHYSICAL_MEM="FreePhysicalMemorySize";
+	private static final String TOTAL_PHYSICAL_MEM="TotalPhysicalMemorySize";
+	private static final String TOTAL_SWAP_MEM="TotalSwapSpaceSize";
+	private static final String FREE_SWAP_MEM="FreeSwapSpaceSize";
+	private static final String SHARED_MEM="CommittedVirtualMemorySize";
 
-		server.registerMBean(mbean, name);
-		Thread.sleep(Long.MAX_VALUE);
+	private long sequenceNumber = 0;
+	private long interval = 3000;
+
+	private Thread monitoringThread;
+
+	private MBeanServer mbeanServer;
+	private ObjectName platformMonitor;
+
+	public void start() {
+		this.mbeanServer = ManagementFactory.getPlatformMBeanServer();
+
+		try {
+			platformMonitor = new ObjectName(OBJECT_NAME);
+			this.mbeanServer.registerMBean(this, platformMonitor);
+
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} catch (InstanceAlreadyExistsException e) {
+			e.printStackTrace();
+		} catch (MBeanRegistrationException e) {
+			e.printStackTrace();
+		} catch (NotCompliantMBeanException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void stop() {
+		try {
+			this.mbeanServer.unregisterMBean(platformMonitor);
+		} catch (MBeanRegistrationException e) {
+			e.printStackTrace();
+		} catch (InstanceNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void startMonitoring() {
+
+		if (monitoringThread == null) {
+			monitoringThread = new Thread(this);
+		}
+		if (!monitoringThread.isAlive()) {
+			monitoringThread.start();
+		}
+	}
+
+	@Override
+	public void stopMonitoring() {
+		monitoringThread.interrupt();
+	}
+
+	@Override
+	public void setInterval(long interval) {
+		this.interval = interval;
+	}
+
+	@Override
+	public long getInterval() {
+		return this.interval;
+	}
+
+	@Override
+	public void run() {
+		this.poolingSystemProperties();
+	}
+
+	private void poolingSystemProperties() {
+		try {
+			ObjectName name = new ObjectName(
+					ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME);
+
+			while (true) {
+
+				try {
+					Thread.sleep(interval);
+				} catch (InterruptedException e) {
+				}
+
+				Object systemLoad = mbeanServer.
+					getAttribute(name, SYSTEM_LOAD);
+				Long freePhysicalMemory = (Long) mbeanServer.
+					getAttribute(name, FREE_PHYSICAL_MEM);
+				Long freeSwapMemory = (Long) mbeanServer.
+					getAttribute(name, FREE_SWAP_MEM);
+				Long sharedMemory = (Long) mbeanServer.
+					getAttribute(name, SHARED_MEM);
+
+				Long totalSwapMemory = (Long) mbeanServer.
+					getAttribute(name, TOTAL_SWAP_MEM);
+				Long totalPhysicalMemory = (Long) mbeanServer.
+					getAttribute(name, TOTAL_PHYSICAL_MEM);
+				
+				
+				Double percentSwap = (double) 
+					((freeSwapMemory*100)/totalSwapMemory);
+				Double percentPhysical = (double) 
+					((freePhysicalMemory*100/totalPhysicalMemory));
+				Long sharedMbyteMemory = sharedMemory / 1000000;
+				
+				Map<String, Object> status = new HashMap<String, Object>();
+				
+				status.put(SYSTEM_LOAD, systemLoad);
+				status.put(FREE_PHYSICAL_MEM, percentPhysical);
+				status.put(FREE_SWAP_MEM, percentSwap);
+				status.put(SHARED_MEM,
+						Double.parseDouble(sharedMbyteMemory.toString()));
+
+				this.sendNotification(RESOURCE_STATUS_TYPE, status);
+			}
+
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} catch (AttributeNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstanceNotFoundException e) {
+			e.printStackTrace();
+		} catch (MBeanException e) {
+			e.printStackTrace();
+		} catch (ReflectionException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void sendNotification(String message, 
+		Map<String, Object> status) {
+
+		Notification notification = new Notification(
+				PlatformMonitor.RESOURCE_STATUS_TYPE, platformMonitor,
+				this.sequenceNumber++, message);
+
+		notification.setUserData(status);
+
+		super.sendNotification(notification);
 	}
 }
+\end{verbatimtab}
+
+\subsection*{\!\textsl{\textbf{Activator.java}}}
+\small
+\begin{verbatimtab}[4]
+package br.ufpe.cin.dsoa.jmx.monitor;
+
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+
+public class Activator implements BundleActivator {
+	private PlatformMonitor platformMonitor;
+
+	public void registerPlatformMBean() {
+		platformMonitor = new PlatformMonitor();
+		platformMonitor.start();
+		platformMonitor.startMonitoring();
+	}
+
+	public void start(BundleContext context) {
+		this.registerPlatformMBean();
+	}
+
+	@Override
+	public void stop(BundleContext arg0) throws Exception {
+		platformMonitor.stop();
+	}
+
+	public static void main(String[] args) {
+		new Activator().registerPlatformMBean();
+	}
+}
+\end{verbatimtab}
+
+
+\chapter{\textit{Provider Manager}}
+
+Este apêndice mostra um exemplo da definição do arquivo XML necessário à utilização do componente pelo provedor de serviços.
+
+Nele, são expostos os parâmetros utilizados na geração das \textit{Monitoring Configuration}, provenientes do planejamento realizado com objetivo de prevenir possíveis quebras de contrato.
+
+São planejados basicamente 2 tipos de configuração de monitoração. A configuração de monitoração de recursos (\textit{e.g} Carga Total CPU) e a configuração de monitoração de atributos de qualidade (\textit{e.g} Tempo de Processamento).
+
+\section{XML Provider}
+
+\tiny
+\begin{verbatimtab}[4]
+<ipojo xmlns:qos="br.ufpe.cin.dsoa.manager">
+	<component classname="english.EnglishDictionary">
+		<provides strategy="br.ufpe.cin.dsoa.strategy.Strategy"/>
+		<qos:provider-manager pid="provider.serasa.service.impl.ServiceSerasaImpl" name="QoS Test Provider"
+			duration.value="86500000" duration.unit="ms">
+			
+			<slo metric="processingTime" statistic="min" threshold="10000"  operation="searchStateSerasa" expression="EQ" />
+			<slo metric="throughput"     statistic="min" threshold="40000"  operation="searchStateSerasa" expression="LT" />
+			<slo metric="processingTime" statistic="min" threshold="50000"  operation="searchCauseSerasa" expression="LT" />
+			<slo metric="throughput"     statistic="min" threshold="70000"  operation="searchCauseSerasa" expression="LT" />
+			<slo metric="availability"   statistic="min" threshold="0.99"   expression="LT"/>
+			
+			<profiles>
+				<profile policy="StaticInstance">
+					<resource type="cpu" 	attribute="SystemLoadAverage" threshold="0.80" expression="GT"/>
+					<resource type="memory" attribute="FreePhysicalMemorySize" threshold="60" expression="GT"/>
+					<resource type="memory" attribute="FreeSwapSpaceSize" threshold="90" expression="GT"/>
+				</profile>
+				<profile policy="PerRequestInstance">
+					<resource type="cpu" 	attribute="SystemLoadAverage" threshold="0.20" expression="GT"/>
+					<resource type="memory" attribute="CommittedVirtualMemorySize" threshold="750" expression="GT"/>
+				</profile>
+			</profiles>
+		</qos:provider-manager>
+	</component>
+	<instance component="english.EnglishDictionary" />
+</ipojo>
+\end{verbatimtab}
+
+\subsection{Definição dos SLOs}
+\small
+\begin{verbatimtab}[4]
+<slo metric="processingTime" statistic="min" threshold="10000"  
+	operation="searchStateSerasa" expression="EQ" />
+<slo metric="throughput"     statistic="min" threshold="40000"  
+	operation="searchStateSerasa" expression="LT" />
+<slo metric="processingTime" statistic="min" threshold="50000"  
+	operation="searchCauseSerasa" expression="LT" />
+<slo metric="throughput"     statistic="min" threshold="70000" 
+	operation="searchCauseSerasa" expression="LT" />
+<slo metric="availability"   statistic="min" threshold="0.99"   
+	expression="LT"/>
+\end{verbatimtab}
+
+
+\subsection{Definição dos Profiles}
+\small
+\begin{verbatimtab}[4]
+<profiles>
+	<profile policy="StaticInstance">
+		<resource type="cpu" 	attribute="SystemLoadAverage" 
+			threshold="0.80" expression="GT"/>
+		<resource type="memory" attribute="FreePhysicalMemorySize" 
+			threshold="60" expression="GT"/>
+		<resource type="memory" attribute="FreeSwapSpaceSize" 
+			threshold="90" expression="GT"/>
+	</profile>
+	<profile policy="PerRequestInstance">
+		<resource type="cpu" 	attribute="SystemLoadAverage" 
+			threshold="0.20" expression="GT"/>
+		<resource type="memory" attribute="CommittedVirtualMemorySize" 
+			threshold="750" expression="GT"/>
+	</profile>
+</profiles>
 \end{verbatimtab}

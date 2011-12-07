@@ -43,11 +43,11 @@ Diz respeito a implantação independente de ambiente ou de outros componentes.
 
 \item \textbf{Não deve possui estado observável}
 
-Diz respeito as intâncias de componentes, que não devem ser distinguíveis entre sí, ou seja, não há o conceito de estado observável presente na orientação a objetos. Terceitos não conseguem diferenciar cópias de um componente.
+Diz respeito as instâncias de componentes, que não devem ser distinguíveis entre si, ou seja, não há o conceito de estado observável presente na orientação a objetos. Terceiros não conseguem diferenciar cópias de um componente.
 
 \item \textbf{Unidade de composição com terceiros}
 
-Essa propriedade traz consigo algumas características semelhantes as da orientação a serviços, uma vez que, para a realização de uma composição, o componente deve ser coeso, autocontido e possuir interfaces bem definidas. 
+Essa propriedade traz consigo algumas características semelhantes as da orientação a serviços, uma vez que, para a realização de uma composição, o componente deve ser coeso, auto-contido e possuir interfaces bem definidas. 
 Um componente pode ser visto como uma caixa preta, que encapsula detalhes de sua implementação e interage com o mundo externo através de sua(s) interface(s).
 \end{enumerate}
 
@@ -57,25 +57,26 @@ Essas propriedades são realizadas por 3 elementos distintos que são base da or
 \label{sub:elements}
 
 \subsubsection{Modelo de Componente}
-O conceito de modelo de componte é, de certa forma, similar ao conceito de classe na orientação a objetos~\cite{cervantes2005technical}. Ele abstrai e descreve as características dos componentes (interfaces, propriedades, dependências) e pode definir mecanismos pelos quais estes são implantados.
+O conceito de modelo de componente é, de certa forma, similar ao conceito de classe na orientação a objetos~\cite{cervantes2005technical}. Ele abstrai e descreve as características dos componentes (interfaces, propriedades, dependências) e pode definir mecanismos pelos quais estes são implantados.
 
-\subsubsection{Intância de Componente}
-Uma instância de componente, retomando nossa analogia a orientação a objetos, é um elemento que representa uma entidade "física" do modelo. Diferente do modelo, uma instância de componente possui estado e pode fazer parte de componsições~\cite{cervantes2005technical}~\cite{szyperski2002component}.
+\subsubsection{Instância de Componente}
+Uma instância de componente, retomando nossa analogia a orientação a objetos, é um elemento que representa uma entidade "física" do modelo. Diferente do modelo, uma instância de componente possui estado e pode fazer parte de composições~\cite{cervantes2005technical}~\cite{szyperski2002component}.
 
 \subsubsection{Pacote de Componente}
-Um pacote de componente pode ser definido como um componente pronto para ser implantado, ou seja, um componente autocontido que possui todas as suas dependências resolvidas de maneira a prover suas funcionalidades de forma independente~\cite{cervantes2005techical}.
+Um pacote de componente pode ser definido como um componente pronto para ser implantado, ou seja, um componente auto-contido que possui todas as suas dependências resolvidas de maneira a prover suas funcionalidades de forma independente~\cite{cervantes2005techical}.
 
 \section{Ciclo PDCA}
 \label{sec:pdca}
-O ciclo PDCA (\textit{\textbf{P}lain \textbf{C}heck \textbf{D}o \textbf{A}ct}), ou ciclo de  Demming, é um ciclo de desenvolvimento e gestão de processos com foco na melhoria contínua proposto por Walter A. Shewhart~\cite{shewhart} e amplamente difundido por W. Edward Deming~\cite{deming} inicialmente utilizado-o na implementação de um sistema de qualidade na indústruia japonesa ~\cite{fabio2003}.
+O ciclo PDCA (\textit{\textbf{P}lain \textbf{C}heck \textbf{D}o \textbf{A}ct}), ou ciclo de  Demming, é um ciclo de desenvolvimento e gestão de processos com foco na melhoria contínua proposto por Walter A. Shewhart~\cite{shewhart} e amplamente difundido por W. Edward Deming~\cite{deming} inicialmente utilizado-o na implementação de um sistema de qualidade na indústria japonesa ~\cite{fabio2003}.
 
 O ciclo é dividido em 4 etapas, ver Figura \ref{fig:pdca}, visando garantir o alcance de metas pré-estabelecidas, através da utilização de informações como fator chave na tomada de decisões.
 
-É um método eficaz de controle de atividades relacionadas a melhorias, que compartilha dos conceitos de gerencia de redes e recursos em geral, a medida que, a tomada de decisão é formente influenciada pelas informações coletadas.
+O ciclo é aplicável a diversas atividades de gestão, incluindo o gerenciamento de performance~\cite{pdcapm}. É um método eficaz de controle de atividades relacionadas a melhorias, que compartilha dos conceitos de gerencia de redes e recursos em geral, a medida que, a tomada de decisão é fortemente influenciada pelas informações coletadas.
+
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=5cm]{chapters/intro/pdca_cycle.png}
+\includegraphics[width=5cm]{chapters/chapter2/pdca_cycle.png}
 \caption[Ciclo PDCA]{Ciclo PDCA de Desenvolvimento com Foco na Melhoria Contínua.}
 \label{fig:pdca}
 \end{figure}
@@ -84,24 +85,24 @@ O ciclo é dividido em 4 etapas, ver Figura \ref{fig:pdca}, visando garantir o a
 \subsection{Etapas}
 \label{pdca:phases}
 \subsubsection{\textit{Plan} - Planejar}
-A fase de planejamento consiste no estabelecimento de metas e objetivos com base nas políticas adotadas pela organização. Nesta etapa é de extrema importância a análise de informações para a identificação e o entendimento do problema a ser resolvido.
+A fase de planejamento consiste no estabelecimento de metas e objetivos com base nas políticas adotadas pela organização~\cite{pdcacont}. Nesta etapa é de extrema importância a análise de informações para a identificação e o entendimento do problema a ser resolvido.
 
-É a fase mais importante do processo, uma vez que, um planejamento bem elaborado reflete no resultado como um todo. Evitando falhas e perda de tempo em fases futuras~\cite{fabio2003}~\cite{erc}.
+É a fase mais importante do processo, uma vez que, um planejamento bem elaborado reflete no resultado como um todo. Evitando falhas e perda de tempo em fases futuras~\cite{fabio2003}~\cite{pdcacont}.
 
 Tem como resultado a elaboração de um plano de ação, que define os métodos necessários para atingir as metas estabelecidas.
 
 \subsubsection{\textit{Do} - Executar}
-É a fase de execução do plano de ação e coleta dos dados relacionados, para posterior análise.
+É a fase de execução do plano de ação e coleta dos dados relacionados, para posterior análise~\cite{pdcacont}.
 
 Nesta etapa é importante que a execução seja coerente com o plano de ação definido na fase anterior, uma vez que, enquanto a fase anterior busca maior eficácia e coesão, a fase de execução é voltada à eficiência do processo.
 
 \subsubsection{\textit{Check} - Verificar}
-É fase de verificação dos resultados obtidos da execução realizada na fase anterior. Com base nas metas e estratégias definidas na fase de planejamento em conjunto com os dados monitorados na fase de execução, a etapa de verificação foca na análise sistemática dos dados monitorados afim de verificar a efetividade das ações tomadas.
+É fase de verificação dos resultados obtidos da execução realizada na fase anterior. Com base nas metas e estratégias definidas na fase de planejamento em conjunto com os dados monitorados na fase de execução, a etapa de verificação foca na análise sistemática dos dados monitorados afim de verificar a efetividade das ações tomadas~\cite{pdcacont}.
 
 A diferença entre o desejável, o planejamento, e o resultado alcançado constitui um problema a ser resolvido.
 
 \subsubsection{\textit{Act} - Agir}
-Nesta fase são realizadas as ações corretivas, com base na análise do resultados da fase anterior. Essas ações tem o intuito de evitar que o problema verificado na etapa anterior volte a acontecer. Também estão definidas no plano de ação e além de buscar corrigir problemas, podem estar envolvidas na busca por melhoria contínua do processo~\cite{pdcaknow}.
+Nesta fase são realizadas as ações corretivas, com base na análise do resultados da fase anterior. Essas ações tem o intuito de evitar que o problema verificado na etapa anterior volte a acontecer~\cite{pdcacont}. Também estão definidas no plano de ação e além de buscar corrigir problemas, podem estar envolvidas na busca por melhoria contínua do processo~\cite{pdcaknow}.
 
 \paragraph{}
 A aplicação dessas etapas resulta no aprendizado do processo, o que repercute na tomada de decisão, uma vez que, utiliza de informações relevantes extraídas da execução do processo.
@@ -129,12 +130,12 @@ Como foi dito anteriormente, JMX foi definida segundo duas JSRs , JSR 3 e JSR 16
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=12cm]{chapters/chapter4/arch_jmx.png}
+\includegraphics[width=12cm]{chapters/chapter2/arch_jmx.png}
 \caption[Arquitetura JMX]{Arquitetura JMX.}
 \label{fig:arch_jmx}
 \end{figure}
 
-\subsubsection{Nível de Intrumentação}
+\subsubsection{Nível de Instrumentação}
 O nível de instrumentação é responsável por expor as funcionalidades e configurações das aplicações através da criação e registro de MBeans~\cite{jmx}. Estes MBeans coletam e manipulam informações dos recursos gerenciáveis, repassando-as aos agentes JMX do nível superior.
 
 Exitem diferentes tipos de MBeans em JMX. Nas próximas seções descreveremos alguns dos mais importantes.
@@ -164,11 +165,11 @@ Desde modo, o acesso ao atributos e operações em MBeans dinâmicas não é rea
 \begin{figure}[htp]
 \centering
 \subfloat[Invocação de Operação na MBean]{
-\includegraphics[width=13cm]{chapters/chapter4/invoke.png}
+\includegraphics[width=13cm]{chapters/chapter2/invoke.png}
 }
 \\
 \subfloat[Acesso a atributo na MBean]{
-\includegraphics[width=13cm]{chapters/chapter4/getValue.png}
+\includegraphics[width=13cm]{chapters/chapter2/getValue.png}
 }
 \caption{Acesso a atributos e operações da MBean.}
 \label{fig:requestjmx}
@@ -246,7 +247,7 @@ O modelo de notificações JMX segue os seguintes passos, demonstrados na Figura
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=13cm]{chapters/chapter4/notification_model.png}
+\includegraphics[width=13cm]{chapters/chapter2/notification_model.png}
 \caption[Modelo de notificação JMX]{Modelo de notificação JMX.}
 \label{fig:notifyjmx}
 \end{figure}
