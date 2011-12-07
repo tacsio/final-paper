@@ -28,7 +28,6 @@ O consumidor do serviço executa consultas a um determinado serviço através do
 Nesse contexto, o consumidor não tem conhecimento de como o serviço é implementado, onde o mesmo se localiza, nem mesmo se o \textit{servant}, pelo qual ele tem acesso ao serviço, é o mesmo a cada invocação. Esse grau de transparência provê um grande potencial de dinamismo e reuso, que são duas das principais características de arquiteturas orientadas a serviços~\cite{davis2009open}.
 
 
-
 \section{Orientação a Componentes}
 Segundo Szyperski ~\cite{szyperski2002component}, "Componentes de software são unidades binárias de produção, aquisição e implantação independente, que interagem formando sistemas".
 
@@ -64,6 +63,11 @@ Uma instância de componente, retomando nossa analogia a orientação a objetos,
 
 \subsubsection{Pacote de Componente}
 Um pacote de componente pode ser definido como um componente pronto para ser implantado, ou seja, um componente auto-contido que possui todas as suas dependências resolvidas de maneira a prover suas funcionalidades de forma independente~\cite{cervantes2005techical}.
+
+\subsection{\textit{Deployment Descriptors}}
+Outro elemento importante no mundo de componetes, é o chamado \textit{Deployment Descriptior}, que é um arquivo de configuração que descreve um conjunto de propriedades que definem como o componente será implantado na plataforma~\cite{deploy}~\cite{deployoasis}. 
+
+Geralmente essas propriedades são descritas em documentos XML~\cite{xml} devido a sua natureza semi-estruturada, representatividade e a facilidade de entendimento e escrita. Além de ser um padrão W3C ~\cite{w3c} amplamente utilizado atualmente.
 
 \section{Ciclo PDCA}
 \label{sec:pdca}
