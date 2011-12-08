@@ -1,12 +1,13 @@
 \chapter{Conceitos Básicos}
 \label{ch:2}
 Neste capítulo discutiremos alguns conceitos básicos necessários ao entendimento da solução proposta. Abordaremos inicialmente sobre orientação a serviços e a componentes, apresentando as principais características de cada abordagem. 
-
+%TODO: incluir OSGi e iPOJO
 Em seguida, discutiremos sobre gerenciamento de recursos e serviços, sua importância no contexto de arquiteturas orientadas a serviços, e uma visão geral do ciclo de desenvolvimento PDCA. 
 
 Por fim, apresentaremos uma visão geral de JMX, a tecnologia utilizada no trabalho para realizar o monitoramento dos recursos.
 
 \section{Orientação a Serviços}
+\label{sec:service}
 Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas, promovendo reuso, baixo acoplamento e interoperabilidade do conceito de serviços como unidades que representam funcionalidades da aplicação~\cite{erl2008soa}~\cite{cervantes2005technical}. Estas funcionalidades são definidas através de contratos de serviço, nos quais o desenvolvimento da aplicação é baseado.
 
 Assim, na orientação a serviços, as capacidades dos serviços são definidas através de uma \textit{Service Description} e a partir dessa descrição, provedores de serviço são descobertos por consumidores de serviço estabelecendo um contrato de serviço entre as partes. Deste modo, no mundo de serviços, temos diversas implementações distintas para um mesmo serviço onde o consumidor não está vinculado a nenhuma delas, podendo substituir o serviço consumido de acordo com suas necessidades, através da definição de novos contratos de serviço com base nessas descrições~\cite{cervantes2005technical}.
@@ -29,6 +30,7 @@ Nesse contexto, o consumidor não tem conhecimento de como o serviço é impleme
 
 
 \section{Orientação a Componentes}
+\label{sec:component}
 Segundo Szyperski ~\cite{szyperski2002component}, "Componentes de software são unidades binárias de produção, aquisição e implantação independente, que interagem formando sistemas".
 
 Além disso, componentes definem interfaces e dependências através de um modelo de componente, que assim como classe da orientação a objetos, descrevem as características do modelo, ver \ref{sub:elements}.
@@ -76,17 +78,59 @@ Para iniciarmos uma introdução sobre OSGi, não podemos deixar de falar da \te
 
 Java fornece a portabilidade necessária para suportar aplicativos em diferentes plataformas, porém, não dá suporte explícito à construção de sistemas modulares~\cite{hall2010osgi}. A plataforma OSGi provê um conjunto de especificações que permitem que as aplicações sejam construídas a partir de pequenos componentes reutilizáveis de maneira colaborativa~\cite{osgiorg}, simplificando o desenvolvimento e a manutenção do código~\cite{hall2010osgi}.
 
-O principal componente das especificações OSGi é o Framework OSGi, ele fornece um ambiente padronizado onde as aplicações, denominadas \textit{bundles}, que definem os módulos do sistema são executados. Cada componente pode, em tempo de execução,  ser instalado, desinstalado, ativado ou desativado local ou remotamente.
+O principal componente das especificações OSGi é o Framework OSGi, ele fornece um ambiente padronizado onde as aplicações, denominadas \textit{bundles}, que definem os módulos do sistema, onde estes podem, em tempo de execução,  ser instalado, desinstalado, ativado ou desativado local ou remotamente.
 
-O framework é divido em 3 camadas:
-TODO
-\begin{itemize}
-	\item \textit{Module Layer}
 
-	\item \textit{LifeCycle Layer}
+\subsection{Arquitetura}
 
-	\item \textit{Service Layer}
-\end{itemize}
+A arquitetura do OSGi define um conjunto de camadas, vistas na Figura \ref{fig:arch_osgi}. 
+
+Iremos nos concentrar nas principais camadas do framework, apresentando-as nas próximas seções.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=9cm]{chapters/chapter2/arch-osgi.png}
+\caption[Arquitetura OSGi]{Arquitetura OSGi~\cite{osgiorg}.}
+\label{fig:arch_osgi}
+\end{figure}
+
+
+\subsubsection{\textit{Module Layer}}
+Define o conceitos de módulos, providos através dos \textit{Bundles}. Um \textit{bundle} é nada mais que um arquivo JAR com um conjunto de metadados definidos em um \textit{Manifest}. De fato, a figura do \textit{bundle} é extremamente simples, porém, ao mesmo tempo poderosa, uma vez que, diferente de um simples arquivo JAR, um \textit{bundle} define um módulo lógico que pode ser combinado para a composição de uma aplicação~\cite{hall2010osgi}.
+
+Além disso, ~\textit{bundles} podem declarar explicitamente dependências externas e pacotes exportados, ampliando o mecanismo de controle de acesso padrão de Java. Essa capacidades de declarar explicitamente pacotes importados e exportados, traz um grande benefício ao desenvolvedor, uma vez que, o próprio framework OSGi fica responsável por gerenciar e verificar a automaticamente consistência da aplicação, através do processo chamado de \textit{bundle resolution}~\cite{hall2010osgi}~\cite{osgiorg}.
+
+\subsubsection{\textit{Lifecycle Layer}}
+Controla o ciclo de vida dos \textit{bundles}, definindo como os mesmos são dinamicamente instalados e gerenciados. 
+
+Também define como os \textit{bundles} obtem acesso ao \textit{bundle context}, controlando a interação dos mesmos com o framework.
+
+É nesse contexto que temos a figura do ativador responsável por inicializar/parar o bundle, provido através da interface \textit{BundleActivator}, semelhante ao \textit{main} de um programa Java.
+
+\subsubsection{\textit{Service Layer}}
+Incorpora características de SOA no OSGi, com as figuras do registro, provedor e consumidor de serviço, visto na Seção \ref{sec:service}. 
+
+Ela expande o dinamismo provido pelos textit{bundles} na camada de clico de vida, combinando este ao dinamismo provido por arquiteturas baseadas em serviço, onde serviços podem aparecer ou desaparecer a qualquer momento~\cite{hall2010osgi}.
+
+\subsection{iPOJO}
+\label{subsec:ipojo}
+Outra tecnologia importante para a compreensão deste trabalho, é o framework iPOJO~\cite{ipojo}.
+
+iPojo é um modelo de serviço orientado a componentes, que tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. É baseado no conceito de POJO (\textit{Plain Old Java Objects}), onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução, seguindo o princípio de que a simplicidade favorece a regularidade.
+	
+No iPojo, os diversos POJO's são encapsulados em containers, estes são responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao container e podem ser facilmente estendidos através da utilização de \textit{handlers}~\cite{ipojo}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5cm]{chapters/chapter2/ipojo-handlers.png}
+\caption[Handlers Ipojo]{Handlers iPOJO~\cite{ipojo}.}
+\label{fig:arch_osgi}
+\end{figure}
+
+A idéia por traz do iPojo se baseia nos conceitos de orientação a componentes, onde tempos a visão de modelo e instância de componente. O iPojo, o modelo de componente, chamado de \textit{component type} define propriedades do componente, classe de implementação e políticas de criação de instância. 
+A instância herda todas as características do tipo do componente, porém, possui um nome exclusivo e um conjunto de configurações próprio do tipo chave-valor~\cite{ipojo}.
+
+O iPojo é define uma ferramenta poderosa e extensível, que abstrai o uso de OSGi através do conceito de containers que controlam o acesso ao POJO, e de \textit{handlers} 'plugados' aos containers, gerenciando a interação com entidades externas ou outros POJOs.
 
 
 \section{Ciclo PDCA}
@@ -280,5 +324,5 @@ Assim, JMX surge como uma tecnologia de monitoramento e notificação flexível,
 
 \section{Considerações Finais}
 Assim, concluímos o capítulo que apresenta os conceitos essenciais ao entendimento dos próximos capítulos e do trabalho como um todo.
-
+%TODO: incluir osgi e ipojo
 Apresentamos os paradigmas de orientação a serviços e componentes, demos uma visão geral do ciclo de desenvolvimento PDCA e da tecnologia de monitoramento de recursos utilizada neste trabalho, a tecnologia JMX.
