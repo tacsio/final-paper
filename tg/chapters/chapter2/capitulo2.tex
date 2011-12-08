@@ -69,6 +69,26 @@ Outro elemento importante no mundo de componetes, é o chamado \textit{Deploymen
 
 Geralmente essas propriedades são descritas em documentos XML~\cite{xml} devido a sua natureza semi-estruturada, representatividade e a facilidade de entendimento e escrita. Além de ser um padrão W3C ~\cite{w3c} amplamente utilizado atualmente.
 
+\section{OSGi}
+\label{sec:osgi}
+
+Para iniciarmos uma introdução sobre OSGi, não podemos deixar de falar da \textit{OSGi Alliance}, um consórcio formado por grandes empresas que lideram vários segmentos do ramo de TI, cuja principal missão é criar um middleware universal para o desenvolvimento de aplicações modulares na plataforma Java~\cite{osgiorg}.
+
+Java fornece a portabilidade necessária para suportar aplicativos em diferentes plataformas, porém, não dá suporte explícito à construção de sistemas modulares~\cite{hall2010osgi}. A plataforma OSGi provê um conjunto de especificações que permitem que as aplicações sejam construídas a partir de pequenos componentes reutilizáveis de maneira colaborativa~\cite{osgiorg}, simplificando o desenvolvimento e a manutenção do código~\cite{hall2010osgi}.
+
+O principal componente das especificações OSGi é o Framework OSGi, ele fornece um ambiente padronizado onde as aplicações, denominadas \textit{bundles}, que definem os módulos do sistema são executados. Cada componente pode, em tempo de execução,  ser instalado, desinstalado, ativado ou desativado local ou remotamente.
+
+O framework é divido em 3 camadas:
+TODO
+\begin{itemize}
+	\item \textit{Module Layer}
+
+	\item \textit{LifeCycle Layer}
+
+	\item \textit{Service Layer}
+\end{itemize}
+
+
 \section{Ciclo PDCA}
 \label{sec:pdca}
 O ciclo PDCA (\textit{\textbf{P}lain \textbf{C}heck \textbf{D}o \textbf{A}ct}), ou ciclo de  Demming, é um ciclo de desenvolvimento e gestão de processos com foco na melhoria contínua proposto por Walter A. Shewhart~\cite{shewhart} e amplamente difundido por W. Edward Deming~\cite{deming} inicialmente utilizado-o na implementação de um sistema de qualidade na indústria japonesa ~\cite{fabio2003}.
@@ -252,7 +272,7 @@ O modelo de notificações JMX segue os seguintes passos, demonstrados na Figura
 \begin{figure}[htp]
 \centering
 \includegraphics[width=13cm]{chapters/chapter2/notification_model.png}
-\caption[Modelo de notificação JMX]{Modelo de notificação JMX.}
+\caption[Modelo de notificação JMX]{Modelo de notificação JMX~\cite{pericasgerencia}.}
 \label{fig:notifyjmx}
 \end{figure}
 

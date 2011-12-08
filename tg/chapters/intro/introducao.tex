@@ -4,13 +4,13 @@
 \section{Contexto}
 Atualmente, o mercado cada vez mais acirrado e competitivo, faz com que as empresas constantemente modifiquem e redesenhem suas estratégias de negócio de maneira ágil, buscando incessantemente por inovação e agregação de valor a seus produtos e serviços. 
 
-Esse tipo de cenário, do ponto de vista computacional, requer adaptação constante dos sistemas e processos relacionados, tornando os custos necessários a essa adaptação um grande obstáculo~\cite{rabelo2006}, já que a maioria desses custos são provenientes de implementações de novas soluções para cada caso específico. Além disso, o constante incremento de novas aplicações torna o sistema ainda mais complexo, dificultando o processo de desenvolvimento e aumentando também os custos relacionados ao gerenciamento~\cite{rabelo2006}~\cite{ada2006}.
+Esse tipo de cenário, do ponto de vista computacional, requer adaptação constante dos sistemas e processos relacionados, tornando os custos necessários a essa adaptação um grande obstáculo~\cite{papazoglou2008service}~\cite{rabelo2006}, já que a maioria desses custos são provenientes de implementações de novas soluções para cada caso específico. Além disso, o constante incremento de novas aplicações torna o sistema ainda mais complexo, dificultando o processo de desenvolvimento e aumentando também os custos relacionados ao gerenciamento~\cite{rabelo2006}~\cite{ada2006}.
 
 Assim, é clara a necessidade de uma solução que suportasse esse novo contexto, no qual os sistemas constantemente evoluem, interagem e trocam informações entre si, onde a idéia de se desenvolver uma aplicação nova e complexa deve ser evitada e substituída por um conjunto de aplicações pequenas, já existentes (quando possível) e mais simples~\cite{rabelo2006}. A aplicação agora deve ser composta por um conjunto de módulos independentes, especializados, interoperáveis e sobretudo simples, o que aumenta a reutilização e manutenção do módulo~\cite{oracle2005ws}.
 
 Em função disto, temos nos princípios de SOA, um modelo arquitetural modular e interoperável que se mostra como uma alternativa viável à resolução dessa necessidade.
 
-Arquitetura Orientada a Serviços, ou do inglês \textit{Service Oriented Architecture} (SOA), tem surgido ao longo dos últimos anos como uma das abordagens preferidas para construção de sistemas~\cite{erl2008soa}. Com objetivos alinhados aos objetivos do paradigma SOC \textit{(Service-Oriented Computing)}, SOA possibilita a criação de novas aplicações com maior coerência, rapidez e diminuição nos custos, tudo isso com excelente aproveitamento do legado~\cite{erl2008soa}.
+Arquitetura Orientada a Serviços, ou do inglês \textit{Service Oriented Architecture} (SOA), tem surgido ao longo dos últimos anos como uma das abordagens preferidas para construção de sistemas~\cite{erl2008soa}. Com objetivos alinhados aos objetivos do paradigma SOC \textit{(Service-Oriented Computing)}~\cite{papazoglou:2003}, SOA possibilita a criação de novas aplicações com maior coerência, rapidez e diminuição nos custos, tudo isso com excelente aproveitamento do legado~\cite{erl2008soa}.
 
 Baseada em padrões abertos e na visão onipresente da Internet, SOA tem como princípio fundamental a idéia de serviços como unidades que representam módulos do negócio ou funcionalidades da aplicação~\cite{erl2008soa}~\cite{imb2007soa}~\cite{cervantes2005technical}. Na visão de SOA, um serviço é um componente que implementa uma função de negócio. Ele pode responder a requisições ocultando os detalhes de sua implementação e é descrito através de contratos que expressam seu objetivo e suas capacidades. 
 
@@ -21,7 +21,7 @@ O \textbf{provedor do serviço} (\textit{Service Provider}), que implementa a fu
 \begin{figure}[htp]
 \centering
 \includegraphics[width=7cm]{chapters/intro/soa_triangle.png}
-\caption[Triângulo SOA]{Triângulo SOA.}
+\caption[Triângulo SOA]{Triângulo SOA~\cite{michlmayr2009end}.}
 \label{fig:soatriangle}
 \end{figure}
 
@@ -39,7 +39,7 @@ Esses contratos são especificados através de SLAs (\textit{Service Level Agree
 
 Porém, uma tarefa complexa neste cenário é garantir que os acordos a nível de serviço, SLAs, entre o consumidor e provedor são realmente respeitados. Além disso, prevenir uma quebra de contrato, onde o provedor não cumpre com os requisitos não-funcionais definidos nos SLAs, é outro ponto complexo a ser atacado, pois, na maioria dos casos, quando é caracterizada uma quebra de contrato o provedor pode sofrer algum tipo de penalidade, ou mesmo, perder um potencial consumidor de seus serviços.
 
-Deste modo, o monitoramento dos serviços aliado à análise dos dados monitorados, surge como uma possível solução para o problema de garantir o cumprimento dos contratos entre provedores e consumidores de serviços. Ainda mais, o resultado dessa análise aliada a um mecanismo de auto-gerenciamento do ambiente onde estes serviços são executados, surge como uma alternativa viável à manutenção dos contratos por parte dos provedores. Uma vez que, na definição dos SLAs, o provedor apresenta suas capacidades funcionais e não-funcionais (atributos de QoS), e os consumidores ao buscarem serviços, definem contratos com base nessas informações disponibilizadas por esses provedores, comprovando as necessidades citadas acima.
+Deste modo, o monitoramento dos serviços aliado à análise dos dados monitorados, surge como uma possível solução para o problema de garantir o cumprimento dos contratos entre provedores e consumidores de serviços~\cite{papazoglou2008service}. Ainda mais, o resultado dessa análise aliada a um mecanismo de auto-gerenciamento do ambiente onde estes serviços são executados, surge como uma alternativa viável à manutenção dos contratos por parte dos provedores. Uma vez que, na definição dos SLAs, o provedor apresenta suas capacidades funcionais e não-funcionais (atributos de QoS), e os consumidores ao buscarem serviços, definem contratos com base nessas informações disponibilizadas por esses provedores, comprovando as necessidades citadas acima.
 
 \section{Objetivos}
 \label{sec:obj}
