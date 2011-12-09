@@ -78,9 +78,9 @@ Geralmente essas propriedades são descritas em documentos XML~\cite{xml} devido
 
 Para iniciarmos uma introdução sobre OSGi, não podemos deixar de falar da \textit{OSGi Alliance}, um consórcio formado por grandes empresas que lideram vários segmentos do ramo de TI, cuja principal missão é criar um middleware universal para o desenvolvimento de aplicações modulares na plataforma Java~\cite{osgiorg}.
 
-Java fornece a portabilidade necessária para suportar aplicativos em diferentes plataformas, porém, não dá suporte explícito à construção de sistemas modulares~\cite{hall2010osgi}. A plataforma OSGi provê um conjunto de especificações que permitem que as aplicações sejam construídas a partir de pequenos componentes reutilizáveis de maneira colaborativa~\cite{osgiorg}, simplificando o desenvolvimento e a manutenção do código~\cite{hall2010osgi}.
+Java fornece a portabilidade necessária para suportar aplicativos em diferentes plataformas, porém, não dá suporte explícito à construção de sistemas modulares~\cite{hall2010osgi}. A plataforma OSGi provê um conjunto de especificações permitindo que aplicações sejam construídas de maneira colaborativa a partir de pequenos componentes reutilizáveis ~\cite{osgiorg}, simplificando o desenvolvimento e a manutenção do código~\cite{hall2010osgi}.
 
-O principal componente das especificações OSGi é o Framework OSGi, ele fornece um ambiente padronizado onde as aplicações, denominadas \textit{bundles}, que definem os módulos do sistema, onde estes podem, em tempo de execução,  ser instalado, desinstalado, ativado ou desativado local ou remotamente.
+O principal componente da especificação OSGi é o Framework OSGi, ele fornece um ambiente padronizado onde as aplicações, denominadas \textit{bundles}, podem, em tempo de execução,  ser instaladas, desinstaladas, ativadas ou desativadas local ou remotamente.
 
 
 \subsection{Arquitetura}
@@ -118,9 +118,9 @@ Ela expande o dinamismo provido pelos textit{bundles} na camada de clico de vida
 \label{subsec:ipojo}
 Outra tecnologia importante para a compreensão deste trabalho, é o framework iPOJO~\cite{ipojo}.
 
-iPojo é um modelo de serviço orientado a componentes, que tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. É baseado no conceito de POJO (\textit{Plain Old Java Objects}), onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução, seguindo o princípio de que a simplicidade favorece a regularidade.
+iPOJO é um modelo de serviço orientado a componentes, que tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. É baseado no conceito de POJO (\textit{Plain Old Java Objects}), onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução, seguindo o princípio de que a simplicidade favorece a regularidade.
 	
-No iPojo, os diversos POJO's são encapsulados em containers, estes são responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao container e podem ser facilmente estendidos através da utilização de \textit{handlers}~\cite{ipojo}.
+No iPOJO, os diversos POJO's são encapsulados em containers, estes são responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao container através da utilização de \textit{handlers}~\cite{ipojo}.
 
 \begin{figure}[htp]
 \centering
@@ -129,10 +129,12 @@ No iPojo, os diversos POJO's são encapsulados em containers, estes são respons
 \label{fig:arch_osgi}
 \end{figure}
 
-A idéia por traz do iPojo se baseia nos conceitos de orientação a componentes, onde tempos a visão de modelo e instância de componente. O iPojo, o modelo de componente, chamado de \textit{component type} define propriedades do componente, classe de implementação e políticas de criação de instância. 
-A instância herda todas as características do tipo do componente, porém, possui um nome exclusivo e um conjunto de configurações próprio do tipo chave-valor~\cite{ipojo}.
+A idéia por traz do iPOJO se baseia nos conceitos de orientação a componentes, onde temos a visão de modelo e instância de componente. 
 
-O iPojo é define uma ferramenta poderosa e extensível, que abstrai o uso de OSGi através do conceito de containers que controlam o acesso ao POJO, e de \textit{handlers} ``plugados'' aos containers, gerenciando a interação com entidades externas ou outros POJOs.
+No iPOJO, o modelo de componente, chamado de \textit{component type}, define propriedades um conjunto de propriedades do componente, sua classe de implementação e políticas de criação de instância. 
+A instância herda todas as características do \textit{component type} e pode ter um conjunto de propriedade próprias~\cite{ipojo}.
+
+O iPojo é uma ferramenta poderosa e extensível, que abstrai o uso de OSGi através do conceito de containers que controlam o acesso ao POJO, e de \textit{handlers} ``plugados'' aos containers, gerenciando a interação com entidades externas ou outros POJOs.
 
 
 \section{Ciclo PDCA}

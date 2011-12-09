@@ -18,4 +18,5 @@ clean:
 search:
 	@clear
 	@grep -r -n --color=always --exclude=Makefile "TODO" .
+	@grep -r -n --color=always --exclude=Makefile "FIXME" .
 

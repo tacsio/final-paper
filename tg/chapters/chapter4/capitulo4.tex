@@ -8,7 +8,10 @@ Também será mostrada uma análise do processo de gerenciamento automático, te
 Essa análise irá relacionar as etapas definidas no ciclo com os sub-processos definidos pelo mecanismo.
 
 \section{Visão Geral}
-O contexto ao qual este trabalho está inserido, foi apresentado no capítulo \ref{ch:3}, através da plataforma DSOA, que provê um ambiente de composição dinâmica baseado em componentes orientados a serviços, com percepção de requisitos não-funcionais mapeados em atributos de qualidade.
+O contexto ao qual este trabalho está inserido, foi apresentado no capítulo \ref{ch:3}, através da plataforma DSOA, que provê um ambiente de composição dinâmica baseado em componentes orientados a serviços, com percepção de requisitos não-funcionais mapeados em atributos de qualidade. Porém, o estado atual da plataforma não suporte nenhum tipo de gerenciamento ou monitoramento do provedor de serviços. 
+
+O provedor basicamente define um conjunto de atributos de qualidade, que o mesmo afirma prover, utilizado como base na seleção dos provedores na elaboração de contratos de serviço baseados em atributos de qualidade.
+%FIXME: Validar com Fábio
 
 %TODO: trecho motivacional do site [DarkSide iPOJO]
 
@@ -29,7 +32,7 @@ A figura \ref{fig:proposal} destaca onde o trabalho desenvolvido esta situado na
 \label{fig:proposal}
 \end{figure}
 
-A combinação destes 2 módulos, junto aos serviços providos pela plataforma surge como uma solução para o problema de gestão de provedores de servico e será detalhada nas próximas seções.
+A combinação destes 2 módulos, junto aos serviços providos pela plataforma surge como uma solução para o problema de gestão de provedores de servico. Detalhadaremos seu funcionamento e arquitetura nas próximas seções.
 
 \section{Arquitetura}
 %TODO explicar arquitetura
@@ -37,7 +40,8 @@ A combinação destes 2 módulos, junto aos serviços providos pela plataforma s
 
 \subsection{Módulo de Monitoração de Recursos}
 %TODO: definir módulo
-Os dados do monitoramento são enviados, através da figura de eventos, ao serviço de processamento de eventos que gera notificações ao gerenciador do provedor de serviços quando algum problema é detectado.%[TODO: como explicar isso ¬¬] 
+
+Os dados do monitoramento são enviados, através da figura de eventos, ao serviço de processamento de eventos que gera notificações ao gerenciador do provedor de serviços quando algum problema é detectado.%[FIXME: como explicar isso ¬¬] 
 
 \begin{figure}[htp]
 \centering
