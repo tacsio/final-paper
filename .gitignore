@@ -7,7 +7,7 @@
 *.lof
 *.out
 *.backup
-*~
+*~*
 *.directory
 *.pdf
 *.synctex.gz
