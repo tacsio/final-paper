@@ -10,22 +10,25 @@ Essa análise irá relacionar as etapas definidas no ciclo com os sub-processos 
 \section{Visão Geral}
 O contexto ao qual este trabalho está inserido, foi apresentado no capítulo \ref{ch:3}, através da plataforma DSOA, que provê um ambiente de composição dinâmica baseado em componentes orientados a serviços, com percepção de requisitos não-funcionais mapeados em atributos de qualidade. 
 
-Porém, o estado atual da plataforma não dá suporte a gerenciamento e monitoramento do provedor de serviços. O provedor basicamente define um conjunto de atributos de qualidade, que são utilizados pelos consumidores na seleção de servico e na elaboração de contratos.
+Porém, o estado atual da plataforma não dá suporte a gerenciamento e monitoramento do provedor de serviços. O provedor basicamente define um conjunto de atributos de qualidade, que são utilizados pelos consumidores na seleção de serviço e na elaboração de contratos.
 
-%TODO: trecho motivacional do site [DarkSide iPOJO]
+Atacar tais limitações mostra-se relevante, a medida que a qualidade do serviço é um fator chave tanto seleção do provedor quanto na manutenção dos contratos.
 
-Como foi dito no Capítulo \ref{ch:1}, a proposta deste trabalho é especificar e construir um mecanismo de gerenciamento automático de provedores de serviço, focado na prevenção de possíveis quebras de contrato.
+Buscando resolver esse problema, o objetivo deste trabalho é especificar e construir um mecanismo de gerenciamento automático de provedores de serviço, focado na prevenção de possíveis quebras de contrato. 
+
+Para isso, a plataforma deve ser capaz de monitorar e adaptar dinamicamente o provedor de serviços, em função do contexto em que o mesmo executa.
+
 
 \section{Arquitetura}
 \label{sec:arch_prop}
 
-%TODO: motivar criacao dos módulos
+Como vimos na Seção anterior, a plataforma DSOA, não prevê o gerenciamento do provedor de serviços com base em atributos de qualidade, deste modo, propomos uma extender a plataforma para suprir tais necessidades.
 
-Para isso, foram desenvolvidos e implantados 2 módulos à plataforma DSOA. Um módulo de monitoração de recursos de hardware e um módulo de gerenciamento de provedores de serviços, ver Figura \ref{fig:proposal}.
+Para isso, foram desenvolvidos e implantados 2 módulos à plataforma. Um módulo de monitoração de recursos de hardware e um módulo de gerenciamento de provedores de serviços, ver Figura \ref{fig:proposal}.
 
-O módulo de monitoração de recursos, consiste em um sensor que captura informações referentes ao estado dos recursos da máquina. É instrumentado através de JMX e disponibilizado como um serviço da plataforma. 
+O módulo de monitoração de recursos consiste em um sensor que captura informações referentes ao estado dos recursos da máquina. É instrumentado através de JMX e foi disponibilizado como um serviço da plataforma. 
 
-O módulo de gerenciamento de provedor de serviço, estende um \textit{container} fornecendo suporte a reconfiguração dinâmica de serviços com base em atributos de qualidade e no contexto em que o provedor executa.
+O módulo de gerenciamento de provedor de serviço estende um \textit{container} fornecendo suporte a reconfiguração dinâmica de serviços. A reconfiguração é baseada em atributos de qualidade e no contexto em que o provedor executa.
 
 A figura \ref{fig:proposal} destaca onde o trabalho desenvolvido esta situado na plataforma DSOA.
 
@@ -36,7 +39,7 @@ A figura \ref{fig:proposal} destaca onde o trabalho desenvolvido esta situado na
 \label{fig:proposal}
 \end{figure}
 
-A combinação destes 2 módulos, junto aos serviços providos pela plataforma surge como uma solução para o problema de gestão de provedores de servico. Detalharemos seu funcionamento e arquitetura nas próximas seções.
+A combinação destes 2 módulos, junto aos serviços providos pela plataforma, surge como uma solução para o problema de gestão de provedores de serviço. Detalharemos seu funcionamento e arquitetura nas próximas seções.
 
 
 \subsection{Módulo de Monitoração de Recursos}
@@ -45,7 +48,7 @@ Conforme o Capítulo \ref{ch:3}, um elemento importante de um sistema de monitor
 
 Na plataforma DSOA, os sensores estão representados pelos serviços de monitoração. Originalmente a plataforma suportava um conjunto de sensores responsáveis pela coleta de dados referentes à qualidade dos serviços providos e consumidos.
 
-Do ponto de vista do provedor, 2 fatores impactam diretamente na qualidade do serviço: A demanda e a limitação dos recursos~\ref{ye2011models}. Neste contexto, é vital que os recursos sejam monitorados, de forma a evitar que o consumo elevado degrade a qualidade do servico provido, levando a eventuais quebras de contratos.
+Do ponto de vista do provedor, 2 fatores impactam diretamente na qualidade do serviço: A demanda e a limitação dos recursos~\cite{ye2011models}. Neste contexto, é vital que os recursos sejam monitorados, de forma a evitar que o consumo elevado degrade a qualidade do serviço provido, levando a eventuais quebras de contratos.
 
 Essa necessidade nos levou a proposição de um novo conjunto de sensores, com a finalidade coletar dados relacionados ao contexto de execução do serviço, em termos de consumo de recursos de hardware, em particular, consumo de CPU e mémoria. Esse conjunto de sensores, foi incorporado à plataforma DSOA, através do módulos de monitoração de recursos, que é parte integrante do serviço de monitoração, conforme a Figura \ref{fig:resc_module}.
 
@@ -67,7 +70,7 @@ Em linhas gerais, um processo de garantia de qualidade envolve um ciclo de ativi
 No contexto do provedor, o gerente de adaptação
 %TODO
 
-Esse módulo implementa uma extensão do container e tem como objetivo permitir que este se adapte dinamicamente, em função do estado atual de consumo de recursos e da qualidade do servico provido. 
+Esse módulo implementa uma extensão do container e tem como objetivo permitir que este se adapte dinamicamente, em função do estado atual de consumo de recursos e da qualidade do serviço provido. 
 
 
 
@@ -75,7 +78,7 @@ Esse módulo implementa uma extensão do container e tem como objetivo permitir 
 \centering
 \includegraphics[width=9cm]{chapters/chapter4/adaptation-manager.png}
 \caption[QoS Provider Manager]{QoS Provider Manager.}
-\label{fig:proposal}
+\label{fig:adapt_module}
 \end{figure}
 
 
