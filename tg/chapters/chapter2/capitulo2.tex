@@ -37,6 +37,8 @@ Segundo Szyperski ~\cite{szyperski2002component}, "Componentes de software são 
 
 Além disso, componentes definem interfaces e dependências através de um modelo de componente, que assim como classe da orientação a objetos, descrevem as características do modelo, ver \ref{sub:elements}.
 
+A orientação a componentes também define o conceito de \textit{containers}, que gerenciam o ciclo de vida e encapsulam os componentes, intermediando sua interação com o mundo externo.
+
 Um componente possui 3 propriedades características:
 
 \begin{enumerate}
@@ -112,15 +114,15 @@ Também define como os \textit{bundles} obtem acesso ao \textit{bundle context},
 \subsubsection{\textit{Service Layer}}
 Incorpora características de SOA no OSGi, com as figuras do registro, provedor e consumidor de serviço, visto na Seção \ref{sec:service}. 
 
-Ela expande o dinamismo provido pelos textit{bundles} na camada de clico de vida, combinando este ao dinamismo provido por arquiteturas baseadas em serviço, onde serviços podem aparecer ou desaparecer a qualquer momento~\cite{hall2010osgi}.
+Ela expande o dinamismo provido pelos textit{bundles} na camada de ciclo de vida, combinando este ao dinamismo provido por arquiteturas baseadas em serviço, onde serviços podem aparecer ou desaparecer a qualquer momento~\cite{hall2010osgi}.
 
 \subsection{iPOJO}
 \label{subsec:ipojo}
 Outra tecnologia importante para a compreensão deste trabalho, é o framework iPOJO~\cite{ipojo}.
 
-iPOJO é um modelo de serviço orientado a componentes, que tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. É baseado no conceito de POJO (\textit{Plain Old Java Objects}), onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução, seguindo o princípio de que a simplicidade favorece a regularidade.
+iPOJO é um modelo de serviço orientado a componentes, que tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. É baseado no conceito de POJO (\textit{Plain Old Java Objects}), onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução.
 	
-No iPOJO, os diversos POJO's são encapsulados em containers, estes são responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao container através da utilização de \textit{handlers}~\cite{ipojo}.
+No iPOJO, os diversos POJO's são encapsulados em \textit{containers}, responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao \textit{container} e podem ser extendidos através da utilização de \textit{handlers}~\cite{ipojo}.
 
 \begin{figure}[htp]
 \centering
@@ -129,7 +131,7 @@ No iPOJO, os diversos POJO's são encapsulados em containers, estes são respons
 \label{fig:arch_osgi}
 \end{figure}
 
-A idéia por traz do iPOJO se baseia nos conceitos de orientação a componentes, onde temos a visão de modelo e instância de componente. 
+A idéia por traz do iPOJO se baseia nos conceitos de orientação a componentes, onde temos, além da figura do \textit{container}, a visão de modelo e instância de componente. 
 
 No iPOJO, o modelo de componente, chamado de \textit{component type}, define propriedades um conjunto de propriedades do componente, sua classe de implementação e políticas de criação de instância. 
 A instância herda todas as características do \textit{component type} e pode ter um conjunto de propriedade próprias~\cite{ipojo}.
