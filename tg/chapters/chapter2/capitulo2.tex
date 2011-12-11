@@ -10,12 +10,14 @@ Por fim, apresentaremos uma visão geral de JMX, a tecnologia utilizada no traba
 
 \section{Orientação a Serviços}
 \label{sec:service}
-Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas, promovendo reuso, baixo acoplamento e interoperabilidade do conceito de serviços como unidades que representam funcionalidades da aplicação~\cite{erl2008soa}~\cite{cervantes2005technical}. Estas funcionalidades são definidas através de contratos de serviço, nos quais o desenvolvimento da aplicação é baseado.
+Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas, promovendo reuso, baixo acoplamento e interoperabilidade, através do conceito de serviços como unidades que representam funcionalidades da aplicação~\cite{erl2008soa}~\cite{cervantes2005technical}. 
 
-Assim, na orientação a serviços, as capacidades dos serviços são definidas através de uma \textit{Service Description} e a partir dessa descrição, provedores de serviço são descobertos por consumidores de serviço estabelecendo um contrato de serviço entre as partes. Deste modo, no mundo de serviços, temos diversas implementações distintas para um mesmo serviço onde o consumidor não está vinculado a nenhuma delas, podendo substituir o serviço consumido de acordo com suas necessidades, através da definição de novos contratos de serviço com base nessas descrições~\cite{cervantes2005technical}.
+Assim, na orientação a serviços, as capacidades dos serviços são definidas através de uma descrição do serviço (\textit{Service Description}), e a partir dessa descrição, provedores de serviço são descobertos por consumidores estabelecendo um contrato de serviço entre as partes. 
+
+Deste modo, no mundo de serviços, temos diversas implementações distintas para um mesmo serviço, e o consumidor não está vinculado a nenhuma delas, podendo substituir o serviço consumido de acordo com suas necessidades, através da definição de novos contratos de serviço com base nessas descrições~\cite{cervantes2005technical}.
 
 \subsection{\textit{Service Oriented Architecture}}
-Alinhado a essas ideias, temos em SOA, um modelo de arquitetura baseada em serviços com suporte a descoberta dinâmica de serviços, uma vez que, o modelo baseia-se nos 3 elementos fundamentais da orientação a serviços.
+Alinhado a essas ideias, temos em SOA, um modelo de arquitetura baseada em serviços com suporte a descoberta dinâmica de serviços. O modelo arquitetural de SOA baseia-se nos 3 elementos fundamentais da orientação a serviços.
 
 \begin{itemize}
  \item \textbf{Provedor de Serviços} (\textit{Service Provider})
@@ -23,10 +25,14 @@ Alinhado a essas ideias, temos em SOA, um modelo de arquitetura baseada em servi
  \item \textbf{Registro de Serviços} (\textit{Service Registry})
 \end{itemize}
 
-A interação destes elementos compões o triângulo tradicional do modelo arquitetural, ver Figura \ref{fig:soatriangle}. 
+A interação destes elementos compões o triângulo tradicional do modelo, ver Figura \ref{fig:soatriangle}. 
 
-O modelo de interação é relativamente simples. Provedores de serviço publicam suas capacidades através de \textit{Service Descriptions} no registro de serviços.
-O consumidor do serviço executa consultas a um determinado serviço através do registro, essa consulta é feita com base da descrição do serviço. Caso exista um provedor que atenda as necessidades do consumidor, então o registro devolverá uma referência do provedor daquele serviço ao consumidor, possibilitando a realização do \textit{binding} entre eles. Então, o provedor disponibiliza um objeto que implementa a interface do serviço, representando o objeto remoto em tempo de execução, (\textit{Servant}~\cite{volter2005remoting}) finalizando a interação com o provedor. Quando a interação entre o consumidor e o \textit{servant} é finalizada, o mesmo é liberado para utilização em alguma outra requisição ou simplesmente destruído.
+A interação dos elementos é relativamente simples. Provedores de serviço publicam suas capacidades através de \textit{Service Descriptions} no registro de serviços.
+O consumidor do serviço executa consultas a um determinado serviço, com base em sua descrição, através do registro. Caso exista um provedor que atenda as necessidades do consumidor, então o registro devolverá uma referência do provedor do serviço ao consumidor, possibilitando a realização do \textit{binding} entre eles. 
+
+Então, o provedor disponibiliza um objeto que implementa a interface do serviço e representa o objeto remoto, em tempo de execução (\textit{Servant}~\cite{volter2005remoting}), finalizando a interação com o provedor. 
+
+Quando a interação entre o consumidor e o \textit{servant} é finalizada, o mesmo é liberado para utilização em alguma outra requisição ou simplesmente destruído.
 
 Nesse contexto, o consumidor não tem conhecimento de como o serviço é implementado, onde o mesmo se localiza, nem mesmo se o \textit{servant}, pelo qual ele tem acesso ao serviço, é o mesmo a cada invocação. Esse grau de transparência provê um grande potencial de dinamismo e reuso, que são duas das principais características de arquiteturas orientadas a serviços~\cite{davis2009open}.
 
@@ -35,7 +41,7 @@ Nesse contexto, o consumidor não tem conhecimento de como o serviço é impleme
 \label{sec:component}
 Segundo Szyperski ~\cite{szyperski2002component}, "Componentes de software são unidades binárias de produção, aquisição e implantação independente, que interagem formando sistemas".
 
-Além disso, componentes definem interfaces e dependências através de um modelo de componente, que assim como classe da orientação a objetos, descrevem as características do modelo, ver \ref{sub:elements}.
+Além disso, componentes definem interfaces e dependências através de um modelo de componente. Esses modelos, assim como classes da orientação a objetos, descrevem as características do modelo, ver \ref{sub:elements}.
 
 A orientação a componentes também define o conceito de \textit{containers}, que gerenciam o ciclo de vida e encapsulam os componentes, intermediando sua interação com o mundo externo.
 
@@ -120,7 +126,7 @@ Ela expande o dinamismo provido pelos textit{bundles} na camada de ciclo de vida
 \label{subsec:ipojo}
 Outra tecnologia importante para a compreensão deste trabalho, é o framework iPOJO~\cite{ipojo}.
 
-iPOJO é um modelo de serviço orientado a componentes, que tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. É baseado no conceito de POJO (\textit{Plain Old Java Objects}), onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução.
+iPOJO implementa um modelo componentes orientados a serviço, que tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. Utiliza o conceito de POJO (\textit{Plain Old Java Objects}) para definir componentes, onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução.
 	
 No iPOJO, os diversos POJO's são encapsulados em \textit{containers}, responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao \textit{container} e podem ser extendidos através da utilização de \textit{handlers}~\cite{ipojo}.
 
@@ -133,19 +139,18 @@ No iPOJO, os diversos POJO's são encapsulados em \textit{containers}, responsá
 
 A idéia por traz do iPOJO se baseia nos conceitos de orientação a componentes, onde temos, além da figura do \textit{container}, a visão de modelo e instância de componente. 
 
-No iPOJO, o modelo de componente, chamado de \textit{component type}, define propriedades um conjunto de propriedades do componente, sua classe de implementação e políticas de criação de instância. 
-A instância herda todas as características do \textit{component type} e pode ter um conjunto de propriedade próprias~\cite{ipojo}.
+No iPOJO, o modelo de componente, chamado de \textit{component type}, especifica: um conjunto de propriedades do componente; sua classe de implementação e políticas de criação de instâncias. Onde cada instância herda todas as características do \textit{component type} e pode ter seu próprio conjunto de propriedade~\cite{ipojo}.
 
-O iPojo é uma ferramenta poderosa e extensível, que abstrai o uso de OSGi através do conceito de containers que controlam o acesso ao POJO, e de \textit{handlers} ``plugados'' aos containers, gerenciando a interação com entidades externas ou outros POJOs.
+O iPOJO abstrai o uso de OSGi através do conceito de containers que controlam o acesso e gerenciam o ciclo de vida do POJO, e de \textit{handlers} ``plugados'' aos containers extendendo suas capacidades.
 
 
 \section{Ciclo PDCA}
 \label{sec:pdca}
-O ciclo PDCA (\textit{\textbf{P}lain \textbf{C}heck \textbf{D}o \textbf{A}ct}), ou ciclo de  Demming, é um ciclo de desenvolvimento e gestão de processos com foco na melhoria contínua proposto por Walter A. Shewhart~\cite{shewhart} e amplamente difundido por W. Edward Deming~\cite{deming} inicialmente utilizado-o na implementação de um sistema de qualidade na indústria japonesa ~\cite{fabio2003}.
+O ciclo PDCA (\textit{\textbf{P}lain \textbf{C}heck \textbf{D}o \textbf{A}ct}), ou ciclo de  Demming, é um ciclo de desenvolvimento e gestão de processos com foco na melhoria contínua proposto por Walter A. Shewhart~\cite{shewhart} e amplamente difundido por W. Edward Deming~\cite{deming}, inicialmente utilizado-o na implementação de um sistema de qualidade na indústria japonesa ~\cite{fabio2003}.
 
-O ciclo é dividido em 4 etapas, ver Figura \ref{fig:pdca}, visando garantir o alcance de metas pré-estabelecidas, através da utilização de informações como fator chave na tomada de decisões.
+O ciclo é dividido em 4 etapas, ver Figura \ref{fig:pdca}, que visam garantir o alcance de metas pré-estabelecidas, através da utilização de informações como fator chave na tomada de decisões.
 
-O ciclo é aplicável a diversas atividades de gestão, incluindo o gerenciamento de performance~\cite{pdcacont}. É um método eficaz de controle de atividades relacionadas a melhorias, que compartilha dos conceitos de gerencia de redes e recursos em geral, a medida que, a tomada de decisão é fortemente influenciada pelas informações coletadas.
+É aplicável a diversas atividades de gestão, incluindo o gerenciamento de performance~\cite{pdcacont}. É um método eficaz de controle de atividades relacionadas a melhorias e compartilha dos conceitos de gerencia de redes e recursos em geral, a medida que, a tomada de decisão é fortemente influenciada pelas informações coletadas.
 
 
 \begin{figure}[htp]

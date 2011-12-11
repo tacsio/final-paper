@@ -89,7 +89,7 @@ Em ~\cite{volter2005remoting}, temos um capítulo dedicado ao gerenciamento de c
 
 A partir disto, definimos um conjunto de políticas para cenários específicos de uso dos recursos. Porém, devido a diversidade enorme de cenários existentes, uma vez que, o uso de recursos é extremamente variável de aplicação para aplicação, a melhor maneira de contemplar a maioria dos casos é disponibilizar a política de criação de instâncias como um serviço. 
 
-Deste modo, abrimos um leque à criação de diversas abordagens de gerenciamento de instâncias, a medida que, a política de criação de instâncias é independente do gerenciador de adaptação e é provida como um serviço.
+Deste modo, abrimos um leque à criação de diversas abordagens de gerenciamento de instâncias, a medida que, a política de criação de instâncias é independente do gerenciador de adaptação.
 
 
 \section{Aplicação do Ciclo PDCA}
@@ -116,7 +116,7 @@ Esses métodos são descritos pela \textit{tag} \verb profile , que define um co
 Um \textit{profile} especificar um conjunto de \verb resources , semelhantes aos \textit{slos}, com o objetivos de definir uma configuração de monitoração.
 
 \subsection{\textit{Do} - Executar}
-Definidas as metas de qualidade e as políticas de manutenção de recursos (através de \verb slos e \verb profiles ), o próximo passo é monitorar o provedor em execução. Cabe ao \textit{Monitoring Service} realizar esta tarefa.
+Definidas as metas de qualidade e as políticas de manutenção de recursos (através de \verb slos ~e \verb profiles ), o próximo passo é monitorar o provedor em execução. Cabe ao \textit{Monitoring Service} realizar esta tarefa.
 
 A monitoração de recursos de recursos é de responsabilidade do \textit{Resource Monitoring Service}, que coleta dados referentes ao estado atual da máquina (através de um processo de \textit{polling}) e os envia à central de processamento de eventos.
 
