@@ -10,11 +10,12 @@ Por fim, apresentaremos uma visão geral de JMX, a tecnologia utilizada no traba
 
 \section{Orientação a Serviços}
 \label{sec:service}
-Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas, promovendo reuso, baixo acoplamento e interoperabilidade, através do conceito de serviços como unidades que representam funcionalidades da aplicação~\cite{erl2008soa}~\cite{cervantes2005technical}. 
 
-Assim, na orientação a serviços, as capacidades dos serviços são definidas através de uma descrição do serviço (\textit{Service Description}), e a partir dessa descrição, provedores de serviço são descobertos por consumidores estabelecendo um contrato de serviço entre as partes. 
+Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas que utiliza a figura de serviços como unidades que representam funcionalidades da aplicação antendendo as necessidades do négocio~\cite{erl2008soa}~\cite{cervantes2005technical}. 
 
-Deste modo, no mundo de serviços, temos diversas implementações distintas para um mesmo serviço, e o consumidor não está vinculado a nenhuma delas, podendo substituir o serviço consumido de acordo com suas necessidades, através da definição de novos contratos de serviço com base nessas descrições~\cite{cervantes2005technical}.
+Nesta linha de pensamento, serviços descrevem suas capacidades através de interfaces bem definidas. E utilizam-se de uma descrição de serviço (\textit{Service Description}) para expor tais capacidades e eventuais propriedades específicas. Um exemplo conhecido de uma \textit{service description} é o documento WSDL, utilizado para descrever \textit{Web Services} expondo, além da interface do serviço, um conjunto extra de propriedades.
+
+Deste modo, no mundo de serviços, temos diversas implementações distintas para um mesmo serviço, onde consumidor não está vinculado a nenhuma delas, podendo substituir o serviço consumido de acordo com suas necessidades, através da definição de novos contratos de serviço com base nessas descrições~\cite{cervantes2005technical}.
 
 \subsection{\textit{Service Oriented Architecture}}
 Alinhado a essas idéias, temos em SOA, um modelo de arquitetura baseada em serviços com suporte a descoberta dinâmica de serviços. O modelo arquitetural de SOA baseia-se nos 3 elementos fundamentais da orientação a serviços.
@@ -25,7 +26,7 @@ Alinhado a essas idéias, temos em SOA, um modelo de arquitetura baseada em serv
  \item \textbf{Registro de Serviços} (\textit{Service Registry})
 \end{itemize}
 
-A interação destes elementos compões o triângulo tradicional do modelo, ver Figura \ref{fig:soatriangle}. 
+A interação destes elementos compõe o tradicional triângulo SOA, ver Figura \ref{fig:soatriangle}. 
 
 A interação dos elementos é relativamente simples. Provedores de serviço publicam suas capacidades através de \textit{Service Descriptions} no registro de serviços.
 O consumidor do serviço executa consultas a um determinado serviço, com base em sua descrição, através do registro. Caso exista um provedor que atenda as necessidades do consumidor, então o registro devolverá uma referência do provedor do serviço ao consumidor, possibilitando a realização do \textit{binding} entre eles. 
@@ -41,7 +42,7 @@ Nesse contexto, o consumidor não tem conhecimento de como o serviço é impleme
 \label{sec:component}
 Segundo Szyperski ~\cite{szyperski2002component}, "Componentes de software são unidades binárias de produção, aquisição e implantação independente, que interagem formando sistemas".
 
-Além disso, componentes definem interfaces e dependências através de um modelo de componente. Esses modelos, assim como classes da orientação a objetos, descrevem as características do modelo, ver \ref{sub:elements}.
+Definem interfaces e dependências através de um modelo de componente. Esses modelos, assim como classes da orientação a objetos, descrevem as características do componente, ver \ref{sub:elements}.
 
 A orientação a componentes também define o conceito de \textit{containers}, que gerenciam o ciclo de vida e encapsulam os componentes, intermediando sua interação com o mundo externo.
 
@@ -86,7 +87,7 @@ Geralmente essas propriedades são descritas em documentos XML~\cite{xml} devido
 
 Para iniciarmos uma introdução sobre OSGi, não podemos deixar de falar da \textit{OSGi Alliance}, um consórcio formado por grandes empresas que lideram vários segmentos do ramo de TI, cuja principal missão é criar um middleware universal para o desenvolvimento de aplicações modulares na plataforma Java~\cite{osgiorg}.
 
-Java fornece a portabilidade necessária para suportar aplicativos em diferentes plataformas, porém, não dá suporte explícito à construção de sistemas modulares~\cite{hall2010osgi}. A plataforma OSGi provê um conjunto de especificações permitindo que aplicações sejam construídas de maneira colaborativa a partir de pequenos componentes reutilizáveis ~\cite{osgiorg}, simplificando o desenvolvimento e a manutenção do código~\cite{hall2010osgi}.
+É sabido que Java fornece a portabilidade necessária para suportar aplicativos em diferentes plataformas, porém, não dá suporte explícito à construção de sistemas modulares~\cite{hall2010osgi}. A plataforma OSGi provê um conjunto de especificações permitindo que aplicações sejam construídas de maneira colaborativa, a partir de pequenos componentes reutilizáveis ~\cite{osgiorg}, simplificando o desenvolvimento e a manutenção do código~\cite{hall2010osgi}.
 
 O principal componente da especificação OSGi é o Framework OSGi, ele fornece um ambiente padronizado onde as aplicações, denominadas \textit{bundles}, podem, em tempo de execução,  ser instaladas, desinstaladas, ativadas ou desativadas local ou remotamente.
 
@@ -108,25 +109,25 @@ Iremos nos concentrar nas principais camadas do framework, apresentando-as nas p
 \subsubsection{\textit{Module Layer}}
 Define o conceitos de módulos, providos através dos \textit{Bundles}. Um \textit{bundle} é nada mais que um arquivo JAR com um conjunto de metadados definidos em um \textit{Manifest}. De fato, a figura do \textit{bundle} é extremamente simples, porém, ao mesmo tempo poderosa, uma vez que, diferente de um simples arquivo JAR, um \textit{bundle} define um módulo lógico que pode ser combinado para a composição de uma aplicação~\cite{hall2010osgi}.
 
-Além disso, ~\textit{bundles} podem declarar explicitamente dependências externas e pacotes exportados, ampliando o mecanismo de controle de acesso padrão de Java. Essa capacidades de declarar explicitamente pacotes importados e exportados, traz um grande benefício ao desenvolvedor, uma vez que, o próprio framework OSGi fica responsável por gerenciar e verificar a automaticamente consistência da aplicação, através do processo chamado de \textit{bundle resolution}~\cite{hall2010osgi}~\cite{osgiorg}.
+Além disso, ~\textit{bundles} podem declarar explicitamente dependências externas e pacotes exportados, ampliando o mecanismo de controle de acesso padrão de Java. Essa capacidades de declarar explicitamente pacotes importados e exportados, traz um grande benefício ao desenvolvedor, uma vez que, o próprio framework fica responsável por gerenciar e verificar a automaticamente consistência da aplicação, através de um processo chamado \textit{bundle resolution}~\cite{hall2010osgi}~\cite{osgiorg}.
 
 \subsubsection{\textit{Lifecycle Layer}}
-Controla o ciclo de vida dos \textit{bundles}, definindo como os mesmos são dinamicamente instalados e gerenciados. 
+Controla o ciclo de vida dos \textit{bundles}, definindo como os mesmos são gerenciados (instalados, desinstalados,parados, etc), dinamicamente em tempo de execução.
 
-Também define como os \textit{bundles} obtem acesso ao \textit{bundle context}, controlando a interação dos mesmos com o framework.
+Também define como os \textit{bundles} obtem acesso ao \textit{bundle context}. Responsável por controlar a interação dos \textit{bundles} com o framework.
 
-É nesse contexto que temos a figura do ativador responsável por inicializar/parar o bundle, provido através da interface \textit{BundleActivator}, semelhante ao \textit{main} de um programa Java.
+Nesse contexto que temos a figura do ativador do bundle. Responsável por inicializar/parar o bundle. Provido através da interface \textit{BundleActivator}, realiza uma função semelhante ao \textit{main} de um programa Java.
 
 \subsubsection{\textit{Service Layer}}
-Incorpora características de SOA no OSGi, com as figuras do registro, provedor e consumidor de serviço, visto na Seção \ref{sec:service}. 
+A camada de serviços incorpora características de SOA no OSGi, com as figuras do registro, provedor e consumidor de serviço, visto na Seção \ref{sec:service}. 
 
-Ela expande o dinamismo provido pelos \textit{bundles} na camada de ciclo de vida, combinando este ao dinamismo provido por arquiteturas baseadas em serviço, onde serviços podem aparecer ou desaparecer a qualquer momento~\cite{hall2010osgi}.
+Ela expande o dinamismo provido pelos \textit{bundles} na camada de ciclo de vida, combinando-o ao dinamismo provido por arquiteturas orientadas a serviço, onde serviços podem aparecer ou desaparecer a qualquer momento~\cite{hall2010osgi}.
 
 \subsection{iPOJO}
 \label{subsec:ipojo}
 Outra tecnologia importante para a compreensão deste trabalho, é o framework iPOJO~\cite{ipojo}.
 
-iPOJO implementa um modelo componentes orientados a serviço, que tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. Utiliza o conceito de POJO (\textit{Plain Old Java Objects}) para definir componentes, onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução.
+O iPOJO implementa um modelo componentes orientados a serviço, e tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. Utiliza o conceito de POJO (\textit{Plain Old Java Objects}) para definir componentes, onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução.
 	
 No iPOJO, os diversos POJO's são encapsulados em \textit{containers}, responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao \textit{container} e podem ser extendidos através da utilização de \textit{handlers}~\cite{ipojo}.
 
