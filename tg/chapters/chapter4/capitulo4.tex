@@ -66,7 +66,7 @@ Os dados do monitoramento são enviados, através da figura de eventos, ao servi
 Um estado de alerta pode ser visto como uma iminência de quebra de contrato. Onde o provedor chegou a um ponto crítico de utilização dos recursos e logo não poderá garantir a qualidade devida, necessitando de adaptar-se ao novo contexto de execução.
 
 \subsection{Módulo de Gerenciamento de Provedor}
-
+\label{subsec:qos_provider}
 Em linhas gerais, um processo de garantia de qualidade envolve um ciclo de atividades compreendendo além da coleta e análise dados, uma intervenção que representa uma ação ou conjunto de ações realizadas com base nessa análise. 
 
 Na plataforma DSOA, as etapas de coleta e análise são tratadas respectivamente pelo serviço de monitoração e pelo serviço de processamento de eventos. A ação é de resposabilidade do gerente de adaptação, que no contexto do provedor de serviços, atualmente não realiza nenhum tipo de tratamento.
@@ -104,7 +104,7 @@ Como vimos na Seção \ref{sec:pdca}, o ciclo foca em manter ou melhorar a quali
 \label{fig:pdcamapping}
 \end{figure}
 
-\subsection{Plan}
+\subsection{\textit{Plan} - Planejar}
 Na etapa de planejamento, as metas serão definidas por meio de um documento XML~\cite{xml} que descreve as capacidades que o provedor afirma garantir. Essas propriedades são utilizadas para definir configurações de monitoração (\textit{Monitoring Configuration}), relacionadas a atributos de qualidade do provedor (\textit{e.g} tempo de processamento).
 
 Essas metas são definidas através da \textit{tag} \verb slo , que descreve uma métrica a ser medida, um valor de \textit{threshold} e uma relação de limite(máximo ou mínimo) que o valor do \textit{threshold} pode ultrapassar. Em alguns casos, temos também o indentificador da operação provida. Essa informação é útil em casos de configurações de monitoração relacionadas a invocações de determinados métodos do provedor (e.g. \textit{throuhput} de uma operação). Ver Apêndice \ref{subsec:slo}.
@@ -113,11 +113,37 @@ Além disso, também são definidos no mesmo XML, métodos que visam atuar sobre
 
 Esses métodos são descritos pela \textit{tag} \verb profile , que define um conjunto de \verb profiles ~responsáveis por relacionar as configurações de monitoração às políticas de gerenciamento de instâncias, onde cara política de gerenciamento tem por objetivo evitar a degradação da qualidade provida. 
 
-Um \textit{profile} especificar um conjunto de \verb resources , semelhantes aos \textit{slos}, com o objetivos de definir uma configuração de monitoração
+Um \textit{profile} especificar um conjunto de \verb resources , semelhantes aos \textit{slos}, com o objetivos de definir uma configuração de monitoração.
 
+\subsection{\textit{Do} - Executar}
+Definidas as metas de qualidade e as políticas de manutenção de recursos (através de \verb slos e \verb profiles ), o próximo passo é monitorar o provedor em execução. Cabe ao \textit{Monitoring Service} realizar esta tarefa.
+
+A monitoração de recursos de recursos é de responsabilidade do \textit{Resource Monitoring Service}, que coleta dados referentes ao estado atual da máquina (através de um processo de \textit{polling}) e os envia à central de processamento de eventos.
+
+A monitoração de atributos de qualidade é realizada no próprio gerenciador de adaptação, através da utilização da interceptação das invocações ao serviço.
+
+Um conjuto de técnicas e padrões para captura de atributos relacionados a performance são discutidos em ~\cite{}~\cite{}.
+
+Deste modo, foi adotado o padrão \textit{QoS Wrapper} para monitoramento do provedor, uma vez que, este é extremamente simples, não gera um \textit{overhead} elevado e é o que melhor se aplica ao nosso problema.
+
+\subsection{\textit{Check} - Verificar}
+A etapa de verificação difere um pouco do processo original, pois ela também ficou resposável por agregar os dados da monitoração. Já que, os dados da monitoração são enviados a cada invocação ao serviço (no caso de dados relacionados a qualidade) ou em intervalos de tempo (no caso de dados relacionados ao estado da máquina).
+
+Além disso, é nesta esta que os estados de alerta são identificados a partir da análise dos dados monitorados em relação aos \verb slos ~e \verb profiles . Essa análise é realizada pelo serviço de processamento de eventos que envia notificações ao gerenciador de adaptação através do serviço de notificação.
+
+\subsection{\textit{Act} - Agir}
+A útima fase do ciclo é responsável por garantir o dinamismo da solução através do módulo de gerenciamento do provedor (\textit{QoS Provider Manager}).
+
+O \textit{QoS Provider Manager} recebe notificações referêntes ao nível de qualidade do serviço provido e ao estado dos recursos da máquina. E com base nessas informações, reconfigura o serviço visando evitar eventuais quebras de contrato.
+
+A reconfiguração é realizada a partir da modificação da política de criação de instâncias, como foi visto na Seção \ref{subsec:qos_provider}.
+
+\paragraph{}
+A figura \ref{fig:dsoa_pcda} mostra onde cada etapa do ciclo está situada na plataforma DSOA.
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=13cm]{chapters/chapter4/pdca_arch_overview.png}
 \caption[Componentes da Arquitetura x Fases PDCA]{Componentes da Arquitetura x Fases PDCA.}
+\label{fig:dsoa_pcda}
 \end{figure}
