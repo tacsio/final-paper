@@ -53,10 +53,14 @@ O serviço de distribuição é resposável por permitir que serviços disponibi
 
 Esse serviços é provido através da utilização do DOSGi~\cite{dosgi}, que implementa um conjunto de serviços que provêem distribuição de serviços OSGi. 
 
-Seu funcionamento baseia-se na ideia de um registro centralizado de serviços remotos, descritos como \textit{endpoints}, onde esses serviços são disponibilizados localmente através de ~\textit{proxies} que permitem o acesso ao ~\textit{endpoint}.
+Seu funcionamento baseia-se na idéia de um registro centralizado de serviços remotos, descritos como \textit{endpoints}, onde esses serviços são disponibilizados localmente através de ~\textit{proxies} que permitem o acesso ao ~\textit{endpoint}.
+
+\subsubsection{\textit{Adaptation Manager}}
+É o principal componente da arquitetura, uma vez que, é responsável por gerenciar dinamicamente as dependências das aplicações, com base em atributos de qualidade.
 
 \subsubsection{\textit{Broker Service}}
-%TODO
+O \textit{broker service} é responsável prover um mecanismo de seleção de serviços com base em atributos de qualidade. Ele abtrai a busca ao registro para o gerente de adaptação
+
 
 \subsubsection{\textit{Mediator Service}}
 %TODO
@@ -73,9 +77,6 @@ Seu funcionamento baseia-se na ideia de um registro centralizado de serviços re
 %TODO
 
 \subsubsection{\textit{Composition Service}}
-%TODO
-
-\subsubsection{\textit{Adaptation Manager}}
 %TODO
 
 \subsubsection{\textit{Management Tool}}
