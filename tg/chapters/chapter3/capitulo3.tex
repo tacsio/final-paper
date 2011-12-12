@@ -11,7 +11,7 @@ Nesse contexto, a plataforma DSOA estende as capacidades fornecidas pelas arquit
 
 Esse tipo de arquitetura é na verdade um modelo de composição de serviços, onde temos as figuras do consumidor e do provedor de serviços, nitidamente separadas.
 
-Neste cenário, a adaptação faz sentido em ambos os lados. No lado do consumidor de serviços, a adaptação consiste na capacidade de selecionar serviços de funcionalidade equivalente, com consciência da qualidade provida. No lado do provedor, essa adaptação faz sentido a medida que existe a necessidade de garantir aspectos de qualidade anúciados.
+Neste cenário, a adaptação faz sentido em ambos os lados. No lado do consumidor de serviços, a adaptação consiste na capacidade de selecionar serviços de funcionalidade equivalente, com consciência da qualidade provida. No lado do provedor, essa adaptação faz sentido a medida que existe a necessidade de garantir aspectos de qualidade anunciados.
 
 Assim, o objetivo da plataforma DSOA é propor uma plataforma orientada a componentes baseados em serviços que estende a capacidade do \textit{container}, de forma a tratar com aspectos de QoS, em particular, aspectos relacionados a performance.
 
@@ -49,14 +49,14 @@ Porém, para prover adaptação dinâmica, o \textit{container} deve ser capaz d
 Nesta Seção, daremos uma uma visão geral de cada componente presente na arquitetura, identificando sua funcionalidade e suas características principais.
 
 \subsubsection{\textit{Distribution Service}}
-O serviço de distribuição é resposável por permitir que serviços disponibilizados no registro do \textit{runtime} OSGi local, sejam distribuídos como serviços remotos a outros \textit{runtimes}.
+O serviço de distribuição é responsável por permitir que serviços disponibilizados no registro do \textit{runtime} OSGi local, sejam distribuídos como serviços remotos a outros \textit{runtimes}.
 
 Esse serviços é provido através da utilização do DOSGi~\cite{dosgi}, que implementa um conjunto de serviços que provêem distribuição de serviços OSGi. 
 
 Seu funcionamento baseia-se na idéia de um registro centralizado de serviços remotos, descritos como \textit{endpoints}, onde esses serviços são disponibilizados localmente através de ~\textit{proxies} que permitem o acesso ao ~\textit{endpoint}.
 
 \subsubsection{\textit{Adaptation Manager}}
-É o principal componente da arquitetura, uma vez que, é responsável por gerenciar dinamicamente as dependências das aplicações, com base em atributos de qualidade. %TODO: completar adaptation
+%É o principal componente da arquitetura, uma vez que, é responsável por gerenciar dinamicamente as dependências das aplicações, com base em atributos de qualidade. TODO: completar adaptation
 
 \subsubsection{\textit{Broker Service}}
 O \textit{broker service} é responsável prover um mecanismo de seleção de serviços com base em atributos de qualidade. Ele abtrai a busca ao registro para o gerente de adaptação e através de um conjunto de serviços de seleção especializado em atributos de qualidade, retorna os serviços que melhor atendem as necessidades do consumidor.
@@ -65,9 +65,9 @@ As necessidades do cliente são definidas em tempo de ~\textit{deployment} atrav
 
 
 \subsubsection{\textit{Mediator Service}}
-Fornece um serviço de intergração e mediação de serviços distribuídos, com funcionalidades equivalentes em diversas tecnologias, a partir de uma interface única, que media a invocação a estes serviços. 
+Fornece um serviço de integração e mediação de serviços distribuídos, com funcionalidades equivalentes em diversas tecnologias, a partir de uma interface única, que media a invocação a estes serviços. 
 
-O esquema de mediação é definido graficamente e em tempo de execução, através do cadastramento das interfaces do serviço concreto e das interfaces de intergração de serviços.
+O esquema de mediação é definido graficamente e em tempo de execução, através do cadastramento das interfaces do serviço concreto e das interfaces de integração de serviços.
 
 \subsubsection{\textit{Notification Service}}
 %TODO
@@ -84,5 +84,5 @@ O esquema de mediação é definido graficamente e em tempo de execução, atrav
 %TODO
 
 \subsubsection{\textit{Management Tool}}
-Fornece um conjunto de ferramentas admistrativas para gerenciar a plataforma e os serviços que estão em execução.
+Fornece um conjunto de ferramentas administrativas para gerenciar a plataforma e os serviços que estão em execução.
 

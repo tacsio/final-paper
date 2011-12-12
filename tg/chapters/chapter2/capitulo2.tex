@@ -11,7 +11,7 @@ Por fim, apresentaremos uma visão geral de JMX, a tecnologia utilizada no traba
 \section{Orientação a Serviços}
 \label{sec:service}
 
-Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas que utiliza a figura de serviços como unidades que representam funcionalidades da aplicação antendendo as necessidades do négocio~\cite{erl2008soa}~\cite{cervantes2005technical}. 
+Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas que utiliza a figura de serviços como unidades que representam funcionalidades da aplicação antedendo as necessidades do negocio~\cite{erl2008soa}~\cite{cervantes2005technical}. 
 
 Nesta linha de pensamento, serviços descrevem suas capacidades através de interfaces bem definidas. E utilizam-se de uma descrição de serviço (\textit{Service Description}) para expor tais capacidades e eventuais propriedades específicas. Um exemplo conhecido de uma \textit{service description} é o documento WSDL, utilizado para descrever \textit{Web Services} expondo, além da interface do serviço, um conjunto extra de propriedades.
 
@@ -78,7 +78,7 @@ Uma instância de componente, retomando nossa analogia a orientação a objetos,
 Um pacote de componente pode ser definido como um componente pronto para ser implantado, ou seja, um componente auto-contido que possui todas as suas dependências resolvidas de maneira a prover suas funcionalidades de forma independente~\cite{cervantes2005technical}.
 
 \subsection{\textit{Deployment Descriptors}}
-Outro elemento importante no mundo de componetes, é o chamado \textit{Deployment Descriptior}, que é um arquivo de configuração que descreve um conjunto de propriedades que definem como o componente será implantado na plataforma~\cite{deploy}~\cite{deployoasis}. 
+Outro elemento importante no mundo de componentes, é o chamado \textit{Deployment Descriptior}, que é um arquivo de configuração que descreve um conjunto de propriedades que definem como o componente será implantado na plataforma~\cite{deploy}~\cite{deployoasis}. 
 
 Geralmente essas propriedades são descritas em documentos XML~\cite{xml} devido a sua natureza semi-estruturada, representatividade e a facilidade de entendimento e escrita. Além de ser um padrão W3C ~\cite{w3c} amplamente utilizado atualmente.
 
@@ -129,7 +129,7 @@ Outra tecnologia importante para a compreensão deste trabalho, é o framework i
 
 O iPOJO implementa um modelo componentes orientados a serviço, e tem como principal objetivo simplificar o desenvolvimento de aplicações OSGi. Utiliza o conceito de POJO (\textit{Plain Old Java Objects}) para definir componentes, onde um POJO é basicamente um objeto java simples, que não possui nenhuma dependência do ambiente de execução.
 	
-No iPOJO, os diversos POJO's são encapsulados em \textit{containers}, responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao \textit{container} e podem ser extendidos através da utilização de \textit{handlers}~\cite{ipojo}.
+No iPOJO, os diversos POJO's são encapsulados em \textit{containers}, responsáveis pelo gerenciamento das interações entre o POJO e o mundo externo ao \textit{container} e podem ser estendidos através da utilização de \textit{handlers}~\cite{ipojo}.
 
 \begin{figure}[htp]
 \centering
@@ -142,7 +142,7 @@ A idéia por traz do iPOJO se baseia nos conceitos de orientação a componentes
 
 No iPOJO, o modelo de componente, chamado de \textit{component type}, especifica: um conjunto de propriedades do componente; sua classe de implementação e políticas de criação de instâncias. Onde cada instância herda todas as características do \textit{component type} e pode ter seu próprio conjunto de propriedade~\cite{ipojo}.
 
-O iPOJO abstrai o uso de OSGi através do conceito de containers que controlam o acesso e gerenciam o ciclo de vida do POJO, e de \textit{handlers} ``plugados'' aos containers extendendo suas capacidades.
+O iPOJO abstrai o uso de OSGi através do conceito de containers que controlam o acesso e gerenciam o ciclo de vida do POJO, e de \textit{handlers} ``plugados'' aos containers estendendo suas capacidades.
 
 
 \section{Ciclo PDCA}
