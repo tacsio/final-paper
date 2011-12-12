@@ -56,14 +56,18 @@ Esse serviços é provido através da utilização do DOSGi~\cite{dosgi}, que im
 Seu funcionamento baseia-se na idéia de um registro centralizado de serviços remotos, descritos como \textit{endpoints}, onde esses serviços são disponibilizados localmente através de ~\textit{proxies} que permitem o acesso ao ~\textit{endpoint}.
 
 \subsubsection{\textit{Adaptation Manager}}
-É o principal componente da arquitetura, uma vez que, é responsável por gerenciar dinamicamente as dependências das aplicações, com base em atributos de qualidade.
+É o principal componente da arquitetura, uma vez que, é responsável por gerenciar dinamicamente as dependências das aplicações, com base em atributos de qualidade. %TODO: completar adaptation
 
 \subsubsection{\textit{Broker Service}}
-O \textit{broker service} é responsável prover um mecanismo de seleção de serviços com base em atributos de qualidade. Ele abtrai a busca ao registro para o gerente de adaptação
+O \textit{broker service} é responsável prover um mecanismo de seleção de serviços com base em atributos de qualidade. Ele abtrai a busca ao registro para o gerente de adaptação e através de um conjunto de serviços de seleção especializado em atributos de qualidade, retorna os serviços que melhor atendem as necessidades do consumidor.
+
+As necessidades do cliente são definidas em tempo de ~\textit{deployment} através de propriedades do componente, porém, todo o processo de seleção e adaptação é realizado dinamicamente em tempo de execução. 
 
 
 \subsubsection{\textit{Mediator Service}}
-%TODO
+Fornece um serviço de intergração e mediação de serviços distribuídos, com funcionalidades equivalentes em diversas tecnologias, a partir de uma interface única, que media a invocação a estes serviços. 
+
+O esquema de mediação é definido graficamente e em tempo de execução, através do cadastramento das interfaces do serviço concreto e das interfaces de intergração de serviços.
 
 \subsubsection{\textit{Notification Service}}
 %TODO
