@@ -41,12 +41,12 @@ Porém, para prover adaptação dinâmica, o \textit{container} deve ser capaz d
 \begin{figure}[htp]
 \centering
 \includegraphics[width=13cm]{chapters/chapter3/dsoa-arch.png}
-\caption[Arquitetura em Camdas DSOA]{Arquitetura em Camdas DSOA.}
+\caption[Arquitetura em Camadas DSOA]{Arquitetura em Camadas DSOA.}
 \label{fig:dsoa_arch}
 \end{figure}
 
 \subsection{Componentes}
-Nesta Seção, daremos uma uma visão geral de cada componente presente na arquitetura, identificando sua funcionalidade e suas características principais.
+Nesta Seção, daremos uma visão geral de cada componente presente na arquitetura, identificando sua funcionalidade e suas características principais.
 
 \subsubsection{\textit{Distribution Service}}
 O serviço de distribuição é responsável por permitir que serviços disponibilizados no registro do \textit{runtime} OSGi local, sejam distribuídos como serviços remotos a outros \textit{runtimes}.
@@ -59,7 +59,7 @@ Seu funcionamento baseia-se na idéia de um registro centralizado de serviços r
 %É o principal componente da arquitetura, uma vez que, é responsável por gerenciar dinamicamente as dependências das aplicações, com base em atributos de qualidade. TODO: completar adaptation
 
 \subsubsection{\textit{Broker Service}}
-O \textit{broker service} é responsável prover um mecanismo de seleção de serviços com base em atributos de qualidade. Ele abtrai a busca ao registro para o gerente de adaptação e através de um conjunto de serviços de seleção especializado em atributos de qualidade, retorna os serviços que melhor atendem as necessidades do consumidor.
+O \textit{broker service} é responsável prover um mecanismo de seleção de serviços com base em atributos de qualidade. Ele abstrai a busca ao registro para o gerente de adaptação e através de um conjunto de serviços de seleção especializado em atributos de qualidade, retorna os serviços que melhor atendem as necessidades do consumidor.
 
 As necessidades do cliente são definidas em tempo de ~\textit{deployment} através de propriedades do componente, porém, todo o processo de seleção e adaptação é realizado dinamicamente em tempo de execução. 
 

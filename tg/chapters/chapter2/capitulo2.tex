@@ -11,7 +11,7 @@ Por fim, apresentaremos uma visão geral de JMX, a tecnologia utilizada no traba
 \section{Orientação a Serviços}
 \label{sec:service}
 
-Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas que utiliza a figura de serviços como unidades que representam funcionalidades da aplicação antedendo as necessidades do negocio~\cite{erl2008soa}~\cite{cervantes2005technical}. 
+Orientação a Serviços, surge como um novo paradigma de desenvolvimento de aplicações distribuídas que utiliza a figura de serviços como unidades que representam funcionalidades da aplicação atendendo as necessidades do negócio~\cite{erl2008soa}~\cite{cervantes2005technical}. 
 
 Nesta linha de pensamento, serviços descrevem suas capacidades através de interfaces bem definidas. E utilizam-se de uma descrição de serviço (\textit{Service Description}) para expor tais capacidades e eventuais propriedades específicas. Um exemplo conhecido de uma \textit{service description} é o documento WSDL, utilizado para descrever \textit{Web Services} expondo, além da interface do serviço, um conjunto extra de propriedades.
 
@@ -112,9 +112,9 @@ Define o conceitos de módulos, providos através dos \textit{Bundles}. Um \text
 Além disso, ~\textit{bundles} podem declarar explicitamente dependências externas e pacotes exportados, ampliando o mecanismo de controle de acesso padrão de Java. Essa capacidades de declarar explicitamente pacotes importados e exportados, traz um grande benefício ao desenvolvedor, uma vez que, o próprio framework fica responsável por gerenciar e verificar a automaticamente consistência da aplicação, através de um processo chamado \textit{bundle resolution}~\cite{hall2010osgi}~\cite{osgiorg}.
 
 \subsubsection{\textit{Lifecycle Layer}}
-Controla o ciclo de vida dos \textit{bundles}, definindo como os mesmos são gerenciados (instalados, desinstalados,parados, etc), dinamicamente em tempo de execução.
+Controla o ciclo de vida dos \textit{bundles}, definindo como os mesmos são gerenciados (instalados, desinstalados,parados, etc.), dinamicamente em tempo de execução.
 
-Também define como os \textit{bundles} obtem acesso ao \textit{bundle context}. Responsável por controlar a interação dos \textit{bundles} com o framework.
+Também define como os \textit{bundles} obtém acesso ao \textit{bundle context}. Responsável por controlar a interação dos \textit{bundles} com o framework.
 
 Nesse contexto que temos a figura do ativador do bundle. Responsável por inicializar/parar o bundle. Provido através da interface \textit{BundleActivator}, realiza uma função semelhante ao \textit{main} de um programa Java.
 
@@ -177,7 +177,7 @@ Tem como resultado a elaboração de um plano de ação, que define os métodos 
 Nesta etapa é importante que a execução seja coerente com o plano de ação definido na fase anterior, uma vez que, enquanto a fase anterior busca maior eficácia e coesão, a fase de execução é voltada à eficiência do processo.
 
 \subsubsection{\textit{Check} - Verificar}
-É fase de verificação dos resultados obtidos da execução realizada na fase anterior. Com base nas metas e estratégias definidas na fase de planejamento em conjunto com os dados monitorados na fase de execução, a etapa de verificação foca na análise sistemática dos dados monitorados afim de verificar a efetividade das ações tomadas~\cite{pdcacont}.
+É fase de verificação dos resultados obtidos da execução realizada na fase anterior. Com base nas metas e estratégias definidas na fase de planejamento em conjunto com os dados monitorados na fase de execução, a etapa de verificação foca na análise sistemática dos dados monitorados a fim de verificar a efetividade das ações tomadas~\cite{pdcacont}.
 
 A diferença entre o desejável, o planejamento, e o resultado alcançado constitui um problema a ser resolvido.
 
@@ -218,7 +218,7 @@ Como foi dito anteriormente, JMX foi definida segundo duas JSRs , JSR 3 e JSR 16
 \subsubsection{Nível de Instrumentação}
 O nível de instrumentação é responsável por expor as funcionalidades e configurações das aplicações através da criação e registro de MBeans~\cite{jmx}. Estes MBeans coletam e manipulam informações dos recursos gerenciáveis, repassando-as aos agentes JMX do nível superior.
 
-Exitem diferentes tipos de MBeans em JMX. Nas próximas seções descreveremos alguns dos mais importantes.
+Existem diferentes tipos de MBeans em JMX. Nas próximas seções descreveremos alguns dos mais importantes.
 
 \paragraph{Standard MBean:}
 \label{para:stardardmbean}
@@ -287,7 +287,7 @@ Já conectores, fornecem uma interface de gerenciamento remoto transparente e in
 \subsection{Mecanismo Notificações}
 Além dos três níveis de arquitetura, JMX provê um mecanismo de notificação que permite que aplicações ou MBeans recebam eventos ou notificações com informações sobre o estado dos recursos gerenciados, podendo gerar estatísticas ou mesmo processar eventos relacionados ao funcionamento dos recursos~\cite{lindfors2002jmx}.
 
-O modelo de notificação JMX é semelhante ao mecanismo de notificações de java, que define \textit{object listers} (recebem as notificações) registados a MBean que envia as notificações \textit{(broadcaster MBeans)}. A \textit{broadcaster MBeans} envia eventos de notificação a todos os \textit{listeners} registrados~\cite{lindfors2002jmx}.
+O modelo de notificação JMX é semelhante ao mecanismo de notificações de java, que define \textit{object listers} (recebem as notificações) registrados a MBean que envia as notificações \textit{(broadcaster MBeans)}. A \textit{broadcaster MBeans} envia eventos de notificação a todos os \textit{listeners} registrados~\cite{lindfors2002jmx}.
 
 \subsubsection{Componentes do Mecanismo de Notificações}
 
