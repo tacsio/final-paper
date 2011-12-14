@@ -147,3 +147,22 @@ A figura \ref{fig:dsoa_pcda} mostra onde cada etapa do ciclo está situada na pl
 \caption[Componentes da Arquitetura x Fases PDCA]{Componentes da Arquitetura x Fases PDCA.}
 \label{fig:dsoa_pcda}
 \end{figure}
+
+
+\section{Avaliação Funcional}
+\label{sec:validation}
+
+Para avaliar o mecanismo proposto, utilizamos a ferramenta JMeter~\cite{jmeter} para simulação de carga, através de requições. O ambiente de experimentos contou com o maquinário descrito na Tabela \ref{tab:labs}.
+
+\begin{table*}[htp]
+\begin{supertabular}[]{|l|l|l|l|}
+\hline
+\textbf{Máquina} & \textbf{S.O.} & \textbf{Mémoria RAM} & \textbf{Processador}\\\hline
+Máquina 1 & Windows 7 Professional & 2G & Intel Core 2 Duo 2.8 Ghz\\\hline
+Máquina 2 & Slackware Linux 13.37 & 2G & Intel Dual Core 2.0 Ghz\\\hline
+\end{supertabular}
+\caption{Configuração do Ambiente de Experimentos}
+\label{tab:labs}
+\end{table*}
+
+O provedor de serviços roda na \verb máquina ~\verb 2 , enquando os consumidores (gerados pelo JMeter~\cite{jmeter}) executam na \verb máquina ~\verb 1 .
