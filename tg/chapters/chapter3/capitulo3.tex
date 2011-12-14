@@ -36,7 +36,7 @@ Uma representação desse tipo sistema pode ser vista na Figura \ref{fig:monitor
 \label{fig:monitor}
 \end{figure}
 
-Porém, para prover adaptação dinâmica, o \textit{container} deve ser capaz de modificar-se sem provocar a interrupção do serviço. Para isso, a plataforma especifica a inclusão de uma camada de serviços de utilidade sobre a camada de composição de serviços e uma camada de adaptação, conforme a Figura \ref{fig:dsoa_arch}.
+Porém, para prover adaptação dinâmica, o \textit{container} deve ser capaz de modificar-se sem provocar a interrupção do serviço. Deste modo, a plataforma especifica a inclusão de uma camada de serviços de utilidade sob a camada de composição de serviços e uma camada de adaptação sobre a mesma, visando estender suas capacidades, conforme a Figura \ref{fig:dsoa_arch}.
 
 \begin{figure}[htp]
 \centering
@@ -56,7 +56,12 @@ Esse serviços é provido através da utilização do DOSGi~\cite{dosgi}, que im
 Seu funcionamento baseia-se na idéia de um registro centralizado de serviços remotos, descritos como \textit{endpoints}, onde esses serviços são disponibilizados localmente através de ~\textit{proxies} que permitem o acesso ao ~\textit{endpoint}.
 
 \subsubsection{\textit{Adaptation Manager}}
-%É o principal componente da arquitetura, uma vez que, é responsável por gerenciar dinamicamente as dependências das aplicações, com base em atributos de qualidade. TODO: completar adaptation
+
+É o principal componente da arquitetura, uma vez que, é responsável por gerenciar dinamicamente as dependências das aplicações, com base em atributos de qualidade. 
+
+No ambiente DSOA, uma aplicação pode ser vista como uma composição de serviços sendo especificada de forma declarativa, ou seja, cada composição possui um descritor, no qual são indicadas as interfaces dos serviços necessários e os atributos de qualidade esperados. Nesse contexto, cabe ao gerente de adaptação interpretar este descritor e buscar garantir que os serviços selecionados para a composição atendam aos critérios de qualidade especificados. Caso isso não ocorra, cabe a ele, adaptar dinamicamente a aplicação substituindo o serviço em uso, por um mais adequado.
+
+Outra responsabilidade do \textit{Adaptation Manager} é solicitar ao serviço de monitoração a verificação da qualidade do serviço provida pelos elementos da composição, através da definição de configurações de monitoração (\textit{monitoring configurations}).
 
 \subsubsection{\textit{Broker Service}}
 O \textit{broker service} é responsável prover um mecanismo de seleção de serviços com base em atributos de qualidade. Ele abstrai a busca ao registro para o gerente de adaptação e através de um conjunto de serviços de seleção especializado em atributos de qualidade, retorna os serviços que melhor atendem as necessidades do consumidor.
@@ -70,18 +75,29 @@ Fornece um serviço de integração e mediação de serviços distribuídos, com
 O esquema de mediação é definido graficamente e em tempo de execução, através do cadastramento das interfaces do serviço concreto e das interfaces de integração de serviços.
 
 \subsubsection{\textit{Notification Service}}
-%TODO
+É o serviço responsável por sinalizar as quebras de contrato ao gerente de adaptação, permitindo que este tome as medidas necessárias para garantir os aspectos de qualidade esperados. 
+
+As notificações são realizadas através do envio de eventos assíncronos, baseado no padrão de troca de mensagens \textit{publish-subscribe}, definindo tópicos para a publicação e entrega de notificações, por meio de eventos.
 
 \subsubsection{\textit{Event Processing Service}}
 \label{subsec:cep}
-%TODO
+É o módulo responsável pelo processamento dos eventos que ocorrem na plataforma. Em particular, a própria infra-estrutura gera eventos relacionados ao ciclo de vida dos serviços, representando, por exemplo, o envio de requisições e respostas, a publicação e a remoção de serviços, além de eventos derivados que indicam o nível de qualidade do serviço percebido pela aplicação.
+
+É serviço de processamento de eventos quem realiza a verificação de quebras as de contrato, através da análise dos dados de qualidade recebidos. 
+
+Em termos de complexidade computacional, esta é uma tarefa extremamente custosa, sobretudo pela quantidade de eventos que devem ser processados. Deste modo, o serviço é implementado sob uma \textit{engine} de processamento de eventos complexos, \textit{Esper}~\cite{esper}, que fornece um mecanismo de processamento de \textit{stream} de eventos e uma linguagem de consulta própria (\verb EQL ), facilitando o processamento configurável dos eventos em tempo real.
 
 \subsubsection{\textit{Monitoring Service}}
 \label{subsec:monit_serv}
-%TODO
+-recebe a configurações de monitoração
+-extraídas das especificaçoes do serviço pelo gerente de adaptação
+-inicializar a monitoração dos serviços utilizados pela aplicacao
+-
 
 \subsubsection{\textit{Composition Service}}
-%TODO
+A plataforma utiliza o iPOJO~\cite{ipojo} como infra-estrutura à composição de serviços. Ele implementa um container que realiza a injeção de dependências na aplicação, ou seja, indica quais serviços devem ser utilizados na composição, sob uma pespectiva puramente funcional.
+
+Assim, temos na figura do \textit{adaptation manager} e dos demais serviços, uma extensão da infra-estrutura de suporte à composição, permitindo o uso de atributos de qualidade na seleção dos serviços que deverão compor a aplicação.
 
 \subsubsection{\textit{Management Tool}}
 Fornece um conjunto de ferramentas administrativas para gerenciar a plataforma e os serviços que estão em execução.
