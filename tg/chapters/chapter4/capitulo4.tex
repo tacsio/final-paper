@@ -111,9 +111,9 @@ Essas metas são definidas através da \textit{tag} \verb slo , que descreve uma
 
 Além disso, também são definidos no mesmo XML, métodos que visam atuar sobre estados de alerta, buscando garantir que as capacidades apresentadas sejam devidamente providas.
 
-Esses métodos são descritos pela \textit{tag} \verb profile , que define um conjunto de \verb profiles ~responsáveis por relacionar as configurações de monitoração às políticas de gerenciamento de instâncias, onde cara política de gerenciamento tem por objetivo evitar a degradação da qualidade provida. 
+Esses métodos são descritos pela \textit{tag} \verb profile , que define um conjunto de \verb profiles ~responsáveis por relacionar as configurações de monitoração às políticas de gerenciamento de instâncias, onde cada política de gerenciamento tem por objetivo evitar a degradação da qualidade provida. 
 
-Um \textit{profile} especificar um conjunto de \verb resources , semelhantes aos \textit{slos}, com o objetivos de definir uma configuração de monitoração.
+Um  \verb profile ~especifica um conjunto de \verb resources , que assim como os \verb slos , definem uma configuração de monitoração (\textit{monitoring configuration}).
 
 \subsection{\textit{Do} - Executar}
 Definidas as metas de qualidade e as políticas de manutenção de recursos (através de \verb slos ~e \verb profiles ), o próximo passo é monitorar o provedor em execução. Cabe ao \textit{Monitoring Service} realizar esta tarefa.
@@ -124,7 +124,7 @@ A monitoração de atributos de qualidade é realizada no próprio gerenciador d
 
 Um conjunto de técnicas e padrões para captura de atributos relacionados a performance são discutidos em ~\cite{oberortner2011monitoring}~\cite{oberortner2010patterns}.
 
-Deste modo, foi adotado o padrão \textit{QoS Wrapper} para monitoramento do provedor, uma vez que, este é extremamente simples, não gera um \textit{overhead} elevado e é o que melhor se aplica ao nosso problema.
+Deste modo, foi adotado o padrão \textit{QoS Wrapper}~\cite{oberortner2011monitoring} para monitoramento do provedor, uma vez que, este é extremamente simples, não gera um \textit{overhead} elevado e é o que melhor se aplica ao nosso problema.
 
 \subsection{\textit{Check} - Verificar}
 A etapa de verificação difere um pouco do processo original, pois ela também ficou responsável por agregar os dados da monitoração. Já que, os dados da monitoração são enviados a cada invocação ao serviço (no caso de dados relacionados a qualidade) ou em intervalos de tempo (no caso de dados relacionados ao estado da máquina).

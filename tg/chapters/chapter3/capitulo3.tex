@@ -49,6 +49,7 @@ Porém, para prover adaptação dinâmica, o \textit{container} deve ser capaz d
 Nesta Seção, daremos uma visão geral de cada componente presente na arquitetura, identificando sua funcionalidade e suas características principais.
 
 \subsubsection{\textit{Distribution Service}}
+\label{subsub:dosgi}
 O serviço de distribuição é responsável por permitir que serviços disponibilizados no registro do \textit{runtime} OSGi local, sejam distribuídos como serviços remotos a outros \textit{runtimes}.
 
 Esse serviços é provido através da utilização do DOSGi~\cite{dosgi}, que implementa um conjunto de serviços que provêem distribuição de serviços OSGi. 
@@ -85,14 +86,13 @@ As notificações são realizadas através do envio de eventos assíncronos, bas
 
 É serviço de processamento de eventos quem realiza a verificação de quebras as de contrato, através da análise dos dados de qualidade recebidos. 
 
-Em termos de complexidade computacional, esta é uma tarefa extremamente custosa, sobretudo pela quantidade de eventos que devem ser processados. Deste modo, o serviço é implementado sob uma \textit{engine} de processamento de eventos complexos, \textit{Esper}~\cite{esper}, que fornece um mecanismo de processamento de \textit{stream} de eventos e uma linguagem de consulta própria (\verb EQL ), facilitando o processamento configurável dos eventos em tempo real.
+Em termos de complexidade computacional, esta é uma tarefa extremamente custosa, sobretudo pela quantidade de eventos que devem ser processados. Deste modo, o serviço é implementado sob uma \textit{engine} de processamento de eventos complexos, \textit{Esper}~\cite{esper}, que fornece um mecanismo de processamento de \textit{stream} de eventos e uma linguagem de consulta própria (\verb EQL ), facilitando o processamento configurável dos eventos em tempo real, através da criação de \textit{statements} que definem \textit{queries} e \textit{patterns}, que respectivamente, selecionam e correlacionam dados provenientes do processamento dos eventos.
 
 \subsubsection{\textit{Monitoring Service}}
 \label{subsec:monit_serv}
--recebe a configurações de monitoração
--extraídas das especificaçoes do serviço pelo gerente de adaptação
--inicializar a monitoração dos serviços utilizados pela aplicacao
--
+O serviço de monitoração é responsável por inicializar a monitoração dos serviços utilizados pela aplicação. Ele recebe as configurações de monitoração, extraídas através das especificações do serviço pelo \textit{adaptation manager}, e configura o \textit{Event Processing Service} de maneira a processar os eventos gerados pela monitoração dos atributos de qualidade da aplicação.
+
+É função do serviço de monitoração, definir os \textit{statements} utilizados no processamento de eventos. Estes \textit{statements} são construídos com base nas \textit{monitoring configurations} repassadas pelo \textit{adaptation manager}.
 
 \subsubsection{\textit{Composition Service}}
 A plataforma utiliza o iPOJO~\cite{ipojo} como infra-estrutura à composição de serviços. Ele implementa um container que realiza a injeção de dependências na aplicação, ou seja, indica quais serviços devem ser utilizados na composição, sob uma pespectiva puramente funcional.
@@ -100,5 +100,5 @@ A plataforma utiliza o iPOJO~\cite{ipojo} como infra-estrutura à composição d
 Assim, temos na figura do \textit{adaptation manager} e dos demais serviços, uma extensão da infra-estrutura de suporte à composição, permitindo o uso de atributos de qualidade na seleção dos serviços que deverão compor a aplicação.
 
 \subsubsection{\textit{Management Tool}}
-Fornece um conjunto de ferramentas administrativas para gerenciar a plataforma e os serviços que estão em execução.
+Fornece um conjunto de ferramentas administrativas para gerenciar a plataforma e os serviços que estão em execução, intergradas a VisualVM~\cite{visualvm}, uma ferramenta visual para gerenciamento de aplicações na plataforma Java SE.
 

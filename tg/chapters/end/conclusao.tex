@@ -1,13 +1,34 @@
 \chapter{Conclusão e Trabalhos Futuros}
 \label{ch:5}
-%TODO introduzir capitulo
+Neste trabalho, foi definido, projetado e construído um mecanismo que permite o monitoramento de recursos e atributos de qualidade, visando a adaptação dinâmica do provedor de serviços, em função do contexto em que esta executa.
+
+O principal objetivo por traz desse mecanismo, foi evitar eventuais quebras de contrato devido a demanda ou a limitação de recursos no contexto em que o serviço é provido.
+
+Foram apresentados os principais conceitos relacionados ao trabalho, como orientação a componentes, orientação a serviços e o ciclo PDCA para gestão de qualidade e melhoria de processos de desenvolvimento. Além das principais tecnologias utilizadas na construção dos componentes do mecanismo.
+
+Em seguida, descrevemos a plataforma DSOA, à qual este trabalho foi incorporado, apresentando seus objetivos, sua arquitetura e os principais componentes da plataforma. 
+
+Por fim, discutimos sobre a proposta deste trabalho, apresentando uma visão geral do contexto, identificando uma possível extensão à plataforma DSOA, definindo os componentes necessários à realização do trabalho, onde a estratégia de execução foi baseada nas etapas definidas pelo cilo PDCA, incorporando suas características de busca por melhoria ao mecanismo.
 
 \section{Contribuições}
 
-%FIXME organizar contribuicoes
-- suporte a utilização de diferentes politicas de criação de instancias em um ambiente OSGi distribuído. (Não suportado pelas políticas padrões do iPOJO.
-- suporte a troca dinâmica de politicas de criação de instancias.
+As principais contribuições deste trabalho são apresentadas a seguir:
 
+\begin{itemize}
+
+\item \textbf{Suporte à adaptação dinâmica do provedor em função do contexto de execução}
+
+Através da do desenvolvimento do gerente de adaptação do provedor (\textit{QoS Provider Manager}), que adapta o provedor de serviços em função da análise de atributos de qualidade e do contexto de execução. A adaptação é provida através de um conjunto de políticas de criação de instâncias padrão, diponibilizadas como serviços OSGi, o que possibilita a adição de novas políticas de criação em tempo execução.
+
+\item \textbf{Módulo de monitoramento de recursos de hardware à plataforma DSOA}
+
+Construído com base em JMX, garantindo à plataforma uma maneira simples de obteção de dados relacionados aos recursos de hardware da máquina em que esta executa.
+
+\item \textbf{Suporte à utilização de diferentes políticas de criação de instâncias em um ambiente OSGi distribuído}
+
+As políticas de criação de instâncias \textit{default} do iPOJO, não dão suporte nativo a execução em um ambiente OSGi, utilizando, apenas a política \textit{singleton}, mesmo que o usuário tenha definido a criação de uma instância diferentes por \textit{bundle}. Isso ocorre porque o D-OSGi, disponibiliza serviços remotos localmente através de \textit{proxies}, visto na Seção \ref{subsub:dosgi}. Deste modo, o \textit{endpoint} remoto é visto localmente como um \textit{bundle}, e este ``mascara'' as invocações locais, de diferentes bundles, ao serviço remoto.
+
+\end{itemize}
 
 \section{Trabalhos Futuros}
 Como pudemos perceber, toda a definição das políticas de gerenciamento de instâncias é feita em tempo de \textit{deployment}. 
