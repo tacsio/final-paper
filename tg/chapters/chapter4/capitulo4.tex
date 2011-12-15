@@ -152,12 +152,12 @@ A figura \ref{fig:dsoa_pcda} mostra onde cada etapa do ciclo está situada na pl
 \section{Avaliação Funcional}
 \label{sec:validation}
 
-Para avaliar o mecanismo proposto, utilizamos a ferramenta JMeter~\cite{jmeter} para simulação de carga, através de requições. O ambiente de experimentos contou com o maquinário descrito na Tabela \ref{tab:labs}.
+Para avaliar o mecanismo proposto, utilizamos a ferramenta JMeter~\cite{jmeter} para simulação de carga, através de requisições. O ambiente de experimentos contou com o maquinário descrito na Tabela \ref{tab:labs}.
 
 \begin{table*}[htp]
 \begin{supertabular}[]{|l|l|l|l|}
 \hline
-\textbf{Máquina} & \textbf{S.O.} & \textbf{Mémoria RAM} & \textbf{Processador}\\\hline
+\textbf{Máquina} & \textbf{S.O.} & \textbf{Memória RAM} & \textbf{Processador}\\\hline
 Máquina 1 & Windows 7 Professional & 2G & Intel Core 2 Duo 2.8 Ghz\\\hline
 Máquina 2 & Windows 7 Professional & 8G & Intel Core i7 2.8 Ghz\\\hline
 Máquina 3 & Slackware Linux 13.37 & 2G & Intel Dual Core 2.0 Ghz\\\hline
@@ -177,7 +177,7 @@ Inicialmente iremos executar com 3 configurações distintas:
 \end{enumerate}
 
 \subsection{Análise dos Resultados}
-Devido as limitações de tempo e a percepção ainda não muito clara das melhores configurações de \verb Profiles ~e \verb Resources ~, realizamos uma comparação entre 2 políticas \textit{default} e a adaptativa (que varia entre as duas \textit{default} em função do contexto).
+Devido às limitações de tempo e a percepção ainda não muito clara das melhores configurações de \verb Profiles ~e \verb Resources ~, realizamos uma comparação entre 2 políticas \textit{default} e a adaptativa (que varia entre as duas \textit{default} em função do contexto).
 
 Inicialmente utilizaremos a política de criação \textit{singleton}, que retorna sempre a mesma instância, analisando o impacto no consumo de recursos de memória e CPU, além do tempo de resposta percebido pelo cliente. Em seguida, realizaremos o mesmo teste com a política de criação \textit{per-request}, que devolve uma nova instância a cada requisição. Por fim, utilizaremos estas duas políticas sob a gerência do \textit{QoS Provider Manager}.
 
@@ -229,11 +229,11 @@ Tanto na carga de CPU, quanto no tempo de resposta percebido pelo cliente, não 
 100 clientes & 3,80 & 3,83 & 3,85\\\hline
 200 clientes & 7,69 & 7,80 & 7,81\\\hline
 \end{supertabular}
-\caption{Média Tempo de Resposta dos Cénarios (ms)}
+\caption{Média Tempo de Resposta dos Cenários (ms)}
 \label{tab:rtt}
 \end{table*}
 
 \paragraph{}
-Assim, concluímos a avaliação funcional do mecanismo, identificando a necessidade de um estudo mais aprofundado da configuração dos parâmetros, de maneira a melhor aproveitar do dinamismo oferecido pela adaptação dinâmica. Uma vez que, nos testes realizados, mesmo com a modificação da política, o consumo de CPU mostrou-se relativamente independente, tendo uma variação mínima entre as política, em todos os cenários.
+Assim, concluímos a avaliação funcional do mecanismo, identificando a necessidade de um estudo mais aprofundado da configuração dos parâmetros, de maneira a melhor aproveitar do dinamismo oferecido pela adaptação dinâmica. Uma vez que, nos testes realizados, mesmo com a modificação da política, o consumo de CPU mostrou-se relativamente independente, tendo uma variação mínima entre as políticas, em todos os cenários.
 
-Diferemente do consumo de memória, que mostrou-se elevado em alguns cenários, de acordo com o número de clientes simultâneos.
+Diferemente do consumo de memória, que se mostrou elevado em alguns cenários, de acordo com o número de clientes simultâneos.
