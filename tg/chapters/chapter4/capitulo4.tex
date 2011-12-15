@@ -183,23 +183,57 @@ Inicialmente utilizaremos a política de criação \textit{singleton}, que retor
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=12cm]{chapters/chapter4/mem-50.png}
+\includegraphics[width=11cm]{chapters/chapter4/mem-50.png}
 \caption[Consumo de Memória 50 Clientes]{Consumo de Memória 50 Clientes.}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=12cm]{chapters/chapter4/mem-100.png}
+\includegraphics[width=11cm]{chapters/chapter4/mem-100.png}
 \caption[Consumo de Memória 100 Clientes]{Consumo de Memória 100 Clientes.}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=12cm]{chapters/chapter4/mem-200.png}
+\includegraphics[width=11cm]{chapters/chapter4/mem-200.png}
 \caption[Consumo de Memória 200 Clientes]{Consumo de Memória 200 Clientes.}
 \label{fig:200-cl}
 \end{figure}
 
-Nos 3 casos, percebemos que o consumo de memória não varia bruscamente, porém, na Figura \ref{fig:200-cl} 
-%TODO
+Nos 3 casos, percebemos que o consumo de memória não varia bruscamente, identificando que a política com adaptação dinâmica ficou estabilizada em umas das políticas \textit{default}.
+
+Porém, na Figura \ref{fig:200-cl}, que apresenta o cenário com um número maior de usuários, consequentemente maior uso dos recursos (tanto de memória, quando de CPU), percebemos o impacto da variação da política no consumo destes recursos.
+
+Analisando o gráfico, para a política com adaptação dinâmica, temos inicialmente um consumo alto de memória, identificando estados de alerta. Deste modo, o provedor foi adaptado ao contexto, por meio da modificação da política de criação, o que fez com que o consumo de memória decaísse gradativamente.
+
+Como a CPU estava com uma carga elevada durante todo o processo (ver Figura \ref{fig:200-cpu}), assim que a memória era estabilizada, ocorria a adaptação visando diminuir a carga de CPU, fazendo com que o consumo de memória crescesse novamente, evidenciando estados de alerta e consequentemente necessitando de adaptação. 
+
+Por conta disto, alguns picos são percebidos na política com adaptação dinâmica. Até que a utilização dos recursos se estabiliza e a política com adaptação dinâmica não realiza mais trocas.
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=10.5cm]{chapters/chapter4/cpu-200.png}
+\caption[Carga CPU 200 Clientes]{Carga CPU 200 Clientes.}
+\label{fig:200-cpu}
+\end{figure}
+
+Tanto na carga de CPU, quanto no tempo de resposta percebido pelo cliente, não aprestaram variações bruscas, como podemos ver na Tabela \ref{tab:rtt}.
+
+\begin{table*}
+\centering
+\begin{supertabular}[]{|l|l|l|l|}
+\hline
+\textbf{Cenário} & \textbf{Static (Singleton)} & \textbf{Per Request} & \textbf{Adaptativa}\\\hline
+50 clientes & 1,93 & 1,91 & 1,90\\\hline
+100 clientes & 3,80 & 3,83 & 3,85\\\hline
+200 clientes & 7,69 & 7,80 & 7,81\\\hline
+\end{supertabular}
+\caption{Média Tempo de Resposta dos Cénarios (ms)}
+\label{tab:rtt}
+\end{table*}
+
 \paragraph{}
+Assim, concluímos a avaliação funcional do mecanismo, identificando a necessidade de um estudo mais aprofundado da configuração dos parâmetros, de maneira a melhor aproveitar do dinamismo oferecido pela adaptação dinâmica. Uma vez que, nos testes realizados, mesmo com a modificação da política, o consumo de CPU mostrou-se relativamente independente, tendo uma variação mínima entre as política, em todos os cenários.
+
+Diferemente do consumo de memória, que mostrou-se elevado em alguns cenários, de acordo com o número de clientes simultâneos.
