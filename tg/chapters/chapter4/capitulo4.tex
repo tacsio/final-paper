@@ -159,10 +159,47 @@ Para avaliar o mecanismo proposto, utilizamos a ferramenta JMeter~\cite{jmeter} 
 \hline
 \textbf{Máquina} & \textbf{S.O.} & \textbf{Mémoria RAM} & \textbf{Processador}\\\hline
 Máquina 1 & Windows 7 Professional & 2G & Intel Core 2 Duo 2.8 Ghz\\\hline
-Máquina 2 & Slackware Linux 13.37 & 2G & Intel Dual Core 2.0 Ghz\\\hline
+Máquina 2 & Windows 7 Professional & 8G & Intel Core i7 2.8 Ghz\\\hline
+Máquina 3 & Slackware Linux 13.37 & 2G & Intel Dual Core 2.0 Ghz\\\hline
 \end{supertabular}
 \caption{Configuração do Ambiente de Experimentos}
 \label{tab:labs}
 \end{table*}
 
-O provedor de serviços roda na \verb máquina ~\verb 2 , enquando os consumidores (gerados pelo JMeter~\cite{jmeter}) executam na \verb máquina ~\verb 1 .
+O provedor de serviços roda na \verb máquina ~\verb 3 , enquanto os consumidores (gerados pelo JMeter) executam nas \verb máquinas ~\verb 1 ~e \verb 2 .
+
+Inicialmente iremos executar com 3 configurações distintas:
+
+\begin{enumerate}
+\item \textbf{50 clientes - 50 requisições}
+\item \textbf{100 clientes - 50 requisições}
+\item \textbf{200 clientes - 50 requisições}
+\end{enumerate}
+
+\subsection{Análise dos Resultados}
+Devido as limitações de tempo e a percepção ainda não muito clara das melhores configurações de \verb Profiles ~e \verb Resources ~, realizamos uma comparação entre 2 políticas \textit{default} e a adaptativa (que varia entre as duas \textit{default} em função do contexto).
+
+Inicialmente utilizaremos a política de criação \textit{singleton}, que retorna sempre a mesma instância, analisando o impacto no consumo de recursos de memória e CPU, além do tempo de resposta percebido pelo cliente. Em seguida, realizaremos o mesmo teste com a política de criação \textit{per-request}, que devolve uma nova instância a cada requisição. Por fim, utilizaremos estas duas políticas sob a gerência do \textit{QoS Provider Manager}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{chapters/chapter4/mem-50.png}
+\caption[Consumo de Memória 50 Clientes]{Consumo de Memória 50 Clientes.}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{chapters/chapter4/mem-100.png}
+\caption[Consumo de Memória 100 Clientes]{Consumo de Memória 100 Clientes.}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{chapters/chapter4/mem-200.png}
+\caption[Consumo de Memória 200 Clientes]{Consumo de Memória 200 Clientes.}
+\label{fig:200-cl}
+\end{figure}
+
+Nos 3 casos, percebemos que o consumo de memória não varia bruscamente, porém, na Figura \ref{fig:200-cl} 
+%TODO
+\paragraph{}
