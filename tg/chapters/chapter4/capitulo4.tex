@@ -1,34 +1,24 @@
-\chapter{Solução Proposta}
+\chapter{Mecanismo de Gerenciamento Automático de Provedores de Serviços}
 \label{ch:4}
 
-Neste capítulo, apresentaremos os componentes desenvolvidos para a realização dos objetivos propostos, bem como, detalhes de implementação considerados importantes para o melhor entendimento técnico do mecanismo. 
-
-Também será mostrada uma análise do processo de gerenciamento automático, tendo em vista as idéias do ciclo PDCA, apresentado na Seção \ref{sec:pdca} deste trabalho. Essa análise irá relacionar as etapas definidas no ciclo com os sub-processos definidos pelo mecanismo.
+Neste capítulo, apresentaremos os componentes desenvolvidos para a realização dos objetivos propostos, bem como, detalhes de implementação considerados importantes para o melhor entendimento técnico do mecanismo. Também será mostrada uma análise do processo de gerenciamento automático, tendo em vista as idéias do ciclo PDCA, apresentado na Seção \ref{sec:pdca} deste trabalho. Essa análise irá relacionar as etapas definidas no ciclo com os sub-processos definidos pelo mecanismo.
 
 \section{Visão Geral}
-O contexto ao qual este trabalho está inserido, foi apresentado no capítulo \ref{ch:3}, através da plataforma DSOA, que provê um ambiente de composição dinâmica baseado em componentes orientados a serviços, com percepção de requisitos não-funcionais mapeados em atributos de qualidade. 
+O contexto ao qual este trabalho está inserido foi apresentado no Capítulo \ref{ch:3}, através da plataforma DSOA, que provê um ambiente de composição dinâmica baseado em componentes orientados a serviços, com percepção de requisitos não-funcionais mapeados em atributos de qualidade. 
 
-Porém, o estado atual da plataforma não dá suporte ao gerenciamento e monitoramento do provedor de serviços. O provedor basicamente define um conjunto de atributos de qualidade, que são utilizados pelos consumidores na seleção de serviço e na elaboração de contratos.
+Porém, o estado atual da plataforma não dá suporte ao gerenciamento e monitoramento do provedor de serviços. O provedor basicamente define um conjunto de atributos de qualidade, que são utilizados pelos consumidores na seleção de serviço e na elaboração de contratos. Solucionair tais limitações mostra-se relevante, a medida que a qualidade do serviço é um fator chave tanto seleção do provedor quanto na manutenção dos contratos.
 
-Atacar tais limitações mostra-se relevante, a medida que a qualidade do serviço é um fator chave tanto seleção do provedor quanto na manutenção dos contratos.
-
-Buscando resolver esse problema, o objetivo deste trabalho é especificar e construir um mecanismo de gerenciamento automático de provedores de serviço, focado na prevenção de possíveis quebras de contrato. 
-
-Para isso, a plataforma deve ser capaz de monitorar e adaptar dinamicamente o provedor de serviços, em função do contexto em que o mesmo executa.
+Buscando resolver esse problema, o objetivo deste trabalho é especificar e construir um mecanismo de gerenciamento automático de provedores de serviço, focado na prevenção de possíveis quebras de contrato. Para isso, a plataforma deve ser capaz de monitorar e adaptar dinamicamente o provedor de serviços em função do contexto em que o mesmo executa.
 
 
 \section{Arquitetura}
 \label{sec:arch_prop}
 
-Como vimos na Seção anterior, a plataforma DSOA, não prevê o gerenciamento do provedor de serviços com base em atributos de qualidade, deste modo, propomos uma estender a plataforma para suprir tais necessidades.
+Como vimos na Seção anterior, a plataforma DSOA, não prevê o gerenciamento do provedor de serviços com base em atributos de qualidade, deste modo, propomos uma estender a plataforma para suprir tais necessidades. Para isso, foram desenvolvidos e implantados 2 módulos à plataforma. Um módulo de monitoração de recursos de hardware e um módulo de gerenciamento de provedores de serviços (ver Figura \ref{fig:proposal}).
 
-Para isso, foram desenvolvidos e implantados 2 módulos à plataforma. Um módulo de monitoração de recursos de hardware e um módulo de gerenciamento de provedores de serviços, ver Figura \ref{fig:proposal}.
+O módulo de monitoração de recursos consiste em um sensor que captura informações referentes ao estado dos recursos da máquina. É instrumentado através de JMX e foi disponibilizado como um serviço da plataforma. O módulo de gerenciamento de provedor de serviço estende um \textit{container} fornecendo suporte à reconfiguração dinâmica de serviços. A reconfiguração é baseada em atributos de qualidade e no contexto em que o provedor executa.
 
-O módulo de monitoração de recursos consiste em um sensor que captura informações referentes ao estado dos recursos da máquina. É instrumentado através de JMX e foi disponibilizado como um serviço da plataforma. 
-
-O módulo de gerenciamento de provedor de serviço estende um \textit{container} fornecendo suporte a reconfiguração dinâmica de serviços. A reconfiguração é baseada em atributos de qualidade e no contexto em que o provedor executa.
-
-A figura \ref{fig:proposal} destaca onde o trabalho desenvolvido esta situado na plataforma DSOA.
+A figura \ref{fig:proposal} destaca onde o trabalho desenvolvido está situado na plataforma DSOA.
 
 \begin{figure}[htp]
 \centering
@@ -42,13 +32,11 @@ A combinação destes 2 módulos, junto aos serviços providos pela plataforma, 
 
 \subsection{Módulo de Monitoração de Recursos}
 
-Conforme o Capítulo \ref{ch:3}, um elemento importante de um sistema de monitoração corresponde a figura dos sensores. Sensores são responsáveis por coletar dados referentes aos recursos monitorados. E na plataforma DSOA, estão representados pelos serviços de monitoração. 
+Conforme o Capítulo \ref{ch:3}, um elemento importante de um sistema de monitoração corresponde a figura dos sensores. Sensores são responsáveis por coletar dados referentes aos recursos monitorados e, na plataforma DSOA, estão representados pelos serviços de monitoração. 
 
-Originalmente a plataforma suporta um conjunto de sensores responsáveis pela coleta de dados referente a qualidade do serviço. Contudo, do ponto de vista do provedor, 2 fatores impactam diretamente na qualidade: a demanda e a limitação dos recursos de hardware e software~\cite{ye2011models}. 
+Originalmente a plataforma suporta um conjunto de sensores responsáveis pela coleta de dados referente à qualidade do serviço. Contudo, do ponto de vista do provedor, dois fatores impactam diretamente na qualidade: a demanda e a limitação dos recursos de hardware e software~\cite{ye2011models}. 
 
-Neste contexto, é vital que os recursos sejam monitorados, de forma a evitar que o consumo elevado degrade a qualidade do serviço provido, prevenindo eventuais quebras de contratos.
-
-Essa necessidade nos levou a proposição de um novo conjunto de sensores, com a finalidade coletar dados relacionados ao contexto de execução do serviço, em termos de consumo de recursos de hardware, em particular, consumo de CPU e memória. 
+Neste contexto, é vital que os recursos sejam monitorados, de forma a evitar que o consumo elevado degrade a qualidade do serviço provido, prevenindo eventuais quebras de contratos. Essa necessidade nos levou a proposição de um novo conjunto de sensores com a finalidade coletar dados relacionados ao contexto de execução do serviço, em termos de consumo de recursos de hardware, em particular, consumo de CPU e memória. 
 
 Esse conjunto de sensores, foi incorporado à plataforma DSOA, através do serviço de monitoração de recursos (\textit{Resource Monitoring Service}), que é parte integrante do serviço de monitoração (\textit{Monitoring Service}), conforme a Figura \ref{fig:resc_module}.
 
@@ -61,9 +49,9 @@ Esse conjunto de sensores, foi incorporado à plataforma DSOA, através do servi
 
 Como foi dito na Seção \ref{sec:arch_prop}, o serviço de monitoração de recursos foi desenvolvido utilizando JMX para realizar a coleta de dados acerca dos recursos da máquina. Esse processo é realizado através de uma técnica de \textit{polling}~\cite{patterson2005organizacao} sobre os dados de memória e utilização de CPU.
 
-Os dados do monitoramento são enviados, através da figura de eventos, ao serviço de processamento de eventos (\textit{Event Processing Service}), que gera notificações ao gerenciador de adaptação (\textit{Adaptation Manager}) quando o provedor encontra-se em um ``Estado de Alerta''.
+Os dados do monitoramento são enviados, através de eventos, ao serviço de processamento de eventos (\textit{Event Processing Service}), que gera notificações ao gerenciador de adaptação (\textit{Adaptation Manager}) quando o provedor encontra-se em um ``Estado de Alerta''.
 
-Um estado de alerta pode ser visto como uma iminência de quebra de contrato. Onde o provedor chegou a um ponto crítico de utilização dos recursos e logo não poderá garantir a qualidade devida, necessitando de adaptar-se ao novo contexto de execução.
+Um estado de alerta pode ser visto como uma iminência de quebra de contrato. Neste estado, o provedor chegou a um ponto crítico de utilização dos recursos e logo não poderá garantir a qualidade devida, necessitando adaptar-se ao novo contexto de execução.
 
 \subsection{Módulo de Gerenciamento de Provedor}
 \label{subsec:qos_provider}
@@ -83,19 +71,10 @@ Assim, o módulo de gerenciamento do provedor (\textit{QoS Provider Manager}) im
 \label{fig:adapt_module}
 \end{figure}
 
-O módulo de gerenciamento do provedor é capaz de adaptá-lo a seu contexto de execução, visando manter a qualidade de serviço, através do gerenciamento das políticas de criação de instâncias.
-
-Em ~\cite{volter2005remoting}, temos um capítulo dedicado ao gerenciamento de ciclo de vida dos objetos remotos. Onde são apresentados diversos cenários de utilização ou limitação de recursos e o padrão de criação de instâncias que melhor se adapta a ele.
-
-A partir disto, definimos um conjunto de políticas para cenários específicos de uso dos recursos. Porém, devido a diversidade enorme de cenários existentes, uma vez que, o uso de recursos é extremamente variável de aplicação para aplicação, a melhor maneira de contemplar a maioria dos casos é disponibilizar a política de criação de instâncias como um serviço. 
-
-Deste modo, abrimos um leque à criação de diversas abordagens de gerenciamento de instâncias, a medida que, a política de criação de instâncias é independente do gerenciador de adaptação.
-
+O módulo de gerenciamento do provedor é capaz de adaptá-lo a seu contexto de execução, visando manter a qualidade de serviço, através do gerenciamento das políticas de criação de instâncias. A partir disto, definimos um conjunto de políticas para cenários específicos de uso dos recursos. Porém, devido a diversidade enorme de cenários existentes, uma vez que, o uso de recursos é extremamente variável de aplicação para aplicação, a melhor maneira de contemplar a maioria dos casos é disponibilizar a política de criação de instâncias como um serviço.  
 
 \section{Aplicação do Ciclo PDCA}
-Todo o processo de monitoramento e adaptação será baseado nas etapas definidas pelo ciclo PDCA.
-
-Como vimos na Seção \ref{sec:pdca}, o ciclo foca em manter ou melhorar a qualidade de processos, com base nas informações referentes a sua execução.
+Todo o processo de monitoramento e adaptação será baseado nas etapas definidas pelo ciclo PDCA. Como vimos na Seção \ref{sec:pdca}, o ciclo foca em manter ou melhorar a qualidade de processos, com base nas informações referentes à sua execução.
 
 \begin{figure}[htp]
 \centering
@@ -107,34 +86,28 @@ Como vimos na Seção \ref{sec:pdca}, o ciclo foca em manter ou melhorar a quali
 \subsection{\textit{Plan} - Planejar}
 Na etapa de planejamento, as metas serão definidas por meio de um documento XML~\cite{xml} que descreve as capacidades que o provedor afirma garantir. Essas propriedades são utilizadas para definir configurações de monitoração (\textit{Monitoring Configuration}), relacionadas a atributos de qualidade do provedor (\textit{e.g} tempo de processamento).
 
-Essas metas são definidas através da \textit{tag} \verb slo , que descreve uma métrica a ser medida, um valor de \textit{threshold} e uma relação de limite(máximo ou mínimo) que o valor do \textit{threshold} pode ultrapassar. Em alguns casos, temos também o identificador da operação provida. Essa informação é útil em casos de configurações de monitoração relacionadas a invocações de determinados métodos do provedor (e.g. \textit{throuhput} de uma operação). Ver Apêndice \ref{subsec:slo}.
+Essas metas são definidas através da \textit{tag} \verb slo , que descreve uma métrica a ser medida, um valor de \textit{threshold} e uma relação de limite(máximo ou mínimo) que o valor do \textit{threshold} pode ultrapassar. Em alguns casos, temos também o identificador da operação provida. Essa informação é útil em casos de configurações de monitoração relacionadas à invocações de determinados métodos do provedor (e.g. \textit{throuhput} de uma operação). 
 
-Além disso, também são definidos no mesmo XML, métodos que visam atuar sobre estados de alerta, buscando garantir que as capacidades apresentadas sejam devidamente providas.
-
-Esses métodos são descritos pela \textit{tag} \verb profile , que define um conjunto de \verb profiles ~responsáveis por relacionar as configurações de monitoração às políticas de gerenciamento de instâncias, onde cada política de gerenciamento tem por objetivo evitar a degradação da qualidade provida. 
+Além disso, também são definidos no mesmo XML, métodos que visam atuar sobre estados de alerta, buscando garantir que as capacidades apresentadas sejam devidamente providas. Esses métodos são descritos pela \textit{tag} \verb profile , que define um conjunto de \verb profiles ~responsáveis por relacionar as configurações de monitoração às políticas de gerenciamento de instâncias, onde cada política de gerenciamento tem por objetivo evitar a degradação da qualidade provida. 
 
 Um  \verb profile ~especifica um conjunto de \verb resources , que assim como os \verb slos , definem uma configuração de monitoração (\textit{monitoring configuration}).
 
 \subsection{\textit{Do} - Executar}
 Definidas as metas de qualidade e as políticas de manutenção de recursos (através de \verb slos ~e \verb profiles ), o próximo passo é monitorar o provedor em execução. Cabe ao \textit{Monitoring Service} realizar esta tarefa.
 
-A monitoração de recursos de recursos é de responsabilidade do \textit{Resource Monitoring Service}, que coleta dados referentes ao estado atual da máquina (através de um processo de \textit{polling}) e os envia à central de processamento de eventos.
+A monitoração de recursos é de responsabilidade do \textit{Resource Monitoring Service}, que coleta dados referentes ao estado atual da máquina (através de um processo de \textit{polling}) e os envia à central de processamento de eventos.
 
 A monitoração de atributos de qualidade é realizada no próprio gerenciador de adaptação, através da utilização da interceptação das invocações ao serviço.
 
-Um conjunto de técnicas e padrões para captura de atributos relacionados a performance são discutidos em ~\cite{oberortner2011monitoring}~\cite{oberortner2010patterns}.
-
-Deste modo, foi adotado o padrão \textit{QoS Wrapper}~\cite{oberortner2011monitoring} para monitoramento do provedor, uma vez que, este é extremamente simples, não gera um \textit{overhead} elevado e é o que melhor se aplica ao nosso problema.
+Um conjunto de técnicas e padrões para captura de atributos relacionados a desempenho são discutidos em ~\cite{oberortner2011monitoring}~\cite{oberortner2010patterns}. Deste modo, foi adotado o padrão \textit{QoS Wrapper}~\cite{oberortner2011monitoring} para monitoramento do provedor, uma vez que, este é extremamente simples, não gera um \textit{overhead} elevado e é o que melhor se aplica ao nosso problema.
 
 \subsection{\textit{Check} - Verificar}
-A etapa de verificação difere um pouco do processo original, pois ela também ficou responsável por agregar os dados da monitoração. Já que, os dados da monitoração são enviados a cada invocação ao serviço (no caso de dados relacionados a qualidade) ou em intervalos de tempo (no caso de dados relacionados ao estado da máquina).
+A etapa de verificação difere um pouco do processo original, pois ela também ficou responsável por agregar os dados da monitoração uma vez que os dados da monitoração são enviados à cada invocação ao serviço (no caso de dados relacionados à qualidade) ou em intervalos de tempo (no caso de dados relacionados ao estado da máquina).
 
-Além disso, é nesta esta que os estados de alerta são identificados a partir da análise dos dados monitorados em relação aos \verb slos ~e \verb profiles . Essa análise é realizada pelo serviço de processamento de eventos que envia notificações ao gerenciador de adaptação através do serviço de notificação.
+Além disso, é nesta etapa que os estados de alerta são identificados a partir da análise dos dados monitorados em relação aos \verb slos ~e \verb profiles . Essa análise é realizada pelo serviço de processamento de eventos que envia notificações ao gerenciador de adaptação através do serviço de notificação.
 
 \subsection{\textit{Act} - Agir}
-A útima fase do ciclo é responsável por garantir o dinamismo da solução através do módulo de gerenciamento do provedor (\textit{QoS Provider Manager}).
-
-O \textit{QoS Provider Manager} recebe notificações referentes ao nível de qualidade do serviço provido e ao estado dos recursos da máquina. E com base nessas informações, reconfigura o serviço visando evitar eventuais quebras de contrato.
+A útima fase do ciclo é responsável por garantir o dinamismo da solução através do módulo de gerenciamento do provedor (\textit{QoS Provider Manager}). O \textit{QoS Provider Manager} recebe notificações referentes ao nível de qualidade do serviço provido e ao estado dos recursos da máquina. Com base nessas informações, reconfigura o serviço visando evitar eventuais quebras de contrato.
 
 A reconfiguração é realizada a partir da modificação da política de criação de instâncias, como foi visto na Seção \ref{subsec:qos_provider}.
 
@@ -149,7 +122,7 @@ A figura \ref{fig:dsoa_pcda} mostra onde cada etapa do ciclo está situada na pl
 \end{figure}
 
 
-\section{Avaliação Funcional}
+\section{Avaliação Experimental}
 \label{sec:validation}
 
 Para avaliar o mecanismo proposto, utilizamos a ferramenta JMeter~\cite{jmeter} para simulação de carga, através de requisições. O ambiente de experimentos contou com o maquinário descrito na Tabela \ref{tab:labs}.
@@ -166,9 +139,9 @@ Máquina 3 & Slackware Linux 13.37 & 2G & Intel Dual Core 2.0 Ghz\\\hline
 \label{tab:labs}
 \end{table*}
 
-O provedor de serviços roda na \verb máquina ~\verb 3 , enquanto os consumidores (gerados pelo JMeter) executam nas \verb máquinas ~\verb 1 ~e \verb 2 .
+O provedor de serviços executa na \verb máquina ~\verb 3 , enquanto os consumidores (gerados pelo JMeter) executam nas \verb máquinas ~\verb 1 ~e \verb 2 .
 
-Inicialmente iremos executar com 3 configurações distintas:
+Inicialmente iremos executar com 3 configurações distintas para avaliar o impacto do número de clientes (consequentemente o número de requisições) no consumo de recursos.
 
 \begin{enumerate}
 \item \textbf{50 clientes - 50 requisições}
@@ -177,7 +150,7 @@ Inicialmente iremos executar com 3 configurações distintas:
 \end{enumerate}
 
 \subsection{Análise dos Resultados}
-Devido às limitações de tempo e a percepção ainda não muito clara das melhores configurações de \verb Profiles ~e \verb Resources ~, realizamos uma comparação entre 2 políticas \textit{default} e a adaptativa (que varia entre as duas \textit{default} em função do contexto).
+Devido às limitações de tempo e a percepção ainda não muito clara das melhores configurações de \verb Profiles ~e \verb Resources ~, realizamos uma comparação entre duas políticas: \textit{default} e a adaptativa (que varia entre as duas \textit{default} em função do contexto).
 
 Inicialmente utilizaremos a política de criação \textit{singleton}, que retorna sempre a mesma instância, analisando o impacto no consumo de recursos de memória e CPU, além do tempo de resposta percebido pelo cliente. Em seguida, realizaremos o mesmo teste com a política de criação \textit{per-request}, que devolve uma nova instância a cada requisição. Por fim, utilizaremos estas duas políticas sob a gerência do \textit{QoS Provider Manager}.
 
@@ -200,15 +173,13 @@ Inicialmente utilizaremos a política de criação \textit{singleton}, que retor
 \label{fig:200-cl}
 \end{figure}
 
-Nos 3 casos, percebemos que o consumo de memória não varia bruscamente, identificando que a política com adaptação dinâmica ficou estabilizada em umas das políticas \textit{default}.
-
-Porém, na Figura \ref{fig:200-cl}, que apresenta o cenário com um número maior de usuários, consequentemente maior uso dos recursos (tanto de memória, quando de CPU), percebemos o impacto da variação da política no consumo destes recursos.
+Nos 3 casos, percebemos que o consumo de memória não varia bruscamente, identificando que a política com adaptação dinâmica ficou estabilizada em umas das políticas \textit{default}. Porém, na Figura \ref{fig:200-cl}, que apresenta o cenário com um número maior de usuários, consequentemente maior uso dos recursos (tanto de memória, quando de CPU), percebemos o impacto da variação da política no consumo destes recursos.
 
 Analisando o gráfico, para a política com adaptação dinâmica, temos inicialmente um consumo alto de memória, identificando estados de alerta. Deste modo, o provedor foi adaptado ao contexto, por meio da modificação da política de criação, o que fez com que o consumo de memória decaísse gradativamente.
 
 Como a CPU estava com uma carga elevada durante todo o processo (ver Figura \ref{fig:200-cpu}), assim que a memória era estabilizada, ocorria a adaptação visando diminuir a carga de CPU, fazendo com que o consumo de memória crescesse novamente, evidenciando estados de alerta e consequentemente necessitando de adaptação. 
 
-Por conta disto, alguns picos são percebidos na política com adaptação dinâmica. Até que a utilização dos recursos se estabiliza e a política com adaptação dinâmica não realiza mais trocas.
+Por conta disto, alguns picos são percebidos na política com adaptação dinâmica, até que a utilização dos recursos se estabiliza e a política com adaptação dinâmica não realiza mais trocas.
 
 
 \begin{figure}[htp]
@@ -233,7 +204,5 @@ Tanto na carga de CPU, quanto no tempo de resposta percebido pelo cliente, não 
 \label{tab:rtt}
 \end{table*}
 
-\paragraph{}
-Assim, concluímos a avaliação funcional do mecanismo, identificando a necessidade de um estudo mais aprofundado da configuração dos parâmetros, de maneira a melhor aproveitar do dinamismo oferecido pela adaptação dinâmica. Uma vez que, nos testes realizados, mesmo com a modificação da política, o consumo de CPU mostrou-se relativamente independente, tendo uma variação mínima entre as políticas, em todos os cenários.
-
-Diferemente do consumo de memória, que se mostrou elevado em alguns cenários, de acordo com o número de clientes simultâneos.
+\section{Considerações Finais}
+Assim, concluímos a avaliação experimental do mecanismo, identificando a necessidade de um estudo mais aprofundado da configuração dos parâmetros, de maneira a melhor aproveitar do dinamismo oferecido pela adaptação dinâmica. Uma vez que, nos testes realizados, mesmo com a modificação da política, o consumo de CPU mostrou-se relativamente independente, tendo uma variação mínima entre as políticas, em todos os cenários.
