@@ -6,7 +6,7 @@ Neste capítulo, apresentaremos os componentes desenvolvidos para a realização
 \section{Visão Geral}
 O contexto ao qual este trabalho está inserido foi apresentado no Capítulo \ref{ch:3}, através da plataforma DSOA, que provê um ambiente de composição dinâmica baseado em componentes orientados a serviços, com percepção de requisitos não-funcionais mapeados em atributos de qualidade. 
 
-Porém, o estado atual da plataforma não dá suporte ao gerenciamento e monitoramento do provedor de serviços. O provedor basicamente define um conjunto de atributos de qualidade, que são utilizados pelos consumidores na seleção de serviço e na elaboração de contratos. Solucionair tais limitações mostra-se relevante, a medida que a qualidade do serviço é um fator chave tanto seleção do provedor quanto na manutenção dos contratos.
+Porém, o estado atual da plataforma não dá suporte ao gerenciamento e monitoramento do provedor de serviços. O provedor basicamente define um conjunto de atributos de qualidade, que são utilizados pelos consumidores na seleção de serviço e na elaboração de contratos. Solucionar tais limitações mostra-se relevante, a medida que a qualidade do serviço é um fator chave tanto seleção do provedor quanto na manutenção dos contratos.
 
 Buscando resolver esse problema, o objetivo deste trabalho é especificar e construir um mecanismo de gerenciamento automático de provedores de serviço, focado na prevenção de possíveis quebras de contrato. Para isso, a plataforma deve ser capaz de monitorar e adaptar dinamicamente o provedor de serviços em função do contexto em que o mesmo executa.
 
@@ -107,7 +107,7 @@ A etapa de verificação difere um pouco do processo original, pois ela também 
 Além disso, é nesta etapa que os estados de alerta são identificados a partir da análise dos dados monitorados em relação aos \verb slos ~e \verb profiles . Essa análise é realizada pelo serviço de processamento de eventos que envia notificações ao gerenciador de adaptação através do serviço de notificação.
 
 \subsection{\textit{Act} - Agir}
-A útima fase do ciclo é responsável por garantir o dinamismo da solução através do módulo de gerenciamento do provedor (\textit{QoS Provider Manager}). O \textit{QoS Provider Manager} recebe notificações referentes ao nível de qualidade do serviço provido e ao estado dos recursos da máquina. Com base nessas informações, reconfigura o serviço visando evitar eventuais quebras de contrato.
+A última fase do ciclo é responsável por garantir o dinamismo da solução através do módulo de gerenciamento do provedor (\textit{QoS Provider Manager}). O \textit{QoS Provider Manager} recebe notificações referentes ao nível de qualidade do serviço provido e ao estado dos recursos da máquina. Com base nessas informações, reconfigura o serviço visando evitar eventuais quebras de contrato.
 
 A reconfiguração é realizada a partir da modificação da política de criação de instâncias, como foi visto na Seção \ref{subsec:qos_provider}.
 
@@ -116,7 +116,7 @@ A figura \ref{fig:dsoa_pcda} mostra onde cada etapa do ciclo está situada na pl
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=13cm]{chapters/chapter4/pdca_arch_overview.png}
+\includegraphics[width=12cm]{chapters/chapter4/pdca_arch_overview.png}
 \caption[Componentes da Arquitetura x Fases PDCA]{Componentes da Arquitetura x Fases PDCA.}
 \label{fig:dsoa_pcda}
 \end{figure}
@@ -172,7 +172,7 @@ Inicialmente utilizaremos a política de criação \textit{singleton}, que retor
 \caption[Consumo de Memória 200 Clientes]{Consumo de Memória 200 Clientes.}
 \label{fig:200-cl}
 \end{figure}
-
+\newpage
 Nos 3 casos, percebemos que o consumo de memória não varia bruscamente, identificando que a política com adaptação dinâmica ficou estabilizada em umas das políticas \textit{default}. Porém, na Figura \ref{fig:200-cl}, que apresenta o cenário com um número maior de usuários, consequentemente maior uso dos recursos (tanto de memória, quando de CPU), percebemos o impacto da variação da política no consumo destes recursos.
 
 Analisando o gráfico, para a política com adaptação dinâmica, temos inicialmente um consumo alto de memória, identificando estados de alerta. Deste modo, o provedor foi adaptado ao contexto, por meio da modificação da política de criação, o que fez com que o consumo de memória decaísse gradativamente.
@@ -190,7 +190,7 @@ Por conta disto, alguns picos são percebidos na política com adaptação dinâ
 \end{figure}
 
 Tanto na carga de CPU, quanto no tempo de resposta percebido pelo cliente, não aprestaram variações bruscas, como podemos ver na Tabela \ref{tab:rtt}.
-
+\newpage
 \begin{table*}
 \centering
 \begin{supertabular}[]{|l|l|l|l|}

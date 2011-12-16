@@ -15,7 +15,7 @@ Neste cenário, a adaptação faz sentido em ambos os lados. No lado do consumid
 
 Assim, o objetivo de DSOA é propor uma plataforma orientada a componentes baseados em serviços que estende a capacidade do \textit{container}, de forma a tratar com aspectos de QoS, em particular, aspectos relacionados a desempenho.
 
-Neste sentido, tratar aspectos de qualidade relacioanados a desempenho é um objetivo desafiador, pois, a maioria das plataformas existentes, não dão suporte a isso. O mais próximo disso, podem ser vistos no iPOJO~\cite{ipojo}, \textit{Declarative Services}~\cite{declarative} e BluePrints~\cite{blueprint}. Porém, tais plataformas tratam apenas de aspectos relacionados a questão da disponibilidade do serviços, não considerando aspectos de desempenho.
+Neste sentido, tratar aspectos de qualidade relacionados a desempenho é um objetivo desafiador, pois, a maioria das plataformas existentes, não dão suporte a isso. O mais próximo disso, podem ser vistos no iPOJO~\cite{ipojo}, \textit{Declarative Services}~\cite{declarative} e BluePrints~\cite{blueprint}. Porém, tais plataformas tratam apenas de aspectos relacionados a questão da disponibilidade do serviços, não considerando aspectos de desempenho.
 
 \section{Arquitetura}
 \label{sec:dsoa_arch}
@@ -70,7 +70,7 @@ O serviço de notificação é responsável por sinalizar as quebras de contrato
 
 \subsubsection{\textit{Event Processing Service}}
 \label{subsec:cep}
-O serviço de processameto de eventos é o módulo responsável pelo processamento dos eventos que ocorrem na plataforma. Em particular, a própria infra-estrutura gera eventos relacionados ao ciclo de vida dos serviços, representando, por exemplo, o envio de requisições e respostas, a publicação e a remoção de serviços, além de eventos derivados que indicam o nível de qualidade do serviço percebido pela aplicação. Ele também é responsável pela verificação de quebras de contrato, através da análise dos dados de qualidade recebidos. 
+O serviço de processamento de eventos é o módulo responsável pelo processamento dos eventos que ocorrem na plataforma. Em particular, a própria infra-estrutura gera eventos relacionados ao ciclo de vida dos serviços, representando, por exemplo, o envio de requisições e respostas, a publicação e a remoção de serviços, além de eventos derivados que indicam o nível de qualidade do serviço percebido pela aplicação. Ele também é responsável pela verificação de quebras de contrato, através da análise dos dados de qualidade recebidos. 
 
 Em termos de complexidade computacional, esta é uma tarefa extremamente custosa, sobretudo pela quantidade de eventos que devem ser processados. Deste modo, o serviço é implementado sob uma \textit{engine} de processamento de eventos complexos, \textit{Esper}~\cite{esper}, que fornece um mecanismo de processamento de \textit{stream} de eventos e uma linguagem de consulta própria (\verb EQL ), facilitando o processamento configurável dos eventos em tempo real, através da criação de \textit{statements} que selecionam ou correlacionam dados provenientes do processamento dos eventos.
 
@@ -84,7 +84,7 @@ O serviço de monitoração é responsável por inicializar a monitoração dos 
 DSOA utiliza o iPOJO~\cite{ipojo} como infra-estrutura à composição de serviços. Ele implementa um \textit{container} que realiza a injeção de dependências na aplicação, ou seja, indica quais serviços devem ser utilizados na composição, sob uma pespectiva puramente funcional. Assim, temos na figura do \textit{adaptation manager} e dos demais serviços, uma extensão da infra-estrutura de suporte à composição, permitindo o uso de atributos de qualidade na seleção dos serviços que deverão compor a aplicação.
 
 \subsubsection{\textit{Management Tool}}
-Este componente fornece um conjunto de ferramentas administrativas para gerenciar a plataforma e os serviços que estão em execução, intergradas a VisualVM~\cite{visualvm}, uma ferramenta visual para gerenciamento de aplicações na plataforma Java SE.
+Este componente fornece um conjunto de ferramentas administrativas para gerenciar a plataforma e os serviços que estão em execução, integradas a VisualVM~\cite{visualvm}, uma ferramenta visual para gerenciamento de aplicações na plataforma Java SE.
 
 \section{Considerações Finais}
 Este capítulo apresentou a plataforma DSOA, que um conjunto de componentes na forma de serviços, para lidar com atributos de qualidade visando a adaptação dinâmica da aplicação. Assim, os conceitos apresentados neste capítulo são essenciais para a contextualização deste trabalho, uma vez que, este tem como um dos objetivos, estender a plataforma conforme veremos no próximo capítulo.
