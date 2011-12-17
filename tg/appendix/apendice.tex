@@ -13,13 +13,13 @@ São planejados basicamente 2 tipos de configuração de monitoração. A config
 <ipojo xmlns:qos="br.ufpe.cin.dsoa.manager">
 	<component classname="english.EnglishDictionary">
 		<provides strategy="br.ufpe.cin.dsoa.strategy.Strategy"/>
-		<qos:provider-manager pid="provider.serasa.service.impl.ServiceSerasaImpl" name="QoS Test Provider"
+		<qos:provider-manager pid="provider.service.english.EnglishDictionaryImpl" name="QoSProvider"
 			duration.value="86500000" duration.unit="ms">
 			
-			<slo metric="processingTime" statistic="min" threshold="10000"  operation="searchStateSerasa" expression="EQ" />
-			<slo metric="throughput"     statistic="min" threshold="40000"  operation="searchStateSerasa" expression="LT" />
-			<slo metric="processingTime" statistic="min" threshold="50000"  operation="searchCauseSerasa" expression="LT" />
-			<slo metric="throughput"     statistic="min" threshold="70000"  operation="searchCauseSerasa" expression="LT" />
+			<slo metric="processingTime" statistic="min" threshold="10000"  operation="checkWord" expression="EQ" />
+			<slo metric="throughput"     statistic="min" threshold="40000"  operation="checkWord" expression="LT" />
+			<slo metric="processingTime" statistic="min" threshold="50000"  operation="translate" expression="LT" />
+			<slo metric="throughput"     statistic="min" threshold="70000"  operation="translate" expression="LT" />
 			<slo metric="availability"   statistic="min" threshold="0.99"   expression="LT"/>
 			
 			<profiles>
@@ -44,13 +44,13 @@ São planejados basicamente 2 tipos de configuração de monitoração. A config
 \small
 \begin{verbatimtab}[4]
 <slo metric="processingTime" statistic="min" threshold="10000"  
-	operation="searchStateSerasa" expression="EQ" />
+	operation="checkWord" expression="EQ" />
 <slo metric="throughput"     statistic="min" threshold="40000"  
-	operation="searchStateSerasa" expression="LT" />
+	operation="checkWord" expression="LT" />
 <slo metric="processingTime" statistic="min" threshold="50000"  
-	operation="searchCauseSerasa" expression="LT" />
+	operation="translate" expression="LT" />
 <slo metric="throughput"     statistic="min" threshold="70000" 
-	operation="searchCauseSerasa" expression="LT" />
+	operation="translate" expression="LT" />
 <slo metric="availability"   statistic="min" threshold="0.99"   
 	expression="LT"/>
 \end{verbatimtab}
