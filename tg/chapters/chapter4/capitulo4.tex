@@ -71,7 +71,7 @@ Assim, o módulo de gerenciamento do provedor (\textit{QoS Provider Manager}) im
 \label{fig:adapt_module}
 \end{figure}
 
-O módulo de gerenciamento do provedor é capaz de adaptá-lo a seu contexto de execução, visando manter a qualidade de serviço, através do gerenciamento das políticas de criação de instâncias. A partir disto, definimos um conjunto de políticas para cenários específicos de uso dos recursos. Porém, devido a diversidade enorme de cenários existentes, uma vez que, o uso de recursos é extremamente variável de aplicação para aplicação, a melhor maneira de contemplar a maioria dos casos é disponibilizar a política de criação de instâncias como um serviço.  
+O módulo de gerenciamento do provedor é capaz de adaptá-lo a seu contexto de execução, visando manter a qualidade de serviço, através do gerenciamento das políticas de criação de instâncias, que definem como os objetos remotos são construídos e acessados quando invocados. A partir disto, definimos um conjunto de políticas para cenários específicos de uso dos recursos. Porém, devido a diversidade enorme de cenários existentes, uma vez que, o uso de recursos é extremamente variável de aplicação para aplicação, a melhor maneira de contemplar a maioria dos casos é disponibilizar a política de criação de instâncias como um serviço.
 
 \section{Aplicação do Ciclo PDCA}
 Todo o processo de monitoramento e adaptação será baseado nas etapas definidas pelo ciclo PDCA. Como vimos na Seção \ref{sec:pdca}, o ciclo foca em manter ou melhorar a qualidade de processos, com base nas informações referentes à sua execução.
@@ -153,6 +153,11 @@ Inicialmente iremos executar com 3 configurações distintas para avaliar o impa
 Devido às limitações de tempo e a percepção ainda não muito clara das melhores configurações de \verb Profiles ~e \verb Resources ~, realizamos uma comparação entre duas políticas: \textit{default} e a adaptativa (que varia entre as duas \textit{default} em função do contexto).
 
 Inicialmente utilizaremos a política de criação \textit{singleton}, que retorna sempre a mesma instância, analisando o impacto no consumo de recursos de memória e CPU, além do tempo de resposta percebido pelo cliente. Em seguida, realizaremos o mesmo teste com a política de criação \textit{per-request}, que devolve uma nova instância a cada requisição. Por fim, utilizaremos estas duas políticas sob a gerência do \textit{QoS Provider Manager}.
+
+A utilização da política \textit{singleton} deverá apresentar um menor consumo de memória, uma vez que, temos apenas uma instância do objeto remoto para todas as requisições ao serviço. Porém, caso a invocação de algum método do objeto remotos tenha de ser sincronizado, esta política terá uma carga de CPU elevada devido ao processo de sincronização das diversas \textit{threads} concorrentes. 
+
+A política \textit{per-request} não apresenta o mesmo problema de carga de CPU quando existe sincronização de invocação ao método do objeto remoto, uma vez que, cada requisição (pertencente a mesma \textit{thread} ou não) é realizada a um objeto diferente. Porém, o consumo de memória apresentado é diretamente proporcional a demanda ao serviço.
+
 
 \begin{figure}[htp]
 \centering
